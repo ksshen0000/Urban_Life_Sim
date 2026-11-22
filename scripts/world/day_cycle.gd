@@ -8,12 +8,12 @@ extends RefCounted
 const KEYS := [
 	[0, Color(0.36, 0.42, 0.68)],
 	[300, Color(0.42, 0.46, 0.70)],
-	[390, Color(1.0, 0.80, 0.70)],    # sunrise
+	[390, Color(1.0, 0.86, 0.78)],    # sunrise
 	[480, Color(1.0, 0.95, 0.90)],
 	[540, Color(1, 1, 1)],
 	[1020, Color(1, 1, 1)],
-	[1080, Color(1.0, 0.82, 0.62)],   # golden hour
-	[1140, Color(0.86, 0.62, 0.62)],  # sunset
+	[1080, Color(1.0, 0.9, 0.76)],    # golden hour
+	[1140, Color(0.9, 0.76, 0.74)],   # sunset
 	[1200, Color(0.52, 0.48, 0.72)],  # blue hour
 	[1290, Color(0.38, 0.42, 0.68)],
 	[1440, Color(0.36, 0.42, 0.68)],
