@@ -1,0 +1,499 @@
+{
+  "schema_version": 1,
+  "id": "map_xinhe",
+  "city_id": "CN_LINCHUAN",
+  "name_key": "district.cn_linchuan.xinhe.name",
+  "tile_size": 32,
+  "rows": [
+    "################################################",
+    "#..............................................#",
+    "#..BBBBBBB..BBBBBBBB..BBBBBBBBBBBB...BBBBBBBBB.#",
+    "#..BBBBBBB..BBBBBBBB..BBBBBBBBBBBB...BBBBBBBBB.#",
+    "#..BBBBBBB..BBBBBBBB..BBBBBBBBBBBB...BBBBBBBBB.#",
+    "#..BBBBBBB..BBBBBBBB..BBBBBBBBBBBB...BBBBBBBBB.#",
+    "#..............................................#",
+    "#..............................................#",
+    "===============================================#",
+    "===============================================#",
+    "#..............................................#",
+    "#..............................................#",
+    "#..FFFFFFFFFFFFFddFFFFFFFFFFFF..gTggggggggggggg#",
+    "#..FdddddddddddddddddddddddddF..gggBBBBBBBBBBgT#",
+    "#..FddBBBBBBBBBBdddddddddddddF..gggBBBBBBBBBBgg#",
+    "#..FddBBBBBBBBBBdddddddddddddF..ggggggggggggggg#",
+    "#..FddBBBBBBBBBBdddddddddddddF..gggggg......ggg#",
+    "#..FddBBBBBBBBBBdddddddddddddF..gggggg......ggg#",
+    "#..FdddddddddddddddddddddddddF..gTggggggggggggg#",
+    "#..FdddddddddddddddddddddddddF..ggggggggggggggg#",
+    "#..FdddddddddddddddddddddddddF..gggBBBBBBBBBBgg#",
+    "#..FdddddddddddddddddddddddddF..gggBBBBBBBBBBgg#",
+    "#..FdddddddddddddddddddddddddF..ggggggggggggggg#",
+    "#..FdddddddddddddddddddddddddF..ggggggggggggggT#",
+    "#..FFFFFFFFFFFFFFFFFFFFFFFFFFF..ggTgggggggggggg#",
+    "################################################"
+  ],
+  "legend": {
+    "#": "wall",
+    ".": "ground",
+    "=": "road",
+    "g": "grass",
+    "T": "tree",
+    "B": "building",
+    "F": "fence",
+    "d": "dirt"
+  },
+  "spawns": [
+    {
+      "location_id": "xinhe_west_entry",
+      "tile": [
+        2,
+        8
+      ]
+    },
+    {
+      "location_id": "barber_shop",
+      "tile": [
+        6,
+        6
+      ]
+    },
+    {
+      "location_id": "construction_site",
+      "tile": [
+        16,
+        13
+      ]
+    }
+  ],
+  "structures": [
+    {
+      "id": "bld_barber",
+      "tiles": [
+        3,
+        2,
+        7,
+        4
+      ],
+      "wall_rows": 2,
+      "roof_overhang_rows": 1,
+      "style": "barber",
+      "door": [
+        6,
+        5
+      ],
+      "sign_key": "location.barber_shop.name"
+    },
+    {
+      "id": "bld_noodle",
+      "tiles": [
+        12,
+        2,
+        8,
+        4
+      ],
+      "wall_rows": 2,
+      "roof_overhang_rows": 1,
+      "style": "noodle",
+      "door": [
+        15,
+        5
+      ],
+      "sign_key": "building.noodle.name"
+    },
+    {
+      "id": "bld_xinhe_block_a",
+      "tiles": [
+        22,
+        2,
+        12,
+        4
+      ],
+      "wall_rows": 3,
+      "roof_overhang_rows": 1,
+      "style": "block"
+    },
+    {
+      "id": "bld_xinhe_block_b",
+      "tiles": [
+        37,
+        2,
+        9,
+        4
+      ],
+      "wall_rows": 3,
+      "roof_overhang_rows": 1,
+      "style": "block"
+    },
+    {
+      "id": "bld_site_frame",
+      "tiles": [
+        6,
+        14,
+        10,
+        4
+      ],
+      "wall_rows": 3,
+      "roof_overhang_rows": 1,
+      "style": "construction"
+    },
+    {
+      "id": "bld_compound_a",
+      "tiles": [
+        35,
+        13,
+        10,
+        2
+      ],
+      "wall_rows": 2,
+      "roof_overhang_rows": 1,
+      "style": "apartment"
+    },
+    {
+      "id": "bld_compound_b",
+      "tiles": [
+        35,
+        20,
+        10,
+        2
+      ],
+      "wall_rows": 2,
+      "roof_overhang_rows": 1,
+      "style": "apartment"
+    }
+  ],
+  "interactables": [
+    {
+      "id": "street_west_8",
+      "kind": "door",
+      "location_id": "xinhe_west_entry",
+      "tile": [
+        0,
+        8
+      ],
+      "name_key": "interactable.to_old_town.name",
+      "target_location_id": "old_town_east_end",
+      "walk_in": true
+    },
+    {
+      "id": "street_west_9",
+      "kind": "door",
+      "location_id": "xinhe_west_entry",
+      "tile": [
+        0,
+        9
+      ],
+      "name_key": "interactable.to_old_town.name",
+      "target_location_id": "old_town_east_end",
+      "walk_in": true
+    },
+    {
+      "id": "door_barber",
+      "kind": "barber",
+      "location_id": "barber_shop",
+      "tile": [
+        6,
+        5
+      ],
+      "name_key": "location.barber_shop.name",
+      "price_minor": 3000,
+      "service_minutes": 30
+    },
+    {
+      "id": "sign_site_gate",
+      "kind": "sign",
+      "location_id": "construction_site",
+      "tile": [
+        18,
+        11
+      ],
+      "name_key": "interactable.site_gate.name",
+      "text_key": "interactable.site_gate.text",
+      "prop": "signpost"
+    },
+    {
+      "id": "site_office",
+      "kind": "workplace",
+      "location_id": "construction_site",
+      "tile": [
+        21,
+        14
+      ],
+      "name_key": "interactable.site_office.name",
+      "prop": "board"
+    }
+  ],
+  "decor": [
+    {
+      "kind": "crane",
+      "tile": [
+        24,
+        18
+      ]
+    },
+    {
+      "kind": "bricks",
+      "tile": [
+        19,
+        21
+      ]
+    },
+    {
+      "kind": "bricks",
+      "tile": [
+        9,
+        21
+      ]
+    },
+    {
+      "kind": "bricks",
+      "tile": [
+        26,
+        14
+      ]
+    },
+    {
+      "kind": "barber_pole",
+      "tile": [
+        10,
+        6
+      ]
+    },
+    {
+      "kind": "laundry",
+      "tile": [
+        38,
+        16
+      ]
+    },
+    {
+      "kind": "laundry",
+      "tile": [
+        42,
+        16
+      ]
+    },
+    {
+      "kind": "lamp",
+      "tile": [
+        8,
+        7
+      ]
+    },
+    {
+      "kind": "lamp",
+      "tile": [
+        20,
+        7
+      ]
+    },
+    {
+      "kind": "lamp",
+      "tile": [
+        32,
+        7
+      ]
+    },
+    {
+      "kind": "lamp",
+      "tile": [
+        44,
+        7
+      ]
+    },
+    {
+      "kind": "lamp",
+      "tile": [
+        14,
+        10
+      ]
+    },
+    {
+      "kind": "lamp",
+      "tile": [
+        26,
+        10
+      ]
+    },
+    {
+      "kind": "lamp",
+      "tile": [
+        38,
+        10
+      ]
+    }
+  ],
+  "ambient": [
+    {
+      "id": "worker_1",
+      "tile": [
+        8,
+        19
+      ],
+      "pose": "work",
+      "facing": "up",
+      "shirt": "#e07a2e",
+      "hair": "#2e221c",
+      "hair_style": "buzz",
+      "figure": "m",
+      "bottom": "#4a4a52",
+      "hours": [
+        {
+          "start_minute_of_day": 420,
+          "end_minute_of_day": 1080
+        }
+      ]
+    },
+    {
+      "id": "worker_2",
+      "tile": [
+        13,
+        19
+      ],
+      "pose": "work",
+      "facing": "up",
+      "shirt": "#3a6fd8",
+      "hair": "#1e1a1a",
+      "hair_style": "short",
+      "figure": "m",
+      "bottom": "#5a4a3a",
+      "hours": [
+        {
+          "start_minute_of_day": 420,
+          "end_minute_of_day": 1080
+        }
+      ]
+    },
+    {
+      "id": "worker_3",
+      "tile": [
+        21,
+        20
+      ],
+      "pose": "work",
+      "facing": "left",
+      "shirt": "#e0b84a",
+      "hair": "#3a2a22",
+      "hair_style": "buzz",
+      "figure": "m",
+      "bottom": "#4a4a52",
+      "hours": [
+        {
+          "start_minute_of_day": 420,
+          "end_minute_of_day": 1080
+        }
+      ]
+    },
+    {
+      "id": "worker_4",
+      "tile": [
+        26,
+        22
+      ],
+      "pose": "browse",
+      "facing": "up",
+      "shirt": "#7d8a96",
+      "hair": "#8a8680",
+      "hair_style": "bald",
+      "figure": "m",
+      "bottom": "#3a3a40",
+      "hours": [
+        {
+          "start_minute_of_day": 420,
+          "end_minute_of_day": 1080
+        }
+      ]
+    },
+    {
+      "id": "auntie_1",
+      "tile": [
+        39,
+        22
+      ],
+      "pose": "stand",
+      "facing": "right",
+      "shirt": "#d84a4a",
+      "hair": "#4a3a34",
+      "hair_style": "perm",
+      "figure": "f",
+      "outfit": "skirt",
+      "bottom": "#3a3550",
+      "hours": [
+        {
+          "start_minute_of_day": 540,
+          "end_minute_of_day": 660
+        },
+        {
+          "start_minute_of_day": 960,
+          "end_minute_of_day": 1140
+        }
+      ]
+    },
+    {
+      "id": "auntie_2",
+      "tile": [
+        41,
+        22
+      ],
+      "pose": "stand",
+      "facing": "left",
+      "shirt": "#8a5ad0",
+      "hair": "#b8b8b8",
+      "hair_style": "bun",
+      "figure": "f",
+      "outfit": "dress",
+      "hours": [
+        {
+          "start_minute_of_day": 540,
+          "end_minute_of_day": 660
+        },
+        {
+          "start_minute_of_day": 960,
+          "end_minute_of_day": 1140
+        }
+      ]
+    },
+    {
+      "id": "kid_1",
+      "tile": [
+        43,
+        17
+      ],
+      "pose": "dance",
+      "facing": "down",
+      "shirt": "#f2c94c",
+      "hair": "#1e1a1a",
+      "hair_style": "spiky",
+      "figure": "m",
+      "bottom": "#3a6fd8",
+      "hours": [
+        {
+          "start_minute_of_day": 960,
+          "end_minute_of_day": 1140
+        }
+      ]
+    },
+    {
+      "id": "barber_client",
+      "tile": [
+        5,
+        7
+      ],
+      "pose": "stand",
+      "facing": "up",
+      "shirt": "#3fa06a",
+      "hair": "#3a2a22",
+      "hair_style": "short",
+      "figure": "m",
+      "hours": [
+        {
+          "start_minute_of_day": 600,
+          "end_minute_of_day": 720
+        },
+        {
+          "start_minute_of_day": 1020,
+          "end_minute_of_day": 1140
+        }
+      ]
+    }
+  ]
+}

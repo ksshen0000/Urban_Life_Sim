@@ -15,6 +15,8 @@ extends RefCounted
 
 const P := SimulationSession.PLAYER_ID
 const OLD_TOWN := "map_old_town"
+const INDUSTRIAL := "map_industrial"
+const Sessions := preload("res://tests/framework/session_factory.gd")
 const BUS_OUT := "route_12_to_industrial"
 const BUS_BACK := "route_12_to_old_town"
 const WAKE_HOUR := 6
@@ -81,12 +83,15 @@ func _play_day(day: int) -> void:
 	todays.sort_custom(func(a: Dictionary, b: Dictionary) -> bool: return int(a["start_minute"]) < int(b["start_minute"]))
 	for sh: Dictionary in todays:
 		var job := s.content.get_record("jobs", sh["job_id"])
-		var far: bool = s.locations.map_of_location(job["workplace_location_id"]) != OLD_TOWN
+		var far: bool = s.locations.map_of_location(job["workplace_location_id"]) == INDUSTRIAL
 		var leave: int = int(sh["start_minute"]) - (45 if far else 15)
 		_wait_until(leave)
 		if far:
 			_eat_before_trip()
 			_ride(BUS_OUT)
+		Sessions.go(s, job["workplace_location_id"])  # walk in if it is indoors (D-034)
+		if strategy.get("talk", true):
+			_talk_around()
 		_must(s.submit("work_shift", {"shift_id": sh["shift_id"]}), "work " + str(sh["shift_id"]))
 		if s.jobs.get_shifts(P).any(func(x: Dictionary) -> bool: return x["shift_id"] == sh["shift_id"] and x["status"] == "completed"):
 			stats["shifts_worked"] += 1
@@ -97,10 +102,11 @@ func _play_day(day: int) -> void:
 		if strategy.get("talk", true):
 			_talk_around()
 	_wait_until(GameClock.minute_from_day_time(day, BED_HOUR))
-	if s.locations.get_map_id(P) != OLD_TOWN:
+	if s.locations.get_map_id(P) == INDUSTRIAL:
 		_ride(BUS_BACK)
 	_eat_if_hungry()
 	if s.housing.has_lease(P):
+		Sessions.go(s, "old_town_apartment")
 		_must(s.submit("perform_activity", {"activity_id": "activity_sleep"}), "sleep")
 		_answer()
 		_track()
@@ -153,8 +159,9 @@ func _eat_if_hungry() -> void:
 		guard += 1
 		var food: String = strategy.get("food", "item_simple_meal")
 		if s.inventory.count(P, food) == 0:
-			if s.locations.get_map_id(P) != OLD_TOWN:
+			if s.locations.get_map_id(P) == INDUSTRIAL:
 				return  # nothing to buy out here; eat back in town
+			_enter_shop(_shop_for(food))
 			var before := s.economy.get_balance(P)
 			if not s.submit("buy_item", {"shop_id": _shop_for(food), "item_id": food, "quantity": 1}).ok:
 				return  # broke: go hungry
@@ -173,9 +180,10 @@ func _eat_before_trip() -> void:
 
 
 func _buy_extras() -> void:
-	if s.locations.get_map_id(P) != OLD_TOWN:
+	if s.locations.get_map_id(P) == INDUSTRIAL:
 		return
 	for pair: Array in strategy.get("extras", []):
+		_enter_shop(_shop_for(pair[0]))
 		for i in int(pair[1]):
 			var before := s.economy.get_balance(P)
 			if not s.submit("buy_item", {"shop_id": _shop_for(pair[0]), "item_id": pair[0], "quantity": 1}).ok:
@@ -193,7 +201,14 @@ func _shop_for(item_id: String) -> String:
 	return ""
 
 
+func _enter_shop(shop_id: String) -> void:
+	Sessions.go(s, s.content.get_record("shops", shop_id)["location_id"])
+	if strategy.get("talk", true):
+		_talk_around()
+
+
 func _ride(route_id: String) -> void:
+	Sessions.go(s, s.content.get_record("transit_routes", route_id)["from_location_id"])
 	var before := s.economy.get_balance(P)
 	if s.submit("take_route", {"route_id": route_id}).ok:
 		stats["fares"] += before - s.economy.get_balance(P)

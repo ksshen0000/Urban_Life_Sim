@@ -22,6 +22,28 @@
       "travel_minutes": 30,
       "first_departure_minute_of_day": 360,
       "last_departure_minute_of_day": 1320
+    },
+    {
+      "id": "route_1_to_downtown",
+      "city_id": "CN_LINCHUAN",
+      "name_key": "route.1_to_downtown.name",
+      "from_location_id": "old_town_bus_stop",
+      "to_location_id": "downtown_bus_stop",
+      "fare_minor": 400,
+      "travel_minutes": 35,
+      "first_departure_minute_of_day": 360,
+      "last_departure_minute_of_day": 1350
+    },
+    {
+      "id": "route_1_to_old_town",
+      "city_id": "CN_LINCHUAN",
+      "name_key": "route.1_to_old_town.name",
+      "from_location_id": "downtown_bus_stop",
+      "to_location_id": "old_town_bus_stop",
+      "fare_minor": 400,
+      "travel_minutes": 35,
+      "first_departure_minute_of_day": 360,
+      "last_departure_minute_of_day": 1350
     }
   ]
 }

@@ -105,6 +105,10 @@ static func _solid_in(image: Image, x: int, y: int) -> bool:
 	return image.get_pixel(x, y).a > 0.5
 
 
+static func clear_cache() -> void:
+	_cache.clear()
+
+
 ## Memoized texture: `build` paints a PixelArt and returns it; called once per key.
 static func cached(key: String, build: Callable) -> ImageTexture:
 	if not _cache.has(key):

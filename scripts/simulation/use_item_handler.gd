@@ -25,6 +25,8 @@ func validate(ctx: CommandContext) -> String:
 		return "E_INVALID_ARGUMENTS"
 	if not (ctx.get_service("content") as ContentRegistry).has_record("items", args["item_id"]):
 		return "E_UNKNOWN_ITEM"
+	if (ctx.get_service("content") as ContentRegistry).get_record("items", ctx.proposal.arguments["item_id"])["category"] == "keepsake":
+		return "E_NOT_USABLE"  # kept, not used up (D-035)
 	var inventory := ctx.world.get_component("inventory") as InventorySystem
 	if inventory.count(ctx.proposal.actor_id, args["item_id"]) < 1:
 		return "E_NOT_ENOUGH_ITEMS"

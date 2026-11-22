@@ -105,6 +105,36 @@
           "per_hour": 3
         }
       ]
+    },
+    {
+      "id": "job_construction_labor",
+      "city_id": "CN_LINCHUAN",
+      "name_key": "job.construction_labor.name",
+      "description_key": "job.construction_labor.desc",
+      "workplace_location_id": "construction_site",
+      "hourly_wage_minor": 3800,
+      "available_from_day": 2,
+      "shifts": [
+        {
+          "id": "day",
+          "start_minute_of_day": 420,
+          "duration_minutes": 360
+        }
+      ],
+      "work_rates_per_hour": [
+        {
+          "need_id": "hunger",
+          "per_hour": 7
+        },
+        {
+          "need_id": "energy",
+          "per_hour": -11
+        },
+        {
+          "need_id": "stress",
+          "per_hour": 2
+        }
+      ]
     }
   ]
 }

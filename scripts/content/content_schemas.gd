@@ -40,16 +40,40 @@ const TILE_KINDS := {
 	"building": {"walkable": false},
 	"tree": {"walkable": false},
 	"water": {"walkable": false},
+	# interiors (D-034): floors, the wall faces seen in 3/4 view, and the dark outside
+	"floor_tile": {"walkable": true},
+	"floor_wood": {"walkable": true},
+	"wall_in": {"walkable": false},
+	"void": {"walkable": false},
+	# districts beyond the old town (D-035): building-site earth, hoarding, polished plaza stone
+	"dirt": {"walkable": true},
+	"fence": {"walkable": false},
+	"plaza": {"walkable": true},
 }
-const TILE_KIND_NAMES := ["ground", "road", "grass", "wall", "building", "tree", "water"]
-const STRUCTURE_STYLES := ["apartment", "shop", "restaurant", "block", "warehouse", "arcade", "billiards"]
-const INTERACTABLE_KINDS := ["sign", "shop", "activity", "home", "job_board", "transit", "workplace"]
+const TILE_KIND_NAMES := ["ground", "road", "grass", "wall", "building", "tree", "water",
+	"floor_tile", "floor_wood", "wall_in", "void", "dirt", "fence", "plaza"]
+const STRUCTURE_STYLES := ["apartment", "shop", "restaurant", "block", "warehouse", "arcade", "billiards",
+	"barber", "noodle", "construction", "tower", "luxury", "cafe", "mall"]
+const INTERACTABLE_KINDS := ["sign", "shop", "activity", "home", "job_board", "transit", "workplace", "door", "barber"]
+## Indoor furniture (D-034): kind -> blocking footprint in tiles [w, h] ([0, 0] = walk-through).
+## Work stations (cash register, order counter) are where shift minigames will live later.
+const FURNITURE := {
+	"fridge": [1, 1], "shelf": [3, 1], "cashier_counter": [3, 1], "snack_rack": [1, 1],
+	"order_counter": [3, 1], "kitchen": [3, 1], "table": [1, 1], "chair_left": [0, 0],
+	"chair_right": [0, 0], "plant": [1, 1], "drink_machine": [1, 1], "trash_bin": [1, 1],
+	"door_mat": [0, 0],
+}
+const FURNITURE_KINDS := ["fridge", "shelf", "cashier_counter", "snack_rack", "order_counter", "kitchen",
+	"table", "chair_left", "chair_right", "plant", "drink_machine", "trash_bin", "door_mat"]
+const WALL_DECOR := ["menu_board", "poster", "clock", "window_in", "wall_shelf", "price_banner"]
 ## Interactables generated at runtime (not allowed in map files): "npc".
 const INTERACTABLE_PROPS := ["none", "signpost", "bus_sign", "board", "bench", "chess_table", "speaker"]
 ## Walk-through scenery placed by maps (`decor`).
-const DECOR_KINDS := ["pavilion", "lamp", "flowers"]
+const DECOR_KINDS := ["pavilion", "lamp", "flowers", "crane", "bricks", "laundry", "barber_pole", "fountain"]
+## Flat road markings drawn under everything (`decals`).
+const DECAL_KINDS := ["crosswalk_v", "crosswalk_h"]
 ## What park regulars and passers-by are doing (`ambient`, presentation only).
-const AMBIENT_POSES := ["chess", "watch", "sing", "erhu", "dance", "taichi", "fish", "stand"]
+const AMBIENT_POSES := ["chess", "watch", "sing", "erhu", "dance", "taichi", "fish", "stand", "eat", "browse", "work"]
 const FACINGS := ["down", "up", "left", "right"]
 const HOURS := {"type": "array", "min_items": 1, "items": {"type": "object", "fields": {
 	"start_minute_of_day": {"type": "int", "required": true, "min": 0, "max": 1439},
@@ -185,9 +209,10 @@ const TABLES := {
 			"id": {"type": "id", "required": true},
 			"name_key": TEXT,
 			"description_key": TEXT,
-			"category": {"type": "string", "required": true, "values": ["food", "drink"]},
+			## "keepsake": owned, never used up (a luxury bag); needs no use_effects.
+			"category": {"type": "string", "required": true, "values": ["food", "drink", "keepsake"]},
 			"use_minutes": {"type": "int", "required": true, "min": 0, "max": 120},
-			"use_effects": {"type": "array", "required": true, "min_items": 1, "unique_by": "need_id",
+			"use_effects": {"type": "array", "required": true, "unique_by": "need_id",
 				"items": {"type": "object", "fields": {
 					"need_id": {"type": "ref", "required": true, "table": "needs"},
 					"delta": {"type": "int", "required": true, "min": -100, "max": 100},
@@ -308,7 +333,7 @@ const TABLES := {
 			"district_id": {"type": "ref", "required": true, "table": "districts", "pattern": GEO_ID,
 				"match": {"city_id": "city_id"}},
 			"kind": {"type": "string", "required": true, "values": [
-				"bus_stop", "home", "shop", "restaurant", "job_board", "park", "workplace", "leisure"]},
+				"bus_stop", "home", "shop", "restaurant", "job_board", "park", "workplace", "leisure", "entrance"]},
 			"name_key": TEXT,
 			## The walkable map this place is on; presence checks compare maps (D-020).
 			"map_id": {"type": "ref", "required": true, "table": "maps", "match": {"city_id": "city_id"}},
@@ -507,7 +532,7 @@ const TABLES := {
 					"tiles": {"type": "array", "required": true, "min_items": 4, "max_items": 4,
 						"items": {"type": "int", "min": 0, "max": 4096}},
 					"wall_rows": {"type": "int", "required": true, "min": 1, "max": 8},
-					"roof_overhang_rows": {"type": "int", "required": true, "min": 0, "max": 4},
+					"roof_overhang_rows": {"type": "int", "required": true, "min": 0, "max": 10},
 					"style": {"type": "string", "required": true, "values": STRUCTURE_STYLES},
 					"door": {"type": "array", "min_items": 2, "max_items": 2, "items": {"type": "int", "min": 0, "max": 4096}},
 					"sign_key": OPTIONAL_TEXT,
@@ -522,6 +547,13 @@ const TABLES := {
 					"text_key": OPTIONAL_TEXT,
 					"shop_id": {"type": "ref", "table": "shops"},
 					"activity_id": {"type": "ref", "table": "activities"},
+					## Doors (kind "door"): where walking through leads. `walk_in` doors (street ends)
+					## trigger by stepping onto them instead of pressing the interact key.
+					"target_location_id": {"type": "ref", "table": "locations", "match": {"city_id": "city_id"}},
+					"walk_in": {"type": "bool"},
+					## Barber (kind "barber"): price and minutes of a haircut.
+					"price_minor": {"type": "int", "min": 0, "max": 10000000},
+					"service_minutes": {"type": "int", "min": 1, "max": 240},
 					## Several activities at one spot (the arcade's machines, the plaza's morning
 					## tai chi and evening dancing): interacting lists them.
 					"activity_ids": {"type": "array", "unique": true, "min_items": 1,
@@ -529,6 +561,30 @@ const TABLES := {
 					## Visual only. Default: none (e.g. a door drawn by its structure).
 					"prop": {"type": "string", "values": INTERACTABLE_PROPS},
 				}}},
+			## Indoors: lit by lamps, so the day/night tint does not darken it (D-035).
+			"indoor": {"type": "bool"},
+			"decals": {"type": "array", "items": {"type": "object", "fields": {
+				"kind": {"type": "string", "required": true, "values": DECAL_KINDS},
+				"tile": TILE,
+			}}},
+			## Indoor furniture; blocks its FURNITURE footprint (tile = footprint's bottom-left).
+			"furniture": {"type": "array", "items": {"type": "object", "fields": {
+				"kind": {"type": "string", "required": true, "values": FURNITURE_KINDS},
+				"tile": TILE,
+			}}},
+			## Pictures on the back wall (drawn on "wall_in" tiles, not y-sorted).
+			"wall_decor": {"type": "array", "items": {"type": "object", "fields": {
+				"kind": {"type": "string", "required": true, "values": WALL_DECOR},
+				"tile": TILE,
+			}}},
+			## Where NPCs scheduled at a location stand on this map (behind the counter, at a
+			## table) instead of next to the location's spawn; optional pose.
+			"anchors": {"type": "array", "unique_by": "location_id", "items": {"type": "object", "fields": {
+				"location_id": {"type": "ref", "required": true, "table": "locations", "match": {"city_id": "city_id"}},
+				"tile": TILE,
+				"pose": {"type": "string", "values": ["stand", "sit"]},
+				"facing": {"type": "string", "values": FACINGS},
+			}}},
 			## Scenery the player walks through (pavilion, street lamps, flower beds).
 			"decor": {"type": "array", "items": {"type": "object", "fields": {
 				"kind": {"type": "string", "required": true, "values": DECOR_KINDS},
@@ -556,7 +612,8 @@ const TABLES := {
 ## Per-kind required interactable fields.
 ## home / job_board / transit / workplace act on whatever their location offers (housing, jobs,
 ## routes, shifts), so they need no extra field.
-const INTERACTABLE_REQUIRES := {"sign": "text_key", "shop": "shop_id", "activity": "activity_id"}
+const INTERACTABLE_REQUIRES := {"sign": "text_key", "shop": "shop_id", "activity": "activity_id",
+	"door": "target_location_id", "barber": "price_minor"}
 
 
 static func has_table(table: String) -> bool:
@@ -579,6 +636,8 @@ static func custom_checks(table: String, record: Dictionary, path: String) -> Ar
 		_check_map(record, path, errors)
 	elif table == "activities":
 		_check_activity(record, path, errors)
+	elif table == "items" and record["category"] != "keepsake" and (record["use_effects"] as Array).is_empty():
+		errors.append({"code": "E_REQUIRED", "path": path + "/use_effects", "message": "food and drink need at least one effect"})
 	return errors
 
 
@@ -628,7 +687,24 @@ static func _check_map(record: Dictionary, path: String, errors: Array[Dictionar
 		elif not is_walkable_kind(legend[(rows[tile[1]] as String)[tile[0]]]):
 			errors.append({"code": "E_MAP_BLOCKED", "path": p, "message": "spawn tile %s is not walkable" % str(tile)})
 	_check_structures(record, path, rows, legend, width, errors)
-	for list_name in ["decor", "ambient"]:
+	var furniture: Array = record.get("furniture", [])
+	for i in furniture.size():
+		var f: Dictionary = furniture[i]
+		var size: Array = FURNITURE[f["kind"]]
+		for dx in maxi(int(size[0]), 1):
+			var tile := [int(f["tile"][0]) + dx, int(f["tile"][1])]
+			var p := "%s/furniture/%d/tile" % [path, i]
+			if not _tile_in_bounds(tile, width, rows.size()):
+				errors.append({"code": "E_MAP_BOUNDS", "path": p, "message": "furniture %s leaves the map" % str(tile)})
+				break
+			if not is_walkable_kind(legend[(rows[tile[1]] as String)[tile[0]]]):
+				errors.append({"code": "E_MAP_BLOCKED", "path": p, "message": "furniture must stand on floor, %s is not" % str(tile)})
+				break
+	var wall_decor: Array = record.get("wall_decor", [])
+	for i in wall_decor.size():
+		if not _tile_in_bounds(wall_decor[i]["tile"], width, rows.size()):
+			errors.append({"code": "E_MAP_BOUNDS", "path": "%s/wall_decor/%d/tile" % [path, i], "message": "outside the map"})
+	for list_name in ["decor", "ambient", "anchors"]:
 		var items: Array = record.get(list_name, [])
 		for i in items.size():
 			var tile: Array = items[i]["tile"]

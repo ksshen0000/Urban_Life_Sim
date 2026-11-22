@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "records": [
+    {
+      "id": "item_luxury_bag",
+      "name_key": "item.luxury_bag.name",
+      "description_key": "item.luxury_bag.desc",
+      "category": "keepsake",
+      "use_minutes": 0,
+      "use_effects": []
+    },
+    {
+      "id": "item_silk_scarf",
+      "name_key": "item.silk_scarf.name",
+      "description_key": "item.silk_scarf.desc",
+      "category": "keepsake",
+      "use_minutes": 0,
+      "use_effects": []
+    },
+    {
+      "id": "item_perfume",
+      "name_key": "item.perfume.name",
+      "description_key": "item.perfume.desc",
+      "category": "keepsake",
+      "use_minutes": 0,
+      "use_effects": []
+    },
+    {
+      "id": "item_luxury_watch",
+      "name_key": "item.luxury_watch.name",
+      "description_key": "item.luxury_watch.desc",
+      "category": "keepsake",
+      "use_minutes": 0,
+      "use_effects": []
+    },
+    {
+      "id": "item_latte",
+      "name_key": "item.latte.name",
+      "description_key": "item.latte.desc",
+      "category": "drink",
+      "use_minutes": 10,
+      "use_effects": [
+        {
+          "need_id": "energy",
+          "delta": 6
+        },
+        {
+          "need_id": "stress",
+          "delta": -5
+        }
+      ]
+    },
+    {
+      "id": "item_cake",
+      "name_key": "item.cake.name",
+      "description_key": "item.cake.desc",
+      "category": "food",
+      "use_minutes": 10,
+      "use_effects": [
+        {
+          "need_id": "hunger",
+          "delta": -20
+        },
+        {
+          "need_id": "stress",
+          "delta": -4
+        }
+      ]
+    }
+  ]
+}

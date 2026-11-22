@@ -162,6 +162,7 @@ func test_hud_shows_initial_state() -> void:
 
 func test_hud_follows_committed_changes() -> void:
 	await _start()
+	Sessions.go(session, "convenience_store")
 	session.submit("buy_item", {"shop_id": "shop_convenience_store", "item_id": "item_drink"})
 	assert_eq(world.ui.hud.get_cash_text(), _cash(-500))
 	session.submit("advance_time", {"minutes": 60}, "system")
@@ -191,6 +192,7 @@ func test_exploration_time_runs_and_pauses_with_menu() -> void:
 
 func test_shop_ui_buy_until_broke() -> void:
 	await _start({"starting_money_minor": 2000})
+	Sessions.go(session, "fast_food_restaurant")
 	world.ui.open_shop("shop_fast_food")
 	var buy := _button("Buy_item_simple_meal")
 	assert_not_null(buy)
@@ -220,7 +222,8 @@ func test_shop_ui_disables_unaffordable_items() -> void:
 
 func test_inventory_ui_use_item() -> void:
 	await _start()
-	session.submit("buy_item", {"shop_id": "shop_fast_food", "item_id": "item_simple_meal"})
+	Sessions.go(session, "fast_food_restaurant")
+	assert_true(session.submit("buy_item", {"shop_id": "shop_fast_food", "item_id": "item_simple_meal"}).ok)
 	await _press_once("open_inventory")
 	assert_eq(world.ui.get_panel_kind(), "inventory")
 	_button("Use_item_simple_meal").pressed.emit()
@@ -281,10 +284,11 @@ func test_job_board_booking_and_work_via_shop_door() -> void:
 	world.ui.close()
 	session.submit("advance_time", {"minutes": GameClock.minute_from_day_time(2, 8, 50) - session.world.clock.get_minute()}, "system")
 	await _place(Vector2i(20, 6))
-	Input.action_press("interact")
-	await wait_physics_frames(2)
-	Input.action_release("interact")
-	assert_eq(world.ui.get_panel_kind(), "menu", "shop door offers work and shopping")
+	await _interact()   # in through the door
+	assert_eq(world.map["id"], "map_convenience_interior")
+	await _place(Vector2i(12, 8))
+	await _interact()   # the counter is the work station (D-034)
+	assert_eq(world.ui.get_panel_kind(), "menu", "the counter offers work and shopping")
 	_button("Work").pressed.emit()
 	assert_eq(world.ui.get_panel_kind(), "confirm")
 	var cash_before := session.economy.get_balance("player")
@@ -295,15 +299,49 @@ func test_job_board_booking_and_work_via_shop_door() -> void:
 	assert_eq(world.ui.hud.get_day_text(), "第 2 天  13:00")
 
 
-func test_shop_door_opens_shop() -> void:
-	await _start()
-	await _place(Vector2i(20, 6))
+func _interact() -> void:
 	Input.action_press("interact")
 	await wait_physics_frames(2)
 	Input.action_release("interact")
+	await wait_physics_frames(2)
+
+
+## D-034: walk in through the shop door, buy at the counter, walk back out.
+func test_walk_into_the_store_shop_at_the_counter_and_leave() -> void:
+	await _start()
+	await _place(Vector2i(20, 6))
+	assert_eq(world.player.get_focus().get_interactable_id(), "door_convenience_store")
+	await _interact()
+	assert_eq(world.map["id"], "map_convenience_interior", "inside the store")
+	assert_eq(world.player.position, world.tile_center(Vector2i(7, 9)), "just inside the door")
+	assert_false(world.ui.is_modal(), "walking in opens no menu")
+	assert_eq(session.world.clock.get_minute(), GameClock.minute_from_day_time(1, 8), "doors take no time")
+	await _place(Vector2i(12, 8))
+	assert_eq(world.player.get_focus().get_interactable_id(), "counter_convenience")
+	await _interact()
 	assert_eq(world.ui.get_panel_kind(), "shop")
 	var title := world.ui.get_panel_content().find_child("Title", true, false) as Label
 	assert_eq(title.text, "转角便利店")
+	world.ui.close()
+	await _place(Vector2i(7, 9))
+	assert_eq(world.player.get_focus().get_interactable_id(), "door_convenience_exit")
+	await _interact()
+	assert_eq(world.map["id"], "map_old_town", "back on the street")
+	assert_eq(world.player.position, world.tile_center(Vector2i(20, 6)), "in front of the store")
+
+
+func test_furniture_blocks_and_room_is_centred() -> void:
+	await _start()
+	Sessions.go(session, "fast_food_restaurant")
+	await wait_physics_frames(3)
+	assert_eq(world.map["id"], "map_fast_food_interior")
+	assert_not_null(world.entities.get_node_or_null("furniture_order_counter_2"))
+	await _place(Vector2i(4, 5))  # just below the order counter
+	await _hold("move_up", 30)
+	assert_true(world.player.position.y >= 5 * 32 + 10 - 0.5, "the counter blocks, y=%s" % world.player.position.y)
+	var b := world.camera_bounds()
+	assert_true(b.position.x < 0 and b.position.y < 0, "small room: camera limits grown around it")
+	assert_eq(b.get_center(), Vector2i(CityMapBuilder.pixel_size(world.map) / 2), "room centred")
 
 
 func test_start_map_has_spawn_for_default_spawn() -> void:
@@ -349,10 +387,13 @@ func test_player_in_front_of_and_behind_a_building() -> void:
 func test_npcs_appear_by_schedule_and_can_be_talked_to() -> void:
 	await _start()
 	world._process(0.0)
-	assert_eq(world.npcs.keys().size(), 2, "Chen at the store, Wang in the park at 08:00")
+	assert_eq(world.npcs.keys(), ["npc_landlord_wang"], "08:00 on the street: Wang in the park")
+	Sessions.go(session, "convenience_store")
+	await wait_physics_frames(2)
+	world._process(0.0)
 	var chen: NpcActor = world.npcs["npc_chen_yu"]
-	assert_eq(chen.position, CityMapBuilder.tile_foot(world.map, Vector2i(21, 6)), "next to the store anchor")
-	await _place(Vector2i(22, 6))
+	assert_eq(chen.position, CityMapBuilder.tile_foot(world.map, Vector2i(12, 6)), "behind the counter (map anchor)")
+	await _place(Vector2i(11, 6))
 	assert_eq(world.player.get_focus().get_interactable_id(), "npc_chen_yu")
 	assert_eq(world.ui.hud.get_prompt_text(), "[E] 陈雨")
 	Input.action_press("interact")
@@ -363,6 +404,8 @@ func test_npcs_appear_by_schedule_and_can_be_talked_to() -> void:
 	assert_eq(session.relationships.get_value("npc_chen_yu"), 5)
 	assert_false(world.ui.is_modal())
 	session.submit("advance_time", {"minutes": 9 * 60}, "system")  # 17:00: Chen moved to the park
+	Sessions.go(session, "park")
+	await wait_physics_frames(2)
 	world._process(0.0)
 	assert_eq(world.npcs["npc_chen_yu"].location_id_of(), "park")
 

@@ -34,6 +34,12 @@ static func install(content: ContentRegistry, locale: String = SOURCE_LOCALE) ->
 	TranslationServer.set_locale(locale)
 
 
+static func uninstall() -> void:
+	for t in _installed:
+		TranslationServer.remove_translation(t)
+	_installed.clear()
+
+
 ## tr() + {placeholder} substitution.
 static func text(key: String, values: Dictionary = {}) -> String:
 	return String(TranslationServer.translate(key)).format(values)

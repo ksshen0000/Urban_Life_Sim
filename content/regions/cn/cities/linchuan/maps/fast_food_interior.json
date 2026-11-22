@@ -1,0 +1,387 @@
+{
+  "schema_version": 1,
+  "id": "map_fast_food_interior",
+  "city_id": "CN_LINCHUAN",
+  "name_key": "location.fast_food_restaurant.name",
+  "tile_size": 32,
+  "rows": [
+    "VWWWWWWWWWWWWWWWWV",
+    "VWWWWWWWWWWWWWWWWV",
+    "VFFFFFFFFFFFFFFFFV",
+    "VFFFFFFFFFFFFFFFFV",
+    "VFFFFFFFFFFFFFFFFV",
+    "VFFFFFFFFFFFFFFFFV",
+    "VFFFFFFFFFFFFFFFFV",
+    "VFFFFFFFFFFFFFFFFV",
+    "VFFFFFFFFFFFFFFFFV",
+    "VFFFFFFFFFFFFFFFFV",
+    "VVVVVVVVVFVVVVVVVV",
+    "VVVVVVVVVVVVVVVVVV"
+  ],
+  "legend": {
+    "V": "void",
+    "W": "wall_in",
+    "F": "floor_wood"
+  },
+  "spawns": [
+    {
+      "location_id": "fast_food_restaurant",
+      "tile": [
+        9,
+        9
+      ]
+    }
+  ],
+  "structures": [],
+  "interactables": [
+    {
+      "id": "door_fast_food_exit",
+      "kind": "door",
+      "location_id": "fast_food_restaurant",
+      "tile": [
+        9,
+        10
+      ],
+      "name_key": "interactable.exit.name",
+      "target_location_id": "fast_food_front"
+    },
+    {
+      "id": "counter_fast_food",
+      "kind": "shop",
+      "location_id": "fast_food_restaurant",
+      "tile": [
+        5,
+        4
+      ],
+      "name_key": "interactable.order_counter.name",
+      "shop_id": "shop_fast_food"
+    }
+  ],
+  "furniture": [
+    {
+      "kind": "kitchen",
+      "tile": [
+        2,
+        2
+      ]
+    },
+    {
+      "kind": "kitchen",
+      "tile": [
+        5,
+        2
+      ]
+    },
+    {
+      "kind": "order_counter",
+      "tile": [
+        3,
+        4
+      ]
+    },
+    {
+      "kind": "order_counter",
+      "tile": [
+        6,
+        4
+      ]
+    },
+    {
+      "kind": "drink_machine",
+      "tile": [
+        16,
+        2
+      ]
+    },
+    {
+      "kind": "trash_bin",
+      "tile": [
+        16,
+        9
+      ]
+    },
+    {
+      "kind": "plant",
+      "tile": [
+        1,
+        9
+      ]
+    },
+    {
+      "kind": "door_mat",
+      "tile": [
+        9,
+        10
+      ]
+    },
+    {
+      "kind": "table",
+      "tile": [
+        11,
+        3
+      ]
+    },
+    {
+      "kind": "chair_left",
+      "tile": [
+        10,
+        3
+      ]
+    },
+    {
+      "kind": "chair_right",
+      "tile": [
+        12,
+        3
+      ]
+    },
+    {
+      "kind": "table",
+      "tile": [
+        14,
+        3
+      ]
+    },
+    {
+      "kind": "chair_left",
+      "tile": [
+        13,
+        3
+      ]
+    },
+    {
+      "kind": "chair_right",
+      "tile": [
+        15,
+        3
+      ]
+    },
+    {
+      "kind": "table",
+      "tile": [
+        11,
+        6
+      ]
+    },
+    {
+      "kind": "chair_left",
+      "tile": [
+        10,
+        6
+      ]
+    },
+    {
+      "kind": "chair_right",
+      "tile": [
+        12,
+        6
+      ]
+    },
+    {
+      "kind": "table",
+      "tile": [
+        14,
+        6
+      ]
+    },
+    {
+      "kind": "chair_left",
+      "tile": [
+        13,
+        6
+      ]
+    },
+    {
+      "kind": "chair_right",
+      "tile": [
+        15,
+        6
+      ]
+    },
+    {
+      "kind": "table",
+      "tile": [
+        11,
+        8
+      ]
+    },
+    {
+      "kind": "chair_left",
+      "tile": [
+        10,
+        8
+      ]
+    },
+    {
+      "kind": "chair_right",
+      "tile": [
+        12,
+        8
+      ]
+    },
+    {
+      "kind": "table",
+      "tile": [
+        14,
+        8
+      ]
+    },
+    {
+      "kind": "chair_left",
+      "tile": [
+        13,
+        8
+      ]
+    },
+    {
+      "kind": "chair_right",
+      "tile": [
+        15,
+        8
+      ]
+    }
+  ],
+  "wall_decor": [
+    {
+      "kind": "menu_board",
+      "tile": [
+        2,
+        0
+      ]
+    },
+    {
+      "kind": "menu_board",
+      "tile": [
+        5,
+        0
+      ]
+    },
+    {
+      "kind": "poster",
+      "tile": [
+        12,
+        1
+      ]
+    },
+    {
+      "kind": "clock",
+      "tile": [
+        15,
+        0
+      ]
+    },
+    {
+      "kind": "window_in",
+      "tile": [
+        10,
+        1
+      ]
+    }
+  ],
+  "anchors": [
+    {
+      "location_id": "fast_food_restaurant",
+      "tile": [
+        15,
+        6
+      ],
+      "pose": "sit",
+      "facing": "left"
+    }
+  ],
+  "ambient": [
+    {
+      "id": "cook",
+      "tile": [
+        4,
+        3
+      ],
+      "pose": "browse",
+      "facing": "up",
+      "shirt": "#f4f1e8",
+      "hair": "#2e221c",
+      "hair_style": "buzz",
+      "figure": "m",
+      "bottom": "#2e2a28",
+      "hours": [
+        {
+          "start_minute_of_day": 600,
+          "end_minute_of_day": 1320
+        }
+      ]
+    },
+    {
+      "id": "diner_1",
+      "tile": [
+        10,
+        3
+      ],
+      "pose": "eat",
+      "facing": "right",
+      "shirt": "#3a6fd8",
+      "hair": "#1e1a1a",
+      "hair_style": "short",
+      "figure": "m",
+      "hours": [
+        {
+          "start_minute_of_day": 660,
+          "end_minute_of_day": 810
+        },
+        {
+          "start_minute_of_day": 1050,
+          "end_minute_of_day": 1230
+        }
+      ]
+    },
+    {
+      "id": "diner_2",
+      "tile": [
+        12,
+        3
+      ],
+      "pose": "eat",
+      "facing": "left",
+      "shirt": "#e07aa0",
+      "hair": "#3a2a22",
+      "hair_style": "long",
+      "figure": "f",
+      "outfit": "skirt",
+      "bottom": "#2e2a28",
+      "hours": [
+        {
+          "start_minute_of_day": 660,
+          "end_minute_of_day": 810
+        },
+        {
+          "start_minute_of_day": 1050,
+          "end_minute_of_day": 1230
+        }
+      ]
+    },
+    {
+      "id": "diner_3",
+      "tile": [
+        13,
+        8
+      ],
+      "pose": "eat",
+      "facing": "right",
+      "shirt": "#3fa06a",
+      "hair": "#6b4430",
+      "hair_style": "ponytail",
+      "figure": "f",
+      "bottom": "#3d4656",
+      "hours": [
+        {
+          "start_minute_of_day": 690,
+          "end_minute_of_day": 800
+        },
+        {
+          "start_minute_of_day": 1080,
+          "end_minute_of_day": 1200
+        }
+      ]
+    }
+  ],
+  "indoor": true
+}

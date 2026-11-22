@@ -17,6 +17,8 @@ var map: Dictionary = {}
 
 var structures: Array[StructureVisual] = []
 var npcs: Dictionary = {}  # npc_id -> NpcActor on the current map
+var day_night: DayNight
+var _last_tile := Vector2i(-1, -1)
 var ambient: Dictionary = {}  # ambient id -> AmbientActor currently shown
 var _npc_presence: Dictionary = {}
 ## Saved standing tile to use instead of the arrival spawn on the next map build (after a load).
@@ -36,6 +38,10 @@ func setup(p_session: SimulationSession, p_bus: GameEventBus, start_tile: Vector
 
 
 func _ready() -> void:
+	day_night = DayNight.new()
+	day_night.name = "DayNight"
+	add_child(day_night)
+	day_night.setup(ground, markings, entities)
 	if session == null:
 		_adopt_global_session()
 	if session == null:
@@ -60,7 +66,9 @@ func _process(delta: float) -> void:
 		sync_map()
 	_refresh_npcs()
 	_refresh_ambient()
+	day_night.update(session.world.clock.get_minute_of_day())
 	if not ui.is_modal():
+		_check_walk_in_doors()
 		if session.dialogue.has_pending():
 			ui.open_story_entry(session.dialogue.peek())
 		else:
@@ -94,7 +102,7 @@ func sync_map() -> void:
 		spawn = _start_tile
 	_start_tile = Vector2i(-1, -1)
 	player.position = CityMapBuilder.tile_center(map, spawn)
-	player.set_camera_limits(Rect2i(Vector2i.ZERO, CityMapBuilder.pixel_size(map)))
+	player.set_camera_limits(camera_bounds())
 	map_changed.emit(map_id)
 
 
@@ -124,6 +132,16 @@ func _build_map() -> void:
 		var it := Interactable.new()
 		it.setup(record, ts)
 		entities.add_child(it)
+	var lamps: Array[Vector2] = []
+	for d: Dictionary in map.get("decor", []):
+		if d["kind"] == "lamp":
+			lamps.append(CityMapBuilder.tile_foot(map, Vector2i(d["tile"][0], d["tile"][1])))
+	day_night.set_sources(lamps, map.get("indoor", false))
+	day_night.update(session.world.clock.get_minute_of_day())
+	for i in (map.get("furniture", []) as Array).size():
+		var f := FurnitureVisual.new()
+		f.setup(map["furniture"][i], ts, i)
+		entities.add_child(f)
 	for i in (map.get("decor", []) as Array).size():
 		var d: Dictionary = map["decor"][i]
 		var prop := PropVisual.new()
@@ -147,6 +165,16 @@ func _refresh_npcs() -> void:
 	var ids := present.keys()
 	ids.sort()
 	for npc_id: String in ids:
+		# A map anchor (behind the counter, at a table) wins over standing next to the spawn.
+		var placed := map_anchor(present[npc_id])
+		if not placed.is_empty() and not used.has(placed["tile"]):
+			used[placed["tile"]] = true
+			var at := NpcActor.new()
+			at.setup_npc(session.content.get_record("npcs", npc_id), present[npc_id], placed["tile"], map["tile_size"],
+				placed["pose"], placed["facing"])
+			entities.add_child(at)
+			npcs[npc_id] = at
+			continue
 		var anchor := CityMapBuilder.spawn_tile(map, present[npc_id])
 		if anchor.x < 0:
 			continue
@@ -160,6 +188,36 @@ func _refresh_npcs() -> void:
 			entities.add_child(actor)
 			npcs[npc_id] = actor
 			break
+
+
+## Street ends (`walk_in` doors): stepping onto one walks on into the next district.
+func _check_walk_in_doors() -> void:
+	var tile := player_tile()
+	if tile == _last_tile:
+		return
+	_last_tile = tile
+	for it: Dictionary in map["interactables"]:
+		if it.get("walk_in", false) and Vector2i(it["tile"][0], it["tile"][1]) == tile:
+			session.submit(UseDoorHandler.ACTION, {"door_id": it["id"]})
+			return
+
+
+## Camera limits: the map, grown symmetrically when it is smaller than the view (shop
+## interiors), so small rooms sit centred on screen instead of in a corner.
+func camera_bounds() -> Rect2i:
+	var size := CityMapBuilder.pixel_size(map)
+	var view := Vector2i(get_viewport_rect().size / player.get_camera_zoom())
+	var grow := Vector2i(maxi(view.x - size.x, 0), maxi(view.y - size.y, 0))
+	return Rect2i(-grow / 2, size + grow)
+
+
+## {tile, pose, facing} of the map's anchor for a location, or {}.
+func map_anchor(location_id: String) -> Dictionary:
+	for a: Dictionary in map.get("anchors", []):
+		if a["location_id"] == location_id:
+			return {"tile": Vector2i(a["tile"][0], a["tile"][1]), "pose": a.get("pose", "stand"),
+				"facing": a.get("facing", "down")}
+	return {}
 
 
 ## Park regulars come and go with their activity's hours (presentation only).
@@ -254,5 +312,11 @@ func _on_interact_requested(target: Interactable) -> void:
 			ui.open_transit(location_id, tr(target.data["text_key"]) if target.data.has("text_key") else "")
 		"workplace":
 			ui.open_work(location_id)
+		"barber":
+			ui.open_barber(target.data)
+		"door":
+			var r := session.submit(UseDoorHandler.ACTION, {"door_id": target.get_interactable_id()})
+			if not r.ok:
+				ui.open_message(target.get_display_name(), ui.error_text(r.error_code))
 		"npc":
 			ui.open_npc(target.data["id"])

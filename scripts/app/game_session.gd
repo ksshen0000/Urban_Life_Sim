@@ -98,6 +98,23 @@ func _ensure_content() -> Dictionary:
 	return {"ok": true, "error_code": null, "message": ""}
 
 
+## Shutdown: release every static cache (textures, tile atlases, sounds, translations) while the
+## engine is still running, so nothing is reported as leaked at exit.
+func _exit_tree() -> void:
+	end_game()
+	content = null
+	release_static_caches()
+
+
+static func release_static_caches() -> void:
+	PixelArt.clear_cache()
+	CityMapBuilder.clear_cache()
+	UiSound.clear_cache()
+	DayNight.release_static()
+	Localizer.uninstall()
+	SchemaValidator.clear_cache()
+
+
 func end_game() -> void:
 	if session == null:
 		return

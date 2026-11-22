@@ -12,7 +12,9 @@
   "default_spawn": "old_town_bus_stop",
   "district_ids": [
     "OLD_TOWN",
-    "INDUSTRIAL"
+    "INDUSTRIAL",
+    "XINHE",
+    "DOWNTOWN"
   ],
   "start_map_id": "map_old_town",
   "game_rules_id": "default"

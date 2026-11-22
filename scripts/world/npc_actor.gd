@@ -11,7 +11,14 @@ var _phase := 0.0
 var _blink := false
 
 
-func setup_npc(npc: Dictionary, location_id: String, tile: Vector2i, tile_size: int) -> void:
+var pose := "stand"
+var facing := "down"
+
+
+func setup_npc(npc: Dictionary, location_id: String, tile: Vector2i, tile_size: int,
+		p_pose: String = "stand", p_facing: String = "down") -> void:
+	pose = p_pose
+	facing = p_facing
 	setup({"id": npc["id"], "kind": "npc", "location_id": location_id, "tile": [tile.x, tile.y],
 		"name_key": npc["name_key"]}, tile_size)
 	npc_id = npc["id"]
@@ -39,4 +46,5 @@ func _process(delta: float) -> void:
 
 
 func _draw() -> void:
-	PixelPerson.draw(self, look, {"facing": "down", "legs": "stand", "blink": _blink})
+	PixelPerson.draw(self, look, {"facing": facing, "legs": "sit" if pose == "sit" else "stand",
+		"arm_r": "forward" if pose == "sit" else "down", "blink": _blink})

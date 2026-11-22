@@ -29,6 +29,10 @@
       "table": "locations"
     },
     {
+      "path": "items.json",
+      "table": "items"
+    },
+    {
       "path": "activities.json",
       "table": "activities"
     },
@@ -42,6 +46,22 @@
     },
     {
       "path": "maps/industrial.json",
+      "table": "maps"
+    },
+    {
+      "path": "maps/fast_food_interior.json",
+      "table": "maps"
+    },
+    {
+      "path": "maps/convenience_interior.json",
+      "table": "maps"
+    },
+    {
+      "path": "maps/xinhe.json",
+      "table": "maps"
+    },
+    {
+      "path": "maps/downtown.json",
       "table": "maps"
     },
     {

@@ -96,7 +96,7 @@ static func create_new(p_content: ContentRegistry, policies: RegionPolicyRegistr
 	for handler: CommandHandler in [AdvanceTimeHandler.new(), BuyItemHandler.new(), UseItemHandler.new(),
 			PerformActivityHandler.new(), BookShiftHandler.new(), WorkShiftHandler.new(), SignLeaseHandler.new(),
 			PayRentHandler.new(), TakeRouteHandler.new(), TriggerEventHandler.new(), ChooseDialogueHandler.new(),
-			DismissStoryHandler.new(), AdvanceQuestHandler.new(), SetProfileHandler.new()]:
+			DismissStoryHandler.new(), AdvanceQuestHandler.new(), SetProfileHandler.new(), UseDoorHandler.new(), GetHaircutHandler.new()]:
 		s.processor.register_handler(handler)
 	return {"ok": true, "error_code": null, "message": "", "session": s}
 

@@ -13,8 +13,8 @@
     "#.BBBBBBBB......BBBBBBBB......BBBBBBBB..BBBBBBB.BBBBBBB#",
     "#......................................................#",
     "#......................................................#",
-    "#======================================================#",
-    "#======================================================#",
+    "#=======================================================",
+    "#=======================================================",
     "#......................................................#",
     "#.gggggggggggg..........................T......T.....T.#",
     "#.gTgggggggTgg.........................................#",
@@ -63,20 +63,6 @@
       ]
     },
     {
-      "location_id": "convenience_store",
-      "tile": [
-        20,
-        6
-      ]
-    },
-    {
-      "location_id": "fast_food_restaurant",
-      "tile": [
-        33,
-        6
-      ]
-    },
-    {
       "location_id": "job_board",
       "tile": [
         20,
@@ -102,6 +88,27 @@
       "tile": [
         51,
         6
+      ]
+    },
+    {
+      "location_id": "convenience_store_front",
+      "tile": [
+        20,
+        6
+      ]
+    },
+    {
+      "location_id": "fast_food_front",
+      "tile": [
+        33,
+        6
+      ]
+    },
+    {
+      "location_id": "old_town_east_end",
+      "tile": [
+        53,
+        8
       ]
     }
   ],
@@ -253,25 +260,25 @@
     },
     {
       "id": "door_convenience_store",
-      "kind": "shop",
-      "location_id": "convenience_store",
+      "kind": "door",
+      "location_id": "convenience_store_front",
       "tile": [
         20,
         5
       ],
       "name_key": "shop.convenience_store.name",
-      "shop_id": "shop_convenience_store"
+      "target_location_id": "convenience_store"
     },
     {
       "id": "door_fast_food",
-      "kind": "shop",
-      "location_id": "fast_food_restaurant",
+      "kind": "door",
+      "location_id": "fast_food_front",
       "tile": [
         33,
         5
       ],
       "name_key": "shop.fast_food.name",
-      "shop_id": "shop_fast_food"
+      "target_location_id": "fast_food_restaurant"
     },
     {
       "id": "sign_job_board",
@@ -395,6 +402,30 @@
       "name_key": "interactable.river_bench.name",
       "activity_id": "activity_rest",
       "prop": "bench"
+    },
+    {
+      "id": "street_east_8",
+      "kind": "door",
+      "location_id": "old_town_east_end",
+      "tile": [
+        55,
+        8
+      ],
+      "name_key": "interactable.to_xinhe.name",
+      "target_location_id": "xinhe_west_entry",
+      "walk_in": true
+    },
+    {
+      "id": "street_east_9",
+      "kind": "door",
+      "location_id": "old_town_east_end",
+      "tile": [
+        55,
+        9
+      ],
+      "name_key": "interactable.to_xinhe.name",
+      "target_location_id": "xinhe_west_entry",
+      "walk_in": true
     }
   ],
   "decor": [
@@ -480,6 +511,62 @@
       "tile": [
         6,
         26
+      ]
+    },
+    {
+      "kind": "lamp",
+      "tile": [
+        12,
+        7
+      ]
+    },
+    {
+      "kind": "lamp",
+      "tile": [
+        27,
+        7
+      ]
+    },
+    {
+      "kind": "lamp",
+      "tile": [
+        39,
+        7
+      ]
+    },
+    {
+      "kind": "lamp",
+      "tile": [
+        50,
+        7
+      ]
+    },
+    {
+      "kind": "lamp",
+      "tile": [
+        6,
+        10
+      ]
+    },
+    {
+      "kind": "lamp",
+      "tile": [
+        24,
+        10
+      ]
+    },
+    {
+      "kind": "lamp",
+      "tile": [
+        44,
+        10
+      ]
+    },
+    {
+      "kind": "lamp",
+      "tile": [
+        52,
+        10
       ]
     }
   ],

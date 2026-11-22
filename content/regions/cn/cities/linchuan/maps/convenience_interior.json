@@ -1,0 +1,259 @@
+{
+  "schema_version": 1,
+  "id": "map_convenience_interior",
+  "city_id": "CN_LINCHUAN",
+  "name_key": "location.convenience_store.name",
+  "tile_size": 32,
+  "rows": [
+    "VWWWWWWWWWWWWWWV",
+    "VWWWWWWWWWWWWWWV",
+    "VFFFFFFFFFFFFFFV",
+    "VFFFFFFFFFFFFFFV",
+    "VFFFFFFFFFFFFFFV",
+    "VFFFFFFFFFFFFFFV",
+    "VFFFFFFFFFFFFFFV",
+    "VFFFFFFFFFFFFFFV",
+    "VFFFFFFFFFFFFFFV",
+    "VFFFFFFFFFFFFFFV",
+    "VVVVVVVFVVVVVVVV",
+    "VVVVVVVVVVVVVVVV"
+  ],
+  "legend": {
+    "V": "void",
+    "W": "wall_in",
+    "F": "floor_tile"
+  },
+  "spawns": [
+    {
+      "location_id": "convenience_store",
+      "tile": [
+        7,
+        9
+      ]
+    }
+  ],
+  "structures": [],
+  "interactables": [
+    {
+      "id": "door_convenience_exit",
+      "kind": "door",
+      "location_id": "convenience_store",
+      "tile": [
+        7,
+        10
+      ],
+      "name_key": "interactable.exit.name",
+      "target_location_id": "convenience_store_front"
+    },
+    {
+      "id": "counter_convenience",
+      "kind": "shop",
+      "location_id": "convenience_store",
+      "tile": [
+        12,
+        7
+      ],
+      "name_key": "interactable.cashier.name",
+      "shop_id": "shop_convenience_store"
+    }
+  ],
+  "furniture": [
+    {
+      "kind": "fridge",
+      "tile": [
+        1,
+        2
+      ]
+    },
+    {
+      "kind": "fridge",
+      "tile": [
+        2,
+        2
+      ]
+    },
+    {
+      "kind": "fridge",
+      "tile": [
+        3,
+        2
+      ]
+    },
+    {
+      "kind": "fridge",
+      "tile": [
+        4,
+        2
+      ]
+    },
+    {
+      "kind": "shelf",
+      "tile": [
+        2,
+        5
+      ]
+    },
+    {
+      "kind": "shelf",
+      "tile": [
+        6,
+        5
+      ]
+    },
+    {
+      "kind": "shelf",
+      "tile": [
+        2,
+        7
+      ]
+    },
+    {
+      "kind": "shelf",
+      "tile": [
+        6,
+        7
+      ]
+    },
+    {
+      "kind": "snack_rack",
+      "tile": [
+        10,
+        4
+      ]
+    },
+    {
+      "kind": "cashier_counter",
+      "tile": [
+        11,
+        7
+      ]
+    },
+    {
+      "kind": "plant",
+      "tile": [
+        14,
+        2
+      ]
+    },
+    {
+      "kind": "drink_machine",
+      "tile": [
+        13,
+        2
+      ]
+    },
+    {
+      "kind": "trash_bin",
+      "tile": [
+        14,
+        9
+      ]
+    },
+    {
+      "kind": "door_mat",
+      "tile": [
+        7,
+        10
+      ]
+    }
+  ],
+  "wall_decor": [
+    {
+      "kind": "price_banner",
+      "tile": [
+        1,
+        0
+      ]
+    },
+    {
+      "kind": "poster",
+      "tile": [
+        6,
+        1
+      ]
+    },
+    {
+      "kind": "clock",
+      "tile": [
+        8,
+        0
+      ]
+    },
+    {
+      "kind": "window_in",
+      "tile": [
+        9,
+        1
+      ]
+    },
+    {
+      "kind": "wall_shelf",
+      "tile": [
+        11,
+        0
+      ]
+    }
+  ],
+  "anchors": [
+    {
+      "location_id": "convenience_store",
+      "tile": [
+        12,
+        6
+      ],
+      "pose": "stand",
+      "facing": "down"
+    }
+  ],
+  "ambient": [
+    {
+      "id": "shopper_1",
+      "tile": [
+        3,
+        6
+      ],
+      "pose": "browse",
+      "facing": "up",
+      "shirt": "#e07a2e",
+      "hair": "#3a2a22",
+      "hair_style": "bob",
+      "figure": "f",
+      "outfit": "skirt",
+      "bottom": "#3a3550",
+      "hours": [
+        {
+          "start_minute_of_day": 600,
+          "end_minute_of_day": 780
+        },
+        {
+          "start_minute_of_day": 1020,
+          "end_minute_of_day": 1200
+        }
+      ]
+    },
+    {
+      "id": "shopper_2",
+      "tile": [
+        8,
+        8
+      ],
+      "pose": "browse",
+      "facing": "up",
+      "shirt": "#7d8a96",
+      "hair": "#1e1a1a",
+      "hair_style": "short",
+      "figure": "m",
+      "hours": [
+        {
+          "start_minute_of_day": 720,
+          "end_minute_of_day": 840
+        },
+        {
+          "start_minute_of_day": 1080,
+          "end_minute_of_day": 1260
+        }
+      ]
+    }
+  ],
+  "indoor": true
+}

@@ -12,26 +12,26 @@ func test_steps_advance_with_play() -> void:
 	assert_eq(s.quests.current_step(Q)["id"], "find_job")
 	s.submit("book_shift", {"job_id": "job_convenience_clerk", "day": 2, "template_id": "morning"})
 	assert_eq(s.quests.current_step(Q)["id"], "eat")
-	s.submit("buy_item", {"shop_id": "shop_fast_food", "item_id": "item_simple_meal"})
+	_in(s, "fast_food_restaurant").submit("buy_item", {"shop_id": "shop_fast_food", "item_id": "item_simple_meal"})
 	s.submit("use_item", {"item_id": "item_simple_meal"})
 	assert_eq(s.quests.current_step(Q)["id"], "first_shift")
 	s.submit("advance_time", {"minutes": GameClock.minute_from_day_time(2, 9) - s.world.clock.get_minute()}, "system")
-	s.submit("work_shift", {"shift_id": "job_convenience_clerk.d2.morning"})
+	_in(s, "convenience_store").submit("work_shift", {"shift_id": "job_convenience_clerk.d2.morning"})
 	assert_eq(s.quests.current_step(Q)["id"], "second_shift")
 	s.submit("book_shift", {"job_id": "job_restaurant_server", "day": 2, "template_id": "dinner"})
 	s.submit("advance_time", {"minutes": GameClock.minute_from_day_time(2, 17) - s.world.clock.get_minute()}, "system")
-	s.submit("work_shift", {"shift_id": "job_restaurant_server.d2.dinner"})
+	_in(s, "fast_food_restaurant").submit("work_shift", {"shift_id": "job_restaurant_server.d2.dinner"})
 	assert_eq(s.quests.current_step(Q)["id"], "acquaintance")
 	for day in [3, 4]:
 		s.submit("advance_time", {"minutes": GameClock.minute_from_day_time(day, 9) - s.world.clock.get_minute()}, "system")
-		s.submit("choose_dialogue", {"tree_id": "dialogue_chen_yu_intro" if day == 3 else "dialogue_chen_yu_chat",
+		_in(s, "convenience_store").submit("choose_dialogue", {"tree_id": "dialogue_chen_yu_intro" if day == 3 else "dialogue_chen_yu_chat",
 			"node_id": "start", "choice_id": "thanks" if day == 3 else "talk"})
 		_answer(s)
-	s.submit("choose_dialogue", {"tree_id": "dialogue_chen_yu_chat", "node_id": "start", "choice_id": "talk"})
+	_in(s, "convenience_store").submit("choose_dialogue", {"tree_id": "dialogue_chen_yu_chat", "node_id": "start", "choice_id": "talk"})
 	assert_true(s.relationships.get_value("npc_chen_yu") >= 8)
 	s.submit("advance_time", {"minutes": GameClock.minute_from_day_time(5, 9) - s.world.clock.get_minute()}, "system")
 	_answer(s)
-	s.submit("choose_dialogue", {"tree_id": "dialogue_chen_yu_chat", "node_id": "start", "choice_id": "talk"})
+	_in(s, "convenience_store").submit("choose_dialogue", {"tree_id": "dialogue_chen_yu_chat", "node_id": "start", "choice_id": "talk"})
 	assert_eq(s.quests.current_step(Q)["id"], "first_rent")
 	s.submit("advance_time", {"minutes": GameClock.minute_from_day_time(7, 1) - s.world.clock.get_minute()}, "system")
 	assert_true(s.quests.is_complete(Q))
@@ -50,9 +50,16 @@ func _answer(s: SimulationSession) -> void:
 
 func test_catches_up_on_steps_done_out_of_order() -> void:
 	var s := Sessions.create({"story_enabled": true})
-	s.submit("buy_item", {"shop_id": "shop_fast_food", "item_id": "item_simple_meal"})
+	_in(s, "fast_food_restaurant").submit("buy_item", {"shop_id": "shop_fast_food", "item_id": "item_simple_meal"})
 	s.submit("use_item", {"item_id": "item_simple_meal"})
 	s.submit("book_shift", {"job_id": "job_convenience_clerk", "day": 2, "template_id": "morning"})
 	assert_eq(s.quests.current_step(Q)["id"], "rent_room", "steps stay in order")
+	Sessions.go(s, "old_town_apartment")
 	s.submit("sign_lease", {"housing_id": "home_shared_room_01"})
 	assert_eq(s.quests.current_step(Q)["id"], "first_shift", "then catch up in one pass")
+
+
+## Walks into `location_id` first (shops are indoors, D-034) and returns the session.
+func _in(s: SimulationSession, location_id: String) -> SimulationSession:
+	Sessions.go(s, location_id)
+	return s

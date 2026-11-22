@@ -74,13 +74,20 @@ func test_day2_intro_needs_chen_present() -> void:
 	_to(s, 2, 7)
 	assert_false(s.events.has_fired("event_day2_chen_intro"), "Chen is not out yet at 07:00")
 	_to(s, 2, 9)
-	assert_true(s.events.has_fired("event_day2_chen_intro"))
+	assert_false(s.events.has_fired("event_day2_chen_intro"), "she works inside the store (D-034)")
+	Sessions.go(s, "convenience_store")
+	assert_true(s.events.has_fired("event_day2_chen_intro"), "meeting her inside")
+	_answer_all(s)
 	assert_eq(s.flags.get_flag("story.met_chen"), true)
 	assert_true(s.relationships.get_value("npc_chen_yu") > 0)
 
 
 func test_dinner_invite_choice_and_atomic_failure() -> void:
 	var s := _story()
+	_to(s, 2, 9)
+	Sessions.go(s, "convenience_store")
+	_answer_all(s)
+	Sessions.go(s, "park")
 	_to(s, 3, 16)
 	assert_eq(s.flags.get_flag("story.met_chen"), true)
 	s.submit("advance_time", {"minutes": 60}, "system")  # 17:00: invite arrives
@@ -142,10 +149,12 @@ func _week(money: int, lease: bool, shifts: int, dinner: bool, chat_days: int) -
 		_to(s, day, 9)
 		var sid := JobsSystem.shift_id_for("job_convenience_clerk", day, "morning")
 		if not s.jobs.get_shift(sid).is_empty():
+			Sessions.go(s, "convenience_store")
 			s.submit("work_shift", {"shift_id": sid})
 			_answer_all(s)
 		if day - 1 <= chat_days and day >= 2:
 			_to(s, day, 17)
+			Sessions.go(s, "park")
 			s.submit("choose_dialogue", {"tree_id": "dialogue_chen_yu_chat", "node_id": "start", "choice_id": "talk"})
 		if day == 3:
 			_to(s, 3, 17)

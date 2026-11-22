@@ -285,6 +285,40 @@
           "per_hour": 6
         }
       ]
+    },
+    {
+      "id": "activity_window_shopping",
+      "name_key": "activity.window_shopping.name",
+      "description_key": "activity.window_shopping.desc",
+      "category": "rest",
+      "duration_minutes": 60,
+      "min_minutes": 30,
+      "max_minutes": 180,
+      "duration_presets_minutes": [
+        30,
+        60,
+        120
+      ],
+      "time_mode": "awake",
+      "location_ids": [
+        "mall"
+      ],
+      "hours": [
+        {
+          "start_minute_of_day": 600,
+          "end_minute_of_day": 1320
+        }
+      ],
+      "rates_per_hour": [
+        {
+          "need_id": "energy",
+          "per_hour": -3
+        },
+        {
+          "need_id": "stress",
+          "per_hour": -5
+        }
+      ]
     }
   ]
 }

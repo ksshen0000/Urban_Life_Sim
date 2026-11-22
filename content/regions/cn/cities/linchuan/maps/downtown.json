@@ -1,0 +1,647 @@
+{
+  "schema_version": 1,
+  "id": "map_downtown",
+  "city_id": "CN_LINCHUAN",
+  "name_key": "district.cn_linchuan.downtown.name",
+  "tile_size": 32,
+  "rows": [
+    "########################################################",
+    "#pppppppppppppppppppppppppppppppppppppppppppppppppppppp#",
+    "#BBBBBBBBppBBBBBBBBppBBBBBBBppBBBBBBppBBBBBBBBppBBBBBBB#",
+    "#BBBBBBBBppBBBBBBBBppBBBBBBBppBBBBBBppBBBBBBBBppBBBBBBB#",
+    "#BBBBBBBBppBBBBBBBBppBBBBBBBppBBBBBBppBBBBBBBBppBBBBBBB#",
+    "#BBBBBBBBppBBBBBBBBppBBBBBBBppBBBBBBppBBBBBBBBppBBBBBBB#",
+    "#pppppppppppppppppppppppppppppppppppppppppppppppppppppp#",
+    "#pppppppppppppppppppppppppppppppppppppppppppppppppppppp#",
+    "#======================================================#",
+    "#======================================================#",
+    "#======================================================#",
+    "#======================================================#",
+    "#pppppppppppppppppppppppppppppppppppppppppppppppppppppp#",
+    "#pppppppppppppppppppppppppppppppppppppppppppppppppppppp#",
+    "#ppBBBBBBBBBBBBBBBBBBBBpppppppppppppBBBBBBBBBpppTppppTp#",
+    "#ppBBBBBBBBBBBBBBBBBBBBpppBBBBBBBpppBBBBBBBBBpppppppppp#",
+    "#ppBBBBBBBBBBBBBBBBBBBBpppBBBBBBBpppBBBBBBBBBpppppppppp#",
+    "#ppBBBBBBBBBBBBBBBBBBBBpppBBBBBBBpppBBBBBBBBBpppppppppp#",
+    "#ppBBBBBBBBBBBBBBBBBBBBpppBBBBBBBpppBBBBBBBBBpppppppppp#",
+    "#pppppppppppppppppppppppppppppppppppppppppppppppTppppTp#",
+    "#pppppppppppppppppppppppppppppppppppppppppppppppppppppp#",
+    "#pppppppppppppppppppppppppppppppppppppppppppppppppppppp#",
+    "#pTpppppppppppppppppppppppppppppppppppppppppppppppppppp#",
+    "#pppppppppppppppppppppppppppppppppppppppppppppppppppppp#",
+    "#pppppppppppppppppppppppppppppTpppppppppppppppppppppppp#",
+    "#pppppppTpppppppppppTpppppppppppppppppppppppTpppppppppp#",
+    "#pppppppppppppppppppppppppppppppppppppppppppppppppppppp#",
+    "########################################################"
+  ],
+  "legend": {
+    "#": "wall",
+    "p": "plaza",
+    "=": "road",
+    "T": "tree",
+    "B": "building"
+  },
+  "spawns": [
+    {
+      "location_id": "downtown_bus_stop",
+      "tile": [
+        25,
+        7
+      ]
+    },
+    {
+      "location_id": "luxury_boutique",
+      "tile": [
+        14,
+        6
+      ]
+    },
+    {
+      "location_id": "downtown_cafe",
+      "tile": [
+        32,
+        6
+      ]
+    },
+    {
+      "location_id": "dessert_shop",
+      "tile": [
+        51,
+        6
+      ]
+    },
+    {
+      "location_id": "mall",
+      "tile": [
+        12,
+        19
+      ]
+    },
+    {
+      "location_id": "watch_store",
+      "tile": [
+        29,
+        19
+      ]
+    }
+  ],
+  "structures": [
+    {
+      "id": "bld_tower_a",
+      "tiles": [
+        1,
+        2,
+        8,
+        4
+      ],
+      "wall_rows": 4,
+      "roof_overhang_rows": 9,
+      "style": "tower",
+      "sign_key": "building.tower_a.name"
+    },
+    {
+      "id": "bld_luxury",
+      "tiles": [
+        11,
+        2,
+        8,
+        4
+      ],
+      "wall_rows": 2,
+      "roof_overhang_rows": 1,
+      "style": "luxury",
+      "door": [
+        14,
+        5
+      ],
+      "sign_key": "location.luxury_boutique.name"
+    },
+    {
+      "id": "bld_tower_b",
+      "tiles": [
+        21,
+        2,
+        7,
+        4
+      ],
+      "wall_rows": 4,
+      "roof_overhang_rows": 10,
+      "style": "tower"
+    },
+    {
+      "id": "bld_cafe",
+      "tiles": [
+        30,
+        2,
+        6,
+        4
+      ],
+      "wall_rows": 2,
+      "roof_overhang_rows": 1,
+      "style": "cafe",
+      "door": [
+        32,
+        5
+      ],
+      "sign_key": "location.downtown_cafe.name"
+    },
+    {
+      "id": "bld_tower_c",
+      "tiles": [
+        38,
+        2,
+        8,
+        4
+      ],
+      "wall_rows": 4,
+      "roof_overhang_rows": 8,
+      "style": "tower",
+      "sign_key": "building.tower_c.name"
+    },
+    {
+      "id": "bld_dessert",
+      "tiles": [
+        48,
+        2,
+        7,
+        4
+      ],
+      "wall_rows": 2,
+      "roof_overhang_rows": 1,
+      "style": "cafe",
+      "door": [
+        51,
+        5
+      ],
+      "sign_key": "location.dessert_shop.name"
+    },
+    {
+      "id": "bld_mall",
+      "tiles": [
+        3,
+        14,
+        20,
+        5
+      ],
+      "wall_rows": 3,
+      "roof_overhang_rows": 2,
+      "style": "mall",
+      "door": [
+        12,
+        18
+      ],
+      "sign_key": "location.mall.name"
+    },
+    {
+      "id": "bld_watch",
+      "tiles": [
+        26,
+        15,
+        7,
+        4
+      ],
+      "wall_rows": 2,
+      "roof_overhang_rows": 1,
+      "style": "luxury",
+      "door": [
+        29,
+        18
+      ],
+      "sign_key": "location.watch_store.name"
+    },
+    {
+      "id": "bld_tower_d",
+      "tiles": [
+        36,
+        14,
+        9,
+        5
+      ],
+      "wall_rows": 5,
+      "roof_overhang_rows": 8,
+      "style": "tower"
+    }
+  ],
+  "interactables": [
+    {
+      "id": "sign_downtown_bus",
+      "kind": "transit",
+      "location_id": "downtown_bus_stop",
+      "tile": [
+        24,
+        7
+      ],
+      "name_key": "interactable.bus_stop.name",
+      "text_key": "interactable.downtown_bus.text",
+      "prop": "bus_sign"
+    },
+    {
+      "id": "door_luxury",
+      "kind": "shop",
+      "location_id": "luxury_boutique",
+      "tile": [
+        14,
+        5
+      ],
+      "name_key": "location.luxury_boutique.name",
+      "shop_id": "shop_luxury_boutique"
+    },
+    {
+      "id": "door_cafe",
+      "kind": "shop",
+      "location_id": "downtown_cafe",
+      "tile": [
+        32,
+        5
+      ],
+      "name_key": "location.downtown_cafe.name",
+      "shop_id": "shop_downtown_cafe"
+    },
+    {
+      "id": "door_dessert",
+      "kind": "shop",
+      "location_id": "dessert_shop",
+      "tile": [
+        51,
+        5
+      ],
+      "name_key": "location.dessert_shop.name",
+      "shop_id": "shop_dessert"
+    },
+    {
+      "id": "door_mall",
+      "kind": "activity",
+      "location_id": "mall",
+      "tile": [
+        12,
+        18
+      ],
+      "name_key": "location.mall.name",
+      "activity_id": "activity_window_shopping"
+    },
+    {
+      "id": "door_watch",
+      "kind": "shop",
+      "location_id": "watch_store",
+      "tile": [
+        29,
+        18
+      ],
+      "name_key": "location.watch_store.name",
+      "shop_id": "shop_watch_store"
+    }
+  ],
+  "decals": [
+    {
+      "kind": "crosswalk_v",
+      "tile": [
+        27,
+        8
+      ]
+    },
+    {
+      "kind": "crosswalk_v",
+      "tile": [
+        27,
+        9
+      ]
+    },
+    {
+      "kind": "crosswalk_v",
+      "tile": [
+        27,
+        10
+      ]
+    },
+    {
+      "kind": "crosswalk_v",
+      "tile": [
+        27,
+        11
+      ]
+    },
+    {
+      "kind": "crosswalk_v",
+      "tile": [
+        28,
+        8
+      ]
+    },
+    {
+      "kind": "crosswalk_v",
+      "tile": [
+        28,
+        9
+      ]
+    },
+    {
+      "kind": "crosswalk_v",
+      "tile": [
+        28,
+        10
+      ]
+    },
+    {
+      "kind": "crosswalk_v",
+      "tile": [
+        28,
+        11
+      ]
+    }
+  ],
+  "decor": [
+    {
+      "kind": "fountain",
+      "tile": [
+        13,
+        23
+      ]
+    },
+    {
+      "kind": "fountain",
+      "tile": [
+        50,
+        24
+      ]
+    },
+    {
+      "kind": "lamp",
+      "tile": [
+        4,
+        7
+      ]
+    },
+    {
+      "kind": "lamp",
+      "tile": [
+        10,
+        7
+      ]
+    },
+    {
+      "kind": "lamp",
+      "tile": [
+        20,
+        7
+      ]
+    },
+    {
+      "kind": "lamp",
+      "tile": [
+        36,
+        7
+      ]
+    },
+    {
+      "kind": "lamp",
+      "tile": [
+        46,
+        7
+      ]
+    },
+    {
+      "kind": "lamp",
+      "tile": [
+        54,
+        7
+      ]
+    },
+    {
+      "kind": "lamp",
+      "tile": [
+        6,
+        12
+      ]
+    },
+    {
+      "kind": "lamp",
+      "tile": [
+        18,
+        12
+      ]
+    },
+    {
+      "kind": "lamp",
+      "tile": [
+        30,
+        12
+      ]
+    },
+    {
+      "kind": "lamp",
+      "tile": [
+        42,
+        12
+      ]
+    },
+    {
+      "kind": "lamp",
+      "tile": [
+        52,
+        12
+      ]
+    },
+    {
+      "kind": "flowers",
+      "tile": [
+        16,
+        22
+      ]
+    },
+    {
+      "kind": "flowers",
+      "tile": [
+        10,
+        22
+      ]
+    },
+    {
+      "kind": "flowers",
+      "tile": [
+        34,
+        22
+      ]
+    },
+    {
+      "kind": "flowers",
+      "tile": [
+        40,
+        21
+      ]
+    }
+  ],
+  "ambient": [
+    {
+      "id": "shopper_a",
+      "tile": [
+        13,
+        6
+      ],
+      "pose": "browse",
+      "facing": "up",
+      "shirt": "#2e2a28",
+      "hair": "#d9b25a",
+      "hair_style": "long",
+      "figure": "f",
+      "outfit": "dress",
+      "hours": [
+        {
+          "start_minute_of_day": 600,
+          "end_minute_of_day": 1320
+        }
+      ]
+    },
+    {
+      "id": "shopper_b",
+      "tile": [
+        16,
+        13
+      ],
+      "pose": "stand",
+      "facing": "right",
+      "shirt": "#f4f1e8",
+      "hair": "#1e1a1a",
+      "hair_style": "bob",
+      "figure": "f",
+      "outfit": "skirt",
+      "bottom": "#2e2a28",
+      "hours": [
+        {
+          "start_minute_of_day": 600,
+          "end_minute_of_day": 1320
+        }
+      ]
+    },
+    {
+      "id": "shopper_c",
+      "tile": [
+        17,
+        13
+      ],
+      "pose": "stand",
+      "facing": "left",
+      "shirt": "#3a3550",
+      "hair": "#3a2a22",
+      "hair_style": "short",
+      "figure": "m",
+      "bottom": "#8a7a5a",
+      "hours": [
+        {
+          "start_minute_of_day": 600,
+          "end_minute_of_day": 1320
+        }
+      ]
+    },
+    {
+      "id": "office_1",
+      "tile": [
+        5,
+        6
+      ],
+      "pose": "stand",
+      "facing": "down",
+      "shirt": "#e9edf2",
+      "hair": "#1e1a1a",
+      "hair_style": "short",
+      "figure": "m",
+      "bottom": "#2e2a28",
+      "shoes": "#2e2a28",
+      "hours": [
+        {
+          "start_minute_of_day": 480,
+          "end_minute_of_day": 600
+        },
+        {
+          "start_minute_of_day": 1080,
+          "end_minute_of_day": 1200
+        }
+      ]
+    },
+    {
+      "id": "office_2",
+      "tile": [
+        42,
+        6
+      ],
+      "pose": "stand",
+      "facing": "down",
+      "shirt": "#3a3550",
+      "hair": "#2e221c",
+      "hair_style": "bun",
+      "figure": "f",
+      "outfit": "skirt",
+      "bottom": "#2e2a28",
+      "hours": [
+        {
+          "start_minute_of_day": 480,
+          "end_minute_of_day": 600
+        },
+        {
+          "start_minute_of_day": 1080,
+          "end_minute_of_day": 1200
+        }
+      ]
+    },
+    {
+      "id": "cafe_1",
+      "tile": [
+        33,
+        7
+      ],
+      "pose": "stand",
+      "facing": "up",
+      "shirt": "#d84a4a",
+      "hair": "#6b4430",
+      "hair_style": "ponytail",
+      "figure": "f",
+      "bottom": "#3d4656",
+      "hours": [
+        {
+          "start_minute_of_day": 540,
+          "end_minute_of_day": 1260
+        }
+      ]
+    },
+    {
+      "id": "fountain_kid",
+      "tile": [
+        15,
+        23
+      ],
+      "pose": "dance",
+      "facing": "down",
+      "shirt": "#3fa06a",
+      "hair": "#1e1a1a",
+      "hair_style": "spiky",
+      "figure": "m",
+      "bottom": "#3a6fd8",
+      "hours": [
+        {
+          "start_minute_of_day": 900,
+          "end_minute_of_day": 1200
+        }
+      ]
+    },
+    {
+      "id": "tourist",
+      "tile": [
+        49,
+        22
+      ],
+      "pose": "stand",
+      "facing": "right",
+      "shirt": "#e07a2e",
+      "hair": "#3a2a22",
+      "hair_style": "bun",
+      "figure": "f",
+      "outfit": "pants",
+      "bottom": "#f4f1e8",
+      "hours": [
+        {
+          "start_minute_of_day": 600,
+          "end_minute_of_day": 1260
+        }
+      ]
+    }
+  ]
+}

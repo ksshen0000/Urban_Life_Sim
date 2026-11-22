@@ -23,7 +23,7 @@
       "district_id": "OLD_TOWN",
       "kind": "shop",
       "name_key": "location.convenience_store.name",
-      "map_id": "map_old_town"
+      "map_id": "map_convenience_interior"
     },
     {
       "id": "fast_food_restaurant",
@@ -31,7 +31,7 @@
       "district_id": "OLD_TOWN",
       "kind": "restaurant",
       "name_key": "location.fast_food_restaurant.name",
-      "map_id": "map_old_town"
+      "map_id": "map_fast_food_interior"
     },
     {
       "id": "job_board",
@@ -80,6 +80,102 @@
       "kind": "leisure",
       "name_key": "location.billiard_hall.name",
       "map_id": "map_old_town"
+    },
+    {
+      "id": "convenience_store_front",
+      "city_id": "CN_LINCHUAN",
+      "district_id": "OLD_TOWN",
+      "kind": "entrance",
+      "name_key": "location.convenience_store_front.name",
+      "map_id": "map_old_town"
+    },
+    {
+      "id": "fast_food_front",
+      "city_id": "CN_LINCHUAN",
+      "district_id": "OLD_TOWN",
+      "kind": "entrance",
+      "name_key": "location.fast_food_front.name",
+      "map_id": "map_old_town"
+    },
+    {
+      "id": "old_town_east_end",
+      "city_id": "CN_LINCHUAN",
+      "district_id": "OLD_TOWN",
+      "kind": "entrance",
+      "name_key": "location.old_town_east_end.name",
+      "map_id": "map_old_town"
+    },
+    {
+      "id": "xinhe_west_entry",
+      "city_id": "CN_LINCHUAN",
+      "district_id": "XINHE",
+      "kind": "entrance",
+      "name_key": "location.xinhe_west_entry.name",
+      "map_id": "map_xinhe"
+    },
+    {
+      "id": "barber_shop",
+      "city_id": "CN_LINCHUAN",
+      "district_id": "XINHE",
+      "kind": "shop",
+      "name_key": "location.barber_shop.name",
+      "map_id": "map_xinhe"
+    },
+    {
+      "id": "construction_site",
+      "city_id": "CN_LINCHUAN",
+      "district_id": "XINHE",
+      "kind": "workplace",
+      "name_key": "location.construction_site.name",
+      "map_id": "map_xinhe"
+    },
+    {
+      "id": "downtown_bus_stop",
+      "city_id": "CN_LINCHUAN",
+      "district_id": "DOWNTOWN",
+      "kind": "bus_stop",
+      "name_key": "location.downtown_bus_stop.name",
+      "map_id": "map_downtown"
+    },
+    {
+      "id": "luxury_boutique",
+      "city_id": "CN_LINCHUAN",
+      "district_id": "DOWNTOWN",
+      "kind": "shop",
+      "name_key": "location.luxury_boutique.name",
+      "map_id": "map_downtown"
+    },
+    {
+      "id": "downtown_cafe",
+      "city_id": "CN_LINCHUAN",
+      "district_id": "DOWNTOWN",
+      "kind": "shop",
+      "name_key": "location.downtown_cafe.name",
+      "map_id": "map_downtown"
+    },
+    {
+      "id": "dessert_shop",
+      "city_id": "CN_LINCHUAN",
+      "district_id": "DOWNTOWN",
+      "kind": "shop",
+      "name_key": "location.dessert_shop.name",
+      "map_id": "map_downtown"
+    },
+    {
+      "id": "mall",
+      "city_id": "CN_LINCHUAN",
+      "district_id": "DOWNTOWN",
+      "kind": "leisure",
+      "name_key": "location.mall.name",
+      "map_id": "map_downtown"
+    },
+    {
+      "id": "watch_store",
+      "city_id": "CN_LINCHUAN",
+      "district_id": "DOWNTOWN",
+      "kind": "shop",
+      "name_key": "location.watch_store.name",
+      "map_id": "map_downtown"
     }
   ]
 }

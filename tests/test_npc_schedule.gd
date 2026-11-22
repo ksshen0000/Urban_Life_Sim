@@ -23,8 +23,9 @@ func test_location_follows_schedule() -> void:
 
 func test_present_on_map() -> void:
 	var sched := NpcScheduleSystem.new(Sessions.content())
-	assert_eq(sched.present_on_map("map_old_town", _at(1, 9)),
-		{"npc_chen_yu": "convenience_store", "npc_landlord_wang": "park"})
+	assert_eq(sched.present_on_map("map_old_town", _at(1, 9)), {"npc_landlord_wang": "park"})
+	assert_eq(sched.present_on_map("map_convenience_interior", _at(1, 9)), {"npc_chen_yu": "convenience_store"},
+		"Chen works inside the store (D-034)")
 	assert_eq(sched.present_on_map("map_industrial", _at(1, 9)), {"npc_lao_zhou": "industrial_warehouse"})
 	assert_eq(sched.present_on_map("map_old_town", _at(1, 23)), {})
 
@@ -32,11 +33,12 @@ func test_present_on_map() -> void:
 func test_session_view_matches_player_map() -> void:
 	var s := Sessions.create()
 	s.submit("advance_time", {"minutes": 60}, "system")  # 09:00
-	assert_eq(s.present_npcs().keys().size(), 2)
+	assert_eq(s.present_npcs(), {"npc_landlord_wang": "park"})
 	s.submit("take_route", {"route_id": "route_12_to_industrial"})
 	assert_eq(s.present_npcs(), {"npc_lao_zhou": "industrial_warehouse"})
 	s.submit("take_route", {"route_id": "route_12_to_old_town"})
-	assert_eq(s.present_npcs().has("npc_chen_yu"), true, "same answer after coming back")
+	Sessions.go(s, "convenience_store")
+	assert_eq(s.present_npcs(), {"npc_chen_yu": "convenience_store"}, "same answer after coming back, inside the store")
 
 
 func test_every_schedule_location_has_an_anchor() -> void:

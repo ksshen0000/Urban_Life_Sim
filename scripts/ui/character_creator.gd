@@ -19,6 +19,10 @@ const FACINGS := ["down", "left", "up", "right"]
 const PREVIEW_SCALE := 8
 
 var profile: Dictionary = ProfileSystem.default_profile()
+## Rows to show; empty = all (the barber shows only "hair_style" and "hair").
+var fields: Array = []
+var confirm_text := ""
+var subtitle := ""
 var _confirm_text := ""
 var _title_text := ""
 var _preview: TextureRect
@@ -30,13 +34,18 @@ var _t := 0.0
 
 
 ## `confirm_key`: "ui.creator.start" (new game) or "ui.creator.save" (mirror).
-static func make(initial: Dictionary, title_key: String, confirm_key: String) -> CharacterCreator:
+static func make(initial: Dictionary, title_key: String, confirm_key: String, p_fields: Array = []) -> CharacterCreator:
 	var c := CharacterCreator.new()
 	if not initial.is_empty():
 		c.profile = initial.duplicate(true)
 	c._title_text = TranslationServer.translate(title_key)
-	c._confirm_text = TranslationServer.translate(confirm_key)
+	c._confirm_text = TranslationServer.translate(confirm_key) if not confirm_key.is_empty() else ""
+	c.fields = p_fields
 	return c
+
+
+func _shows(field: String) -> bool:
+	return fields.is_empty() or fields.has(field)
 
 
 func _ready() -> void:
@@ -59,6 +68,12 @@ func _ready() -> void:
 	title.text = _title_text
 	title.add_theme_font_size_override("font_size", 36)
 	outer.add_child(title)
+	if not subtitle.is_empty():
+		var sub := Label.new()
+		sub.text = subtitle
+		outer.add_child(sub)
+	if not confirm_text.is_empty():
+		_confirm_text = confirm_text
 	var body := HBoxContainer.new()
 	body.add_theme_constant_override("separation", 40)
 	outer.add_child(body)
@@ -68,7 +83,8 @@ func _ready() -> void:
 	buttons.alignment = BoxContainer.ALIGNMENT_END
 	buttons.add_theme_constant_override("separation", 16)
 	outer.add_child(buttons)
-	_button(buttons, "Random", tr("ui.creator.random"), randomize_look)
+	if fields.is_empty():
+		_button(buttons, "Random", tr("ui.creator.random"), randomize_look)
 	_button(buttons, "Cancel", tr("ui.creator.cancel"), func() -> void: cancelled.emit())
 	var ok := _button(buttons, "Confirm", _confirm_text, _confirm)
 	_refresh()
@@ -108,7 +124,6 @@ func _build_options() -> Control:
 	grid.columns = 2
 	grid.add_theme_constant_override("h_separation", 20)
 	grid.add_theme_constant_override("v_separation", 14)
-	_label(grid, "ui.creator.name")
 	_name_edit = LineEdit.new()
 	_name_edit.name = "NameEdit"
 	_name_edit.max_length = ProfileSystem.MAX_NAME_LENGTH
@@ -116,28 +131,38 @@ func _build_options() -> Control:
 	_name_edit.custom_minimum_size.x = 320
 	_name_edit.text = profile["name"]
 	_name_edit.text_changed.connect(func(t: String) -> void: profile["name"] = t)
-	grid.add_child(_name_edit)
-	_label(grid, "ui.creator.gender")
-	var g := _row(grid, "figure")
-	_button(g, "Gender_m", tr("ui.creator.male"), _set_gender.bind("m"))
-	_button(g, "Gender_f", tr("ui.creator.female"), _set_gender.bind("f"))
-	_label(grid, "ui.creator.hair_style")
-	var h := _row(grid, "hair_style")
-	_button(h, "HairPrev", "◀", _cycle_hair.bind(-1))
+	if _shows("name"):
+		_label(grid, "ui.creator.name")
+		grid.add_child(_name_edit)
+	if _shows("figure"):
+		_label(grid, "ui.creator.gender")
+		var g := _row(grid, "figure")
+		_button(g, "Gender_m", tr("ui.creator.male"), _set_gender.bind("m"))
+		_button(g, "Gender_f", tr("ui.creator.female"), _set_gender.bind("f"))
 	_hair_label = Label.new()
-	_hair_label.custom_minimum_size.x = 120
-	_hair_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	h.add_child(_hair_label)
-	_button(h, "HairNext", "▶", _cycle_hair.bind(1))
-	_swatches(grid, "ui.creator.hair_color", "hair", HAIR)
-	_swatches(grid, "ui.creator.skin", "skin", SKIN)
-	_swatches(grid, "ui.creator.top", "top", TOP)
-	_label(grid, "ui.creator.bottom")
-	var o := _row(grid, "outfit")
-	for outfit in ProfileSystem.OUTFITS:
-		_button(o, "Outfit_" + outfit, tr("ui.creator." + outfit), _set_look.bind("outfit", outfit))
-	_swatches(grid, "ui.creator.bottom_color", "bottom", BOTTOM)
-	_swatches(grid, "ui.creator.shoes", "shoes", SHOES)
+	if _shows("hair_style"):
+		_label(grid, "ui.creator.hair_style")
+		var h := _row(grid, "hair_style")
+		_button(h, "HairPrev", "◀", _cycle_hair.bind(-1))
+		_hair_label.custom_minimum_size.x = 120
+		_hair_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		h.add_child(_hair_label)
+		_button(h, "HairNext", "▶", _cycle_hair.bind(1))
+	if _shows("hair"):
+		_swatches(grid, "ui.creator.hair_color", "hair", HAIR)
+	if _shows("skin"):
+		_swatches(grid, "ui.creator.skin", "skin", SKIN)
+	if _shows("top"):
+		_swatches(grid, "ui.creator.top", "top", TOP)
+	if _shows("outfit"):
+		_label(grid, "ui.creator.bottom")
+		var o := _row(grid, "outfit")
+		for outfit in ProfileSystem.OUTFITS:
+			_button(o, "Outfit_" + outfit, tr("ui.creator." + outfit), _set_look.bind("outfit", outfit))
+	if _shows("bottom"):
+		_swatches(grid, "ui.creator.bottom_color", "bottom", BOTTOM)
+	if _shows("shoes"):
+		_swatches(grid, "ui.creator.shoes", "shoes", SHOES)
 	return grid
 
 

@@ -1220,6 +1220,56 @@
       "id": "ui.journal.title_named",
       "zh_CN": "{name}的日志",
       "en": "{name}'s journal"
+    },
+    {
+      "id": "ui.error.e_unknown_door",
+      "zh_CN": "这扇门不通。",
+      "en": "That door doesn't lead anywhere."
+    },
+    {
+      "id": "ui.error.e_not_usable",
+      "zh_CN": "这个不是吃的用的，好好收着吧。",
+      "en": "That's something to keep, not use."
+    },
+    {
+      "id": "ui.barber.title",
+      "zh_CN": "理发",
+      "en": "Haircut"
+    },
+    {
+      "id": "ui.barber.price",
+      "zh_CN": "剪一次 {price}，大约 {minutes} 分钟。",
+      "en": "{price} per cut, about {minutes} minutes."
+    },
+    {
+      "id": "ui.creator.cut",
+      "zh_CN": "就剪这个（{price}）",
+      "en": "This one ({price})"
+    },
+    {
+      "id": "ui.hud.phase.morning",
+      "zh_CN": "清晨",
+      "en": "Morning"
+    },
+    {
+      "id": "ui.hud.phase.day",
+      "zh_CN": "白天",
+      "en": "Day"
+    },
+    {
+      "id": "ui.hud.phase.dusk",
+      "zh_CN": "傍晚",
+      "en": "Dusk"
+    },
+    {
+      "id": "ui.hud.phase.night",
+      "zh_CN": "夜里",
+      "en": "Night"
+    },
+    {
+      "id": "ui.inventory.keepsake",
+      "zh_CN": "收藏品",
+      "en": "Keepsake"
     }
   ]
 }

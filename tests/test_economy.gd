@@ -21,6 +21,9 @@ class DirectWrite extends CommandHandler:
 
 
 func _buy(s: SimulationSession, shop: String, item: String, qty := 1) -> CommandResult:
+	var where: String = s.content.get_record("shops", shop).get("location_id", "")
+	if not where.is_empty():
+		Sessions.go(s, where)  # shops are indoors (D-034)
 	return s.submit("buy_item", {"shop_id": shop, "item_id": item, "quantity": qty})
 
 
@@ -74,6 +77,7 @@ func test_money_stays_integer_over_many_small_purchases() -> void:
 
 func test_purchase_validation_errors_change_nothing() -> void:
 	var s := Sessions.create()
+	Sessions.go(s, "fast_food_restaurant")
 	var before := s.world.to_dict()
 	assert_eq(_buy(s, "shop_nowhere", "item_drink").error_code, "E_UNKNOWN_SHOP")
 	assert_eq(_buy(s, "shop_fast_food", "item_instant_food").error_code, "E_ITEM_NOT_SOLD")

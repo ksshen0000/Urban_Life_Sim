@@ -22,6 +22,17 @@ func _ready() -> void:
 		_players.append(p)
 
 
+static func clear_cache() -> void:
+	_cache.clear()
+
+
+## Quitting while a click is still playing must not leave the playback behind.
+func _exit_tree() -> void:
+	for p in _players:
+		p.stop()
+		p.stream = null
+
+
 func play(sound: String) -> void:
 	# Buttons that change scene (New game, Title screen, Load) run their action before the click
 	# handler; by then the old scene, and this node with it, has already left the tree.

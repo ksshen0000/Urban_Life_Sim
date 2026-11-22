@@ -26,3 +26,31 @@ static func create(overrides: Dictionary = {}) -> SimulationSession:
 		CITY_ID, o)
 	assert(r["ok"], str(r["message"]))
 	return r["session"]
+
+
+## Walks the player to `location_id` through doors (D-034): out of the current interior if
+## needed, then in through the door that leads there. Bus rides are not taken. Returns true if
+## the player ends up on that location's map.
+static func go(s: SimulationSession, location_id: String) -> bool:
+	var target_map := s.locations.map_of_location(location_id)
+	for i in 3:
+		var here := s.locations.get_map_id(SimulationSession.PLAYER_ID)
+		if here == target_map:
+			return true
+		var door := _door_towards(s, here, target_map)
+		if door.is_empty() or not s.submit("use_door", {"door_id": door}).ok:
+			return false
+	return s.locations.get_map_id(SimulationSession.PLAYER_ID) == target_map
+
+
+## A door on map `here` leading to `target_map`, else a door leading back out to the street.
+static func _door_towards(s: SimulationSession, here: String, target_map: String) -> String:
+	var fallback := ""
+	for it: Dictionary in s.content.get_record("maps", here)["interactables"]:
+		if it["kind"] != "door":
+			continue
+		if s.locations.map_of_location(it["target_location_id"]) == target_map:
+			return it["id"]
+		if s.content.get_record("maps", here).get("indoor", false):
+			fallback = it["id"]  # out of a shop; never wander off down a street
+	return fallback

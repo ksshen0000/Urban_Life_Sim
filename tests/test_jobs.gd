@@ -8,6 +8,14 @@ const P := SimulationSession.PLAYER_ID
 const CLERK := "job_convenience_clerk"
 
 
+## Goes to the shift's workplace (through a door if it is indoors) and works it.
+func _work(s: SimulationSession, shift_id: String) -> CommandResult:
+	var job := s.content.get_record("jobs", s.jobs.get_shift(shift_id).get("job_id", shift_id.get_slice(".", 0)))
+	if not job.is_empty():
+		Sessions.go(s, job["workplace_location_id"])
+	return s.submit("work_shift", {"shift_id": shift_id})
+
+
 func _wait(s: SimulationSession, minutes: int) -> void:
 	assert_true(s.submit("advance_time", {"minutes": minutes}, "system").ok)
 
@@ -22,7 +30,7 @@ func _to(s: SimulationSession, day: int, hour: int, minute: int = 0) -> void:
 
 func test_jobs_loaded_from_content() -> void:
 	var ids := Sessions.content().get_ids("jobs")
-	assert_eq(ids, PackedStringArray(["job_convenience_clerk", "job_restaurant_server", "job_warehouse_sorter"]))
+	assert_eq(ids, PackedStringArray(["job_construction_labor", "job_convenience_clerk", "job_restaurant_server", "job_warehouse_sorter"]))
 
 
 func test_booking_rules() -> void:
@@ -60,13 +68,13 @@ func test_work_shift_pays_once_with_region_take_home() -> void:
 	_to(s, 2, 9)
 	var before := s.economy.get_balance(P)
 	var id := JobsSystem.shift_id_for(CLERK, 2, "morning")
-	var r := s.submit("work_shift", {"shift_id": id})
+	var r := _work(s, id)
 	assert_true(r.ok, str(r.error_code))
 	assert_eq(GameClock.format_debug(s.world.clock.get_minute()), "D2 13:00")
 	assert_eq(s.economy.get_balance(P) - before, 8360, "¥88.00 gross - 5% = ¥83.60")
 	var sh := s.jobs.get_shift(id)
 	assert_eq([sh["status"], sh["gross_minor"], sh["net_minor"], sh["worked_minutes"]], ["completed", 8800, 8360, 240])
-	assert_eq(s.submit("work_shift", {"shift_id": id}).error_code, "E_SHIFT_NOT_BOOKED", "a paid shift cannot be worked again")
+	assert_eq(_work(s, id).error_code, "E_SHIFT_NOT_BOOKED", "a paid shift cannot be worked again")
 	assert_eq(s.economy.get_balance(P) - before, 8360, "paid exactly once")
 	var wages := s.economy.get_ledger(P).filter(func(t: Dictionary) -> bool: return str(t["reason"]) == "wage:" + id)
 	assert_eq(wages.size(), 1)
@@ -76,6 +84,7 @@ func test_replayed_work_command_is_not_paid_twice() -> void:
 	var s := Sessions.create()
 	_book(s, CLERK, 2, "morning")
 	_to(s, 2, 9)
+	Sessions.go(s, "convenience_store")
 	var p := ActionProposal.create("ui.work.1", P, "work_shift", {"shift_id": JobsSystem.shift_id_for(CLERK, 2, "morning")})
 	var first := s.processor.apply(p)
 	var balance := s.economy.get_balance(P)
@@ -91,7 +100,7 @@ func test_work_needs_use_job_rates() -> void:
 	_to(s, 2, 9)
 	var e0 := s.needs.get_value(P, "energy")
 	var st0 := s.needs.get_value(P, "stress")
-	s.submit("work_shift", {"shift_id": JobsSystem.shift_id_for(CLERK, 2, "morning")})
+	_work(s, JobsSystem.shift_id_for(CLERK, 2, "morning"))
 	assert_eq(s.needs.get_value(P, "energy"), maxi(e0 - 20, 0), "-5/h for 4h")
 	assert_true(s.needs.get_value(P, "stress") >= st0 + 8, "+2/h for 4h (+ pressure if hungry)")
 
@@ -101,11 +110,11 @@ func test_early_arrival_waits_and_late_arrival_is_docked() -> void:
 	_book(s, CLERK, 2, "morning")
 	_book(s, "job_restaurant_server", 2, "dinner")
 	_to(s, 2, 7, 30)
-	assert_true(s.submit("work_shift", {"shift_id": JobsSystem.shift_id_for(CLERK, 2, "morning")}).ok)
+	assert_true(_work(s, JobsSystem.shift_id_for(CLERK, 2, "morning")).ok)
 	var early := s.jobs.get_shift(JobsSystem.shift_id_for(CLERK, 2, "morning"))
 	assert_eq([early["worked_minutes"], early["late_minutes"]], [240, 0], "waited until 09:00, full pay")
 	_to(s, 2, 18, 0)  # dinner started 17:00: 60 min late
-	var r := s.submit("work_shift", {"shift_id": JobsSystem.shift_id_for("job_restaurant_server", 2, "dinner")})
+	var r := _work(s, JobsSystem.shift_id_for("job_restaurant_server", 2, "dinner"))
 	assert_true(r.ok)
 	var late := s.jobs.get_shift(JobsSystem.shift_id_for("job_restaurant_server", 2, "dinner"))
 	assert_eq([late["worked_minutes"], late["late_minutes"], late["gross_minor"]], [180, 60, 7500])
@@ -117,9 +126,9 @@ func test_start_window() -> void:
 	_book(s, CLERK, 2, "morning")
 	var id := JobsSystem.shift_id_for(CLERK, 2, "morning")
 	_to(s, 2, 6, 59)
-	assert_eq(s.submit("work_shift", {"shift_id": id}).error_code, "E_SHIFT_NOT_STARTED")
+	assert_eq(_work(s, id).error_code, "E_SHIFT_NOT_STARTED")
 	_to(s, 2, 12, 31)
-	assert_eq(s.submit("work_shift", {"shift_id": id}).error_code, "E_SHIFT_TOO_LATE")
+	assert_eq(_work(s, id).error_code, "E_SHIFT_TOO_LATE")
 
 
 func test_missed_shift() -> void:
@@ -141,9 +150,9 @@ func test_must_be_at_workplace() -> void:
 	_book(s, "job_warehouse_sorter", 4, "day")
 	var id := JobsSystem.shift_id_for("job_warehouse_sorter", 4, "day")
 	_to(s, 4, 7, 30)
-	assert_eq(s.submit("work_shift", {"shift_id": id}).error_code, "E_NOT_HERE", "warehouse is in the industrial zone")
+	assert_eq(_work(s, id).error_code, "E_NOT_HERE", "warehouse is in the industrial zone")
 	assert_true(s.submit("take_route", {"route_id": "route_12_to_industrial"}).ok)
-	assert_true(s.submit("work_shift", {"shift_id": id}).ok)
+	assert_true(_work(s, id).ok)
 	assert_eq(s.jobs.get_shift(id)["net_minor"], 15200, "¥160.00 gross - 5%")
 
 
@@ -162,6 +171,6 @@ func test_region_policy_swap_changes_pay_not_flow() -> void:
 	_book(s, CLERK, 2, "morning")
 	_to(s, 2, 9)
 	var before := s.economy.get_balance(P)
-	assert_true(s.submit("work_shift", {"shift_id": JobsSystem.shift_id_for(CLERK, 2, "morning")}).ok)
+	assert_true(_work(s, JobsSystem.shift_id_for(CLERK, 2, "morning")).ok)
 	assert_eq(s.economy.get_balance(P) - before, 7800, "same WorkShiftHandler, different policy: ¥88 - ¥10 fee")
 	fx.cleanup()

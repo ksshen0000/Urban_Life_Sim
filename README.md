@@ -47,7 +47,7 @@ content/       数据驱动内容包（common/ 通用规则与文案，regions/c
 scenes/        Godot 场景（boot/ world/ interiors/ ui/）
 scripts/       app/ kernel/ simulation/ narrative/ regions/ content/ persistence/ world/ ui/（intelligence/ 待 v0.2）
 tests/         无头测试（framework/ 为零依赖断言基类，run_tests.gd 为执行器）
-tools/         check.sh、balance_report.gd、screenshot.gd（需要显示器）、sprite_sheet.gd（无界面导出人物总览图）、build_release.sh
+tools/         check.sh、balance_report.gd、screenshot.gd（需要显示器）、sprite_sheet.gd（无界面导出人物总览图）、leak_probe.gd（开窗口走一遍新游戏并退出，检查退出时的资源泄漏）、build_release.sh
 docs/          PRODUCT_SPEC.md、decisions.md、agent_progress.md、changelog.md、balance.md、RELEASE_README.txt（随安装包附带的玩家说明）
 ```
 

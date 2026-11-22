@@ -8,6 +8,7 @@ extends Control
 var _session: SimulationSession
 var _bus: GameEventBus
 var _day_label: Label
+var _phase_label: Label  # 清晨 / 白天 / 傍晚 / 夜里 (D-035)
 var _cash_label: Label
 var _needs_box: VBoxContainer
 var _need_rows: Dictionary = {}  # need_id -> {bar: ProgressBar, value: Label}
@@ -52,6 +53,7 @@ func refresh() -> void:
 	@warning_ignore("integer_division")
 	var hh := mod / 60
 	_day_label.text = "%s  %02d:%02d" % [Localizer.text("ui.hud.day", {"day": v["day_index"]}), hh, mod % 60]
+	_phase_label.text = tr("ui.hud.phase." + DayCycle.phase(mod))
 	_cash_label.text = Localizer.text("ui.hud.cash", {"cash": MoneyFormat.format_minor(
 		v["balance_minor"], v["currency_code"], v["currency_minor_digits"])})
 	_refresh_objective()
@@ -85,6 +87,10 @@ func set_prompt(display_name: String) -> void:
 
 
 # Read-back helpers for tests and accessibility tooling.
+func get_phase_text() -> String:
+	return _phase_label.text
+
+
 func get_day_text() -> String:
 	return _day_label.text
 
@@ -125,6 +131,17 @@ func _build() -> void:
 	left.add_theme_constant_override("separation", 8)
 	top.add_child(left)
 	_day_label = _panel_label(left, 28)
+	var panel := _day_label.get_parent()
+	panel.remove_child(_day_label)
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 14)
+	panel.add_child(row)
+	row.add_child(_day_label)
+	_phase_label = Label.new()
+	_phase_label.name = "Phase"
+	_phase_label.add_theme_font_size_override("font_size", 22)
+	_phase_label.add_theme_color_override("font_color", Color("#f2d27a"))
+	row.add_child(_phase_label)
 	_objective_panel = PanelContainer.new()
 	left.add_child(_objective_panel)
 	var obj_box := VBoxContainer.new()

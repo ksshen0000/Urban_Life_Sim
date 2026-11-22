@@ -39,6 +39,24 @@ func _draw() -> void:
 					_grass_edges(cell, o, ts)
 				"water":
 					_bank(cell, o, ts)
+				"wall_in":
+					_wall_trim(cell, o, ts)
+				"void":
+					if _kind(cell + Vector2i.UP) in ["floor_tile", "floor_wood"]:
+						# the cut-away front wall: its top edge
+						draw_rect(Rect2(o.x, o.y, ts, 3 * PX), Color("#d9cdb2"))
+						draw_rect(Rect2(o.x, o.y + 3 * PX, ts, PX), Color("#8a7e66"))
+	for d: Dictionary in _map.get("decals", []):
+		var o := Vector2(d["tile"][0], d["tile"][1]) * ts
+		for i in 4:
+			if d["kind"] == "crosswalk_v":
+				draw_rect(Rect2(o.x + 2 * PX, o.y + (i * 4 + 1) * PX, 12 * PX, 2 * PX), Color("#eeeae0"))
+			else:
+				draw_rect(Rect2(o.x + (i * 4 + 1) * PX, o.y + 2 * PX, 2 * PX, 12 * PX), Color("#eeeae0"))
+	for d: Dictionary in _map.get("wall_decor", []):
+		var tex := PixelProps.texture(d["kind"])
+		draw_texture_rect(tex, Rect2(Vector2(d["tile"][0], d["tile"][1]) * ts,
+			Vector2(tex.get_width(), tex.get_height()) * PX), false)
 
 
 func _road(cell: Vector2i, o: Vector2, ts: float) -> void:
@@ -55,6 +73,17 @@ func _road(cell: Vector2i, o: Vector2, ts: float) -> void:
 		draw_rect(Rect2(o.x, o.y + ts - 3 * PX, ts, PX), Color("#c9c5b9"))
 	if up == "road":
 		draw_rect(Rect2(o.x + 3 * PX, o.y - PX, 7 * PX, 2 * PX), Color("#e6cf5a"))
+
+
+## Interior wall face: crown moulding at the top, skirting board where it meets the floor.
+func _wall_trim(cell: Vector2i, o: Vector2, ts: float) -> void:
+	if _kind(cell + Vector2i.UP) != "wall_in":
+		draw_rect(Rect2(o.x, o.y, ts, 3 * PX), Color("#a08a6a"))
+		draw_rect(Rect2(o.x, o.y + 3 * PX, ts, PX), Color("#d8c8a8"))
+	if _kind(cell + Vector2i.DOWN) in ["floor_tile", "floor_wood"]:
+		draw_rect(Rect2(o.x, o.y + ts - 4 * PX, ts, 4 * PX), Color("#7a5a3a"))
+		draw_rect(Rect2(o.x, o.y + ts - 4 * PX, ts, PX), Color("#9a7a52"))
+		draw_rect(Rect2(o.x, o.y + ts, ts, 2 * PX), Color(0, 0, 0, 0.18))
 
 
 ## A tree with no lawn around it stands in a paved tree pit.

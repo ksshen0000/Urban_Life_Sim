@@ -9,7 +9,9 @@ const WORLD_COLLISION_LAYER := 1
 const TILE_COLORS := {
 	"ground": Color("#d9c9a6"), "road": Color("#575b63"), "grass": Color("#6fae55"),
 	"wall": Color("#8a8f99"), "building": Color("#cdbb95"), "tree": Color("#6fae55"),
-	"water": Color("#3f86b8"),
+	"water": Color("#3f86b8"), "floor_tile": Color("#e6e3dc"), "floor_wood": Color("#b98a5a"),
+	"wall_in": Color("#efe3c8"), "void": Color("#1d1b22"), "dirt": Color("#a8835a"),
+	"fence": Color("#e8e4da"), "plaza": Color("#cfd2d6"),
 }
 
 ## Each kind has VARIANTS hand-off-free variations (stone colour, grass tufts, flowers), picked
@@ -19,6 +21,10 @@ const VARIANTS := 4
 const ART := 16
 
 static var _tileset_cache: Dictionary = {}
+
+
+static func clear_cache() -> void:
+	_tileset_cache.clear()
 
 
 static func build_tileset(tile_size: int) -> TileSet:
@@ -129,6 +135,58 @@ static func art_pixel(kind: String, variant: int, x: int, y: int) -> Color:
 			if y % 4 == 1 or (x + off) % 8 == 0:
 				return Color("#51463f")
 			return brick
+		"floor_tile":
+			# 8 x 8 ceramic tiles, faint checker, grout lines
+			if x % 8 == 0 or y % 8 == 0:
+				return base.darkened(0.14)
+			var c := base.darkened(0.04) if ((x / 8) + (y / 8)) % 2 == 1 else base
+			if x % 8 == 1 and y % 8 == 1:
+				c = c.lightened(0.1)
+			return c
+		"floor_wood":
+			# planks 4 px tall, staggered joints, grain specks
+			var row := y / 4
+			var c := base.darkened(0.06) if _hash01(row, variant, 3) > 0.5 else base
+			if y % 4 == 0:
+				return base.darkened(0.25)
+			if (x + row * 5 + variant * 3) % 16 == 0:
+				return base.darkened(0.22)
+			if n > 0.9:
+				c = c.darkened(0.08)
+			elif n < 0.08:
+				c = c.lightened(0.06)
+			return c
+		"wall_in":
+			# painted wall with a faint vertical stripe
+			return base.darkened(0.04) if x % 4 == 0 else base
+		"void":
+			return base
+		"dirt":
+			var c := base
+			if n > 0.85:
+				c = base.lightened(0.12)   # pebbles
+			elif n < 0.15:
+				c = base.darkened(0.12)
+			if (x + y * 3 + variant) % 13 == 0:
+				c = base.darkened(0.2)     # tyre tracks
+			return c
+		"fence":
+			# site hoarding: white panels, blue band, posts
+			if x % 16 == 0:
+				return Color("#8a8f99")
+			if y >= 5 and y < 9:
+				return Color("#2f6fb0")
+			if y >= 14:
+				return Color("#6b5d55")
+			return base.darkened(0.06) if x % 8 == 4 else base
+		"plaza":
+			# large polished slabs with a light sheen
+			if x % 16 == 0 or y % 8 == 0:
+				return base.darkened(0.16)
+			var c := base.lightened(0.05) if ((x / 16) + (y / 8) + variant) % 2 == 0 else base
+			if (x - y + 32) % 11 == 0:
+				c = c.lightened(0.08)
+			return c
 		"water":
 			var c := base
 			var wave := (x + y * 2 + variant * 3) % 11

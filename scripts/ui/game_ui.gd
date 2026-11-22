@@ -38,6 +38,7 @@ var _last_balance := 0
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	layer = 10  # above the day/night tint and glow layers (DayNight uses 1 and 2)
 	sound = UiSound.new()
 	sound.name = "UiSound"
 	add_child(sound)
@@ -319,8 +320,11 @@ func open_inventory(feedback: String = "") -> void:
 		var row := _row()
 		_cell(row, tr(item["name_key"]), 140)
 		_cell(row, Localizer.text("ui.inventory.count", {"count": items[item_id]}), 80)
-		_cell(row, describe_item(item), 340)
-		_button(row, "Use_" + item_id, tr("ui.inventory.use"), _use.bind(item_id))
+		if item["category"] == "keepsake":
+			_cell(row, tr("ui.inventory.keepsake") + " · " + tr(item["description_key"]), 420)
+		else:
+			_cell(row, describe_item(item), 340)
+			_button(row, "Use_" + item_id, tr("ui.inventory.use"), _use.bind(item_id))
 	_add_feedback(feedback)
 	_add_buttons([["Close", tr("ui.common.close"), close]])
 	_show()
@@ -548,6 +552,34 @@ func open_home(location_id: String, feedback: String = "") -> void:
 	actions.append(["Close", tr("ui.common.close"), close])
 	_add_buttons(actions)
 	_show()
+
+
+## The barber (D-035): the creator limited to hair style and colour; a cut goes through
+## `get_haircut` (pays, takes the service time, changes the hair).
+func open_barber(barber: Dictionary) -> void:
+	close()
+	var price := _money(int(barber["price_minor"]))
+	var creator := CharacterCreator.make(_session.profile.get_profile(SimulationSession.PLAYER_ID),
+		"ui.barber.title", "", ["hair_style", "hair"])
+	creator.confirm_text = Localizer.text("ui.creator.cut", {"price": price})
+	creator.subtitle = Localizer.text("ui.barber.price", {"price": price, "minutes": barber.get("service_minutes", 30)})
+	creator.name = "Mirror"
+	add_child(creator)
+	_session.world.clock.push_pause(PAUSE_REASON + "_mirror")
+	get_tree().paused = true
+	var done := func(profile: Dictionary) -> void:
+		creator.queue_free()
+		_session.world.clock.pop_pause(PAUSE_REASON + "_mirror")
+		get_tree().paused = false
+		modal_changed.emit(false)
+		if profile.is_empty():
+			return
+		var r := _session.submit("get_haircut", {"barber_id": barber["id"], "hair_style": profile["look"]["hair_style"],
+			"hair": profile["look"]["hair"]})
+		open_message(tr("ui.barber.title"), Localizer.text("ui.activity.paid", {"cost": price}) if r.ok else error_text(r.error_code))
+	creator.confirmed.connect(done)
+	creator.cancelled.connect(done.bind({}))
+	modal_changed.emit(true)
 
 
 ## The mirror at home: the character creator over the game; saving goes through `set_profile`.

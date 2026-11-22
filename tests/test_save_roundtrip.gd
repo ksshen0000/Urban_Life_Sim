@@ -42,9 +42,11 @@ func _played_session() -> SimulationSession:
 	s.run_story_rules()
 	_answer(s)
 	assert_true(s.submit("sign_lease", {"housing_id": "home_shared_room_01"}).ok, "lease")
+	Sessions.go(s, "fast_food_restaurant")
 	assert_true(s.submit("buy_item", {"shop_id": "shop_fast_food", "item_id": "item_simple_meal", "quantity": 1}).ok, "buy")
 	assert_true(s.submit("book_shift", {"job_id": "job_convenience_clerk", "day": 2, "template_id": "morning"}).ok, "book")
 	_to(s, 1, 9)
+	Sessions.go(s, "convenience_store")
 	assert_true(s.submit("choose_dialogue", {"tree_id": "dialogue_chen_yu_intro", "node_id": "start", "choice_id": "thanks"}).ok, "talk")
 	_to(s, 2, 7)
 	assert_true(s.submit("work_shift", {"shift_id": JobsSystem.shift_id_for("job_convenience_clerk", 2, "morning")}).ok, "work")
@@ -109,6 +111,7 @@ func test_play_continues_identically_after_load() -> void:
 	var loaded: SimulationSession = _save_and_load(s)["session"]
 	for sess: SimulationSession in [s, loaded]:
 		_answer(sess)
+		Sessions.go(sess, "fast_food_restaurant")
 		sess.submit("buy_item", {"shop_id": "shop_fast_food", "item_id": "item_simple_meal", "quantity": 1})
 		sess.submit("book_shift", {"job_id": "job_convenience_clerk", "day": 7, "template_id": "evening"})
 		_to(sess, 8, 8)

@@ -67,6 +67,16 @@ func pose_state(t: float) -> Dictionary:
 			var k := int(t / 1.3) % 3
 			st["arm_l"] = ["forward", "out", "forward"][k]
 			st["arm_r"] = ["forward", "out", "down"][k]
+		"eat":
+			st["legs"] = "sit"
+			st["arm_r"] = "forward" if fmod(t, 1.6) < 0.5 else "down"
+		"work":
+			# hammering / shovelling: arms up and down
+			var up := fmod(t, 0.8) < 0.4
+			st["arm_l"] = "up" if up else "forward"
+			st["arm_r"] = "up" if up else "forward"
+		"browse":
+			st["arm_r"] = "forward" if fmod(t, 3.0) < 0.8 else "down"
 		"fish":
 			st["legs"] = "sit"
 			st["arm_r"] = "forward"

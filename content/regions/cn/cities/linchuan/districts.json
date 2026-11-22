@@ -1,7 +1,25 @@
 {
   "schema_version": 1,
   "records": [
-    {"id": "OLD_TOWN", "city_id": "CN_LINCHUAN", "name_key": "district.cn_linchuan.old_town.name"},
-    {"id": "INDUSTRIAL", "city_id": "CN_LINCHUAN", "name_key": "district.cn_linchuan.industrial.name"}
+    {
+      "id": "OLD_TOWN",
+      "city_id": "CN_LINCHUAN",
+      "name_key": "district.cn_linchuan.old_town.name"
+    },
+    {
+      "id": "INDUSTRIAL",
+      "city_id": "CN_LINCHUAN",
+      "name_key": "district.cn_linchuan.industrial.name"
+    },
+    {
+      "id": "XINHE",
+      "city_id": "CN_LINCHUAN",
+      "name_key": "district.cn_linchuan.xinhe.name"
+    },
+    {
+      "id": "DOWNTOWN",
+      "city_id": "CN_LINCHUAN",
+      "name_key": "district.cn_linchuan.downtown.name"
+    }
   ]
 }

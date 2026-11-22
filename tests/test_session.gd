@@ -43,8 +43,10 @@ func test_ids_are_unique_and_actor_tagged() -> void:
 
 func test_whole_world_round_trip() -> void:
 	var s := Sessions.create()
+	Sessions.go(s, "fast_food_restaurant")
 	s.submit("buy_item", {"shop_id": "shop_fast_food", "item_id": "item_simple_meal", "quantity": 2})
 	s.submit("use_item", {"item_id": "item_simple_meal"})
+	Sessions.go(s, "old_town_apartment")
 	s.submit("sign_lease", {"housing_id": "home_shared_room_01"})
 	assert_true(s.submit("perform_activity", {"activity_id": "activity_sleep"}).ok)
 	var saved: Dictionary = JSON.parse_string(JSON.stringify(s.world.to_dict()))

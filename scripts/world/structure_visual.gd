@@ -17,9 +17,16 @@ const PALETTES := {
 	"block": {"wall": Color("#c4a48a"), "roof": Color("#5d6470"), "trim": Color("#8a857d"), "accent": Color("#cfd6dd")},
 	"arcade": {"wall": Color("#3b3550"), "roof": Color("#2e2a3e"), "trim": Color("#6a5a8a"), "accent": Color("#e04aa0"), "accent2": Color("#4ad0e0")},
 	"billiards": {"wall": Color("#ddd3bd"), "roof": Color("#2f5a42"), "trim": Color("#6a5a45"), "accent": Color("#2f7a4a")},
+	"barber": {"wall": Color("#f0ece4"), "roof": Color("#5d6470"), "trim": Color("#7d8a96"), "accent": Color("#2f6fb0")},
+	"noodle": {"wall": Color("#e9d8b0"), "roof": Color("#8a3b2e"), "trim": Color("#9a6b45"), "accent": Color("#3fa06a")},
+	"cafe": {"wall": Color("#6b4a36"), "roof": Color("#3a2e28"), "trim": Color("#4a3328"), "accent": Color("#e8d6b8")},
+	"luxury": {"wall": Color("#2e2c30"), "roof": Color("#1e1c22"), "trim": Color("#c9a55a"), "accent": Color("#c9a55a")},
+	"tower": {"wall": Color("#4a6a8a"), "roof": Color("#3a4250"), "trim": Color("#c8d4de"), "accent": Color("#8fb8d8")},
+	"mall": {"wall": Color("#e8ecf0"), "roof": Color("#8a96a2"), "trim": Color("#b9c2cc"), "accent": Color("#d84a4a")},
+	"construction": {"wall": Color("#a9a59e"), "roof": Color("#8a867e"), "trim": Color("#6b5d55"), "accent": Color("#3fa06a")},
 }
 ## Styles with shop windows and an awning on the ground floor.
-const STOREFRONT_STYLES := ["shop", "restaurant", "arcade", "billiards"]
+const STOREFRONT_STYLES := ["shop", "restaurant", "arcade", "billiards", "barber", "noodle", "cafe", "luxury"]
 const FADED_ALPHA := 0.45
 const A := 16  # art pixels per tile
 const SIGN_FONT_SIZE := 12
@@ -47,10 +54,32 @@ func setup(record: Dictionary, tile_size: int) -> void:
 	_tex = PixelArt.cached("building:" + JSON.stringify(data, "", true), _paint)
 	if record.has("sign_key"):
 		_add_sign(tr(record["sign_key"]))
+	# Lit windows at night: part of the building, so y-sorting keeps people in front of them.
+	var glow := _WindowGlow.new()
+	glow.name = "WindowGlow"
+	var rects: Array[Rect2] = []
+	for r in lit_window_rects():
+		rects.append(Rect2(r.position - position, r.size))
+	glow.rects = rects
+	var add := CanvasItemMaterial.new()
+	add.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD
+	glow.material = add
+	add_child(glow)
 	queue_redraw()
 
 
 ## Pixel rect (world space) covered by the drawing, used for the fade check.
+class _WindowGlow extends Node2D:
+	var rects: Array[Rect2] = []
+
+	func _draw() -> void:
+		var k := DayNight.glow_strength
+		if k <= 0.01:
+			return
+		for r in rects:
+			draw_rect(r, Color(1.0, 0.78, 0.42, 0.5 * k))
+
+
 func get_visual_rect() -> Rect2:
 	var height := (_h + _overhang) * _ts
 	return Rect2(position.x, position.y - height, _w * _ts, height)
@@ -64,6 +93,35 @@ func update_fade(player_feet: Vector2) -> void:
 
 func is_faded() -> bool:
 	return modulate.a < 0.99
+
+
+## Windows lit at night (world coordinates): about half of them, chosen by a stable hash;
+## shop windows always. Matches the painted layout (16 art px per tile, 2 world px per art px).
+func lit_window_rects() -> Array[Rect2]:
+	var out: Array[Rect2] = []
+	var style: String = data.get("style", "block")
+	var salt := str(data["id"]).hash()
+	var door_col := int(data["door"][0]) - int(data["tiles"][0]) if data.has("door") else -1
+	if style == "tower" or style == "mall":
+		var top := -(_h + _overhang) * _ts + 8
+		var y := top
+		while y < -_ts * 0.5:
+			for col in _w * 2:
+				if CityMapBuilder._hash01(col, int(y), salt) > 0.45:
+					out.append(Rect2(position + Vector2(col * _ts / 2.0 + 3, y), Vector2(_ts / 2.0 - 6, 10)))
+			y += 16
+		return out
+	for row in _wall_rows:
+		var ground := row == _wall_rows - 1
+		for col in _w:
+			if ground and col == door_col:
+				continue
+			var y := -_wall_rows * _ts + row * _ts + 8
+			if ground and style in STOREFRONT_STYLES:
+				out.append(Rect2(position + Vector2(col * _ts + 2, y), Vector2(28, 18)))
+			elif style != "construction" and style != "warehouse" and CityMapBuilder._hash01(col, row, salt + 7) > 0.5:
+				out.append(Rect2(position + Vector2(col * _ts + 6, y), Vector2(20, 18)))
+	return out
 
 
 func _add_sign(text: String) -> void:
@@ -104,6 +162,10 @@ func _paint() -> PixelArt:
 	var o := Vector2i(1, 1)
 	var fy := total - wall_h  # facade top
 	var salt := str(data["id"]).hash()
+	if style in ["tower", "mall", "construction"]:
+		_paint_special(a, o, W, total, wall_h, pal, style, salt)
+		a.outline(0.55)
+		return a
 	# facade
 	var wall: Color = pal["wall"]
 	for y in wall_h:
@@ -142,6 +204,68 @@ func _paint() -> PixelArt:
 	_roof(a, o, W, fy, pal, style)
 	a.outline(0.55)
 	return a
+
+
+## Glass towers, the mall and the unfinished building on the site have their own facades.
+@warning_ignore("integer_division")
+func _paint_special(a: PixelArt, o: Vector2i, W: int, total: int, wall_h: int, pal: Dictionary, style: String, salt: int) -> void:
+	var door_col := int(data["door"][0]) - int(data["tiles"][0]) if data.has("door") else -1
+	match style:
+		"tower":
+			# glass curtain wall from the ground to a slim crown, sky reflected in the panes
+			var glass: Color = pal["wall"]
+			for y in range(4, total):
+				for x in W:
+					var c := glass.lightened(0.25 * (1.0 - float(y) / total))
+					if x % 8 == 0 or y % 8 == 3:
+						c = (pal["trim"] as Color).darkened(0.15)
+					elif (x + y) % 23 < 3:
+						c = c.lightened(0.25)   # reflection streak
+					elif _h01(x / 8, y / 8, salt) > 0.85:
+						c = c.darkened(0.2)
+					a.px(o.x + x, o.y + y, c)
+			a.rect(o.x + 2, o.y, W - 4, 4, pal["roof"])
+			a.rect(o.x + W / 2 - 1, o.y - 0, 2, 2, Color("#d84a4a"))
+			a.rect(o.x, o.y + total - 3, W, 3, Color("#3a4250"))
+			a.rect(o.x + W / 2 - 6, o.y + total - 12, 12, 9, Color("#2a3440"))   # lobby door
+			a.rect(o.x + W / 2 - 5, o.y + total - 11, 10, 7, Color("#8fb8d8"))
+		"mall":
+			var wall: Color = pal["wall"]
+			a.rect(o.x, o.y + 4, W, total - 4, wall)
+			a.rect(o.x, o.y, W, 5, pal["roof"])
+			for y in range(10, total - 18, 12):          # glass bands per floor
+				a.rect(o.x + 2, o.y + y, W - 4, 7, Color("#7aa6c8"))
+				for x in range(2, W - 2, 12):
+					a.rect(o.x + x, o.y + y, 1, 7, pal["trim"])
+			a.rect(o.x, o.y + total - 18, W, 18, Color("#c9d4dc"))   # ground-floor glass
+			for x in range(0, W, 16):
+				a.rect(o.x + x, o.y + total - 18, 1, 18, pal["trim"])
+				a.rect(o.x + x + 3, o.y + total - 14, 10, 6, [Color("#d84a4a"), Color("#f2c94c"), Color("#3a6fd8"), Color("#e07aa0")][(x / 16) % 4])
+			if door_col >= 0:
+				a.rect(o.x + door_col * A + 1, o.y + total - 16, 14, 16, Color("#2a3440"))
+				a.rect(o.x + door_col * A + 2, o.y + total - 15, 12, 14, Color("#9cc6da"))
+			a.rect(o.x, o.y + total - 20, W, 2, pal["accent"])
+		"construction":
+			# bare concrete frame, scaffolding and a green safety net
+			var concrete: Color = pal["wall"]
+			for y in range(4, total):
+				for x in W:
+					var c := concrete
+					if y % 12 < 2:
+						c = concrete.darkened(0.2)                 # floor slabs
+					elif x % 16 < 3:
+						c = concrete.darkened(0.1)                 # columns
+					elif _h01(x, y, salt) > 0.5 and x > W / 2:
+						c = Color("#3f8a5a") if (x + y) % 3 != 0 else Color("#2f7a4a")   # safety net
+					else:
+						c = Color("#4a4640")                       # open floors
+					a.px(o.x + x, o.y + y, c)
+			for x in range(0, W, 8):                               # scaffold poles
+				a.rect(o.x + x, o.y + 2, 1, total - 2, Color("#c9a040"))
+			for y in range(6, total, 10):
+				a.rect(o.x, o.y + y, W, 1, Color("#c9a040"))
+			a.rect(o.x + 4, o.y, 12, 3, Color("#d84a4a"))         # banner
+			a.rect(o.x, o.y + total - 3, W, 3, Color("#6b5d55"))
 
 
 func _wall_texture(style: String, wall: Color, x: int, y: int, salt: int) -> Color:
@@ -201,6 +325,23 @@ func _shop_window(a: PixelArt, at: Vector2i, pal: Dictionary, style: String, col
 			a.rect(r.position.x + 2, r.position.y + 2, 5, 4, c1)
 			a.rect(r.position.x + 8, r.position.y + 3, 4, 3, (pal["accent"] as Color) if col % 2 == 0 else (pal["accent2"] as Color))
 			a.rect(r.position.x + 2, r.position.y + 7, 10, 1, Color("#3a3458"))
+		"luxury":
+			# dark glass, a lit display plinth with one item under a spotlight
+			a.rect(r.position.x, r.position.y, r.size.x, r.size.y, Color("#1c1b20"))
+			a.rect(r.position.x + 4, r.position.y, 6, 3, Color("#f6e7a8"))
+			a.rect(r.position.x + 4, r.position.y + 6, 6, 3, Color("#d8d2c4"))
+			a.rect(r.position.x + 5, r.position.y + 3, 4, 3, [Color("#b0473c"), Color("#c9a55a"), Color("#e8d6b8")][col % 3])
+			a.px(r.position.x + 1, r.position.y + 1, Color(1, 1, 1, 0.5))
+			return
+		"cafe":
+			a.rect(r.position.x, r.position.y, r.size.x, r.size.y, Color("#e8c890"))
+			a.rect(r.position.x + 2, r.position.y + 5, 4, 3, Color("#f4f1e8"))
+			a.rect(r.position.x + 8, r.position.y + 5, 4, 3, Color("#f4f1e8"))
+			a.px(r.position.x + 3, r.position.y + 4, Color("#6b4a36"))
+		"barber":
+			a.rect(r.position.x, r.position.y, r.size.x, r.size.y, Color("#a8d0e2"))
+			a.rect(r.position.x + 3, r.position.y + 2, 8, 5, Color("#d8dbe0"))   # mirror
+			a.rect(r.position.x + 4, r.position.y + 6, 6, 3, Color("#2a2a2e"))   # chair
 		"billiards":
 			a.rect(r.position.x, r.position.y, r.size.x, r.size.y, Color("#a9c2c9"))
 			a.rect(r.position.x + 1, r.position.y + 5, r.size.x - 2, 3, pal["accent"])

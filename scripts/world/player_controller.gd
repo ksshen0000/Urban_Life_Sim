@@ -26,6 +26,10 @@ var _focus: Interactable = null
 @onready var _camera: Camera2D = $Camera2D
 
 
+func get_camera_zoom() -> Vector2:
+	return _camera.zoom
+
+
 func set_camera_limits(bounds: Rect2i) -> void:
 	_camera.limit_left = bounds.position.x
 	_camera.limit_top = bounds.position.y

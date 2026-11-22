@@ -44,7 +44,7 @@ func test_real_content_loads() -> void:
 	var city := reg.get_record("cities", "CN_LINCHUAN")
 	assert_eq(typeof(city.get("starting_money_minor")), TYPE_INT, "money normalized to int")
 	assert_eq(city.get("starting_money_minor"), 140000)
-	assert_eq(city.get("district_ids"), ["OLD_TOWN", "INDUSTRIAL"])
+	assert_eq(city.get("district_ids"), ["OLD_TOWN", "INDUSTRIAL", "XINHE", "DOWNTOWN"])
 	assert_eq(reg.get_ids("needs"), PackedStringArray(["energy", "hunger", "stress"]))
 	assert_true(str(reg.get_record_source("cities", "CN_LINCHUAN").get("file")).ends_with(CITY + "city.json"))
 	assert_true(reg.has_record("locations", "old_town_bus_stop"))
@@ -81,7 +81,7 @@ func test_returned_records_are_copies() -> void:
 	city["starting_money_minor"] = 999
 	(city["district_ids"] as Array).clear()
 	assert_eq(reg.get_record("cities", "CN_LINCHUAN")["starting_money_minor"], 140000)
-	assert_eq((reg.get_record("cities", "CN_LINCHUAN")["district_ids"] as Array).size(), 2)
+	assert_eq((reg.get_record("cities", "CN_LINCHUAN")["district_ids"] as Array).size(), 4)
 
 
 # --- field validation ---------------------------------------------------------------------
@@ -157,7 +157,7 @@ func test_unknown_reference() -> void:
 	(fx.data(CITY + "city.json")["district_ids"] as Array).append("HARBOR")
 	fx.data(CITY + "city.json")["default_spawn"] = "airport"
 	var reg := _load_fixture()
-	_expect_error(reg, "E_UNKNOWN_REF", "city.json", "/district_ids/2", "HARBOR")
+	_expect_error(reg, "E_UNKNOWN_REF", "city.json", "/district_ids/4", "HARBOR")
 	_expect_error(reg, "E_UNKNOWN_REF", "city.json", "/default_spawn", "airport")
 
 
@@ -302,13 +302,31 @@ func test_map_spawn_must_be_walkable_and_in_bounds() -> void:
 
 
 func test_interactable_kind_requires_its_target() -> void:
+	# A door must say where it leads (the old town's shop doors, D-034).
 	var its: Array = fx.data(MAP)["interactables"]
+	for i in its.size():
+		if its[i]["kind"] == "door":
+			(its[i] as Dictionary).erase("target_location_id")
+			_expect_error(_load_fixture(), "E_REQUIRED", MAP, "/interactables/%d/target_location_id" % i)
+			return
+	fail("fixture has no door interactable")
+
+
+func test_shop_counter_requires_its_shop() -> void:
+	var interior := CITY + "maps/convenience_interior.json"
+	var its: Array = fx.data(interior)["interactables"]
 	for i in its.size():
 		if its[i]["kind"] == "shop":
 			(its[i] as Dictionary).erase("shop_id")
-			_expect_error(_load_fixture(), "E_REQUIRED", MAP, "/interactables/%d/shop_id" % i)
+			_expect_error(_load_fixture(), "E_REQUIRED", interior, "/interactables/%d/shop_id" % i)
 			return
-	fail("fixture has no shop interactable")
+	fail("interior has no shop counter")
+
+
+func test_furniture_must_stand_on_floor() -> void:
+	var interior := CITY + "maps/convenience_interior.json"
+	fx.data(interior)["furniture"][0]["tile"] = [0, 5]  # the dark outside column
+	_expect_error(_load_fixture(), "E_MAP_BLOCKED", interior, "/furniture/0/tile")
 
 
 func test_interactable_ids_unique() -> void:

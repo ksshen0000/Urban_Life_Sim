@@ -511,6 +511,226 @@
       "id": "interactable.river_bench.name",
       "zh_CN": "河边长椅",
       "en": "Riverside bench"
+    },
+    {
+      "id": "location.convenience_store_front.name",
+      "zh_CN": "转角便利店门口",
+      "en": "Outside the corner store"
+    },
+    {
+      "id": "location.fast_food_front.name",
+      "zh_CN": "老街快餐门口",
+      "en": "Outside Old Street Fast Food"
+    },
+    {
+      "id": "interactable.exit.name",
+      "zh_CN": "出门",
+      "en": "Exit"
+    },
+    {
+      "id": "interactable.cashier.name",
+      "zh_CN": "收银台",
+      "en": "Checkout"
+    },
+    {
+      "id": "interactable.order_counter.name",
+      "zh_CN": "点餐台",
+      "en": "Order counter"
+    },
+    {
+      "id": "district.cn_linchuan.xinhe.name",
+      "zh_CN": "新河里",
+      "en": "Xinhe"
+    },
+    {
+      "id": "district.cn_linchuan.downtown.name",
+      "zh_CN": "市中心",
+      "en": "Downtown"
+    },
+    {
+      "id": "location.old_town_east_end.name",
+      "zh_CN": "老街东头",
+      "en": "East end of Old Street"
+    },
+    {
+      "id": "location.xinhe_west_entry.name",
+      "zh_CN": "新河里路口",
+      "en": "Xinhe crossing"
+    },
+    {
+      "id": "location.barber_shop.name",
+      "zh_CN": "阿强理发",
+      "en": "Ah Qiang Barbers"
+    },
+    {
+      "id": "location.construction_site.name",
+      "zh_CN": "新河里工地",
+      "en": "Xinhe building site"
+    },
+    {
+      "id": "location.downtown_bus_stop.name",
+      "zh_CN": "市中心站",
+      "en": "Downtown stop"
+    },
+    {
+      "id": "location.luxury_boutique.name",
+      "zh_CN": "LUMEN 精品",
+      "en": "LUMEN Boutique"
+    },
+    {
+      "id": "location.downtown_cafe.name",
+      "zh_CN": "云端咖啡",
+      "en": "Cloud Café"
+    },
+    {
+      "id": "location.dessert_shop.name",
+      "zh_CN": "糖果屋甜品",
+      "en": "Sugar House Desserts"
+    },
+    {
+      "id": "location.mall.name",
+      "zh_CN": "临川中心",
+      "en": "Linchuan Centre"
+    },
+    {
+      "id": "location.watch_store.name",
+      "zh_CN": "时光名表",
+      "en": "Timeless Watches"
+    },
+    {
+      "id": "building.noodle.name",
+      "zh_CN": "兰州拉面",
+      "en": "Lanzhou Noodles"
+    },
+    {
+      "id": "building.tower_a.name",
+      "zh_CN": "临川金融中心",
+      "en": "Linchuan Finance Centre"
+    },
+    {
+      "id": "building.tower_c.name",
+      "zh_CN": "星河大厦",
+      "en": "Galaxy Tower"
+    },
+    {
+      "id": "interactable.to_xinhe.name",
+      "zh_CN": "往新河里 →",
+      "en": "To Xinhe →"
+    },
+    {
+      "id": "interactable.to_old_town.name",
+      "zh_CN": "← 回老街",
+      "en": "← Back to Old Street"
+    },
+    {
+      "id": "interactable.site_gate.name",
+      "zh_CN": "工地大门",
+      "en": "Site gate"
+    },
+    {
+      "id": "interactable.site_gate.text",
+      "zh_CN": "安全第一，进场戴好安全帽。工地小工在招聘公告栏上招人。",
+      "en": "Safety first: hard hats on site. Labourers are hired through the job board."
+    },
+    {
+      "id": "interactable.site_office.name",
+      "zh_CN": "工地值班室",
+      "en": "Site office"
+    },
+    {
+      "id": "interactable.downtown_bus.text",
+      "zh_CN": "1 路：市中心 ⇄ 老街",
+      "en": "Route 1: Downtown ⇄ Old Street"
+    },
+    {
+      "id": "job.construction_labor.name",
+      "zh_CN": "工地小工",
+      "en": "Building-site labourer"
+    },
+    {
+      "id": "job.construction_labor.desc",
+      "zh_CN": "搬砖、运料、打下手。钱最多，也最累，早上七点开工。",
+      "en": "Carrying bricks and materials. Pays best, wears you out most; starts at 7 a.m."
+    },
+    {
+      "id": "item.luxury_bag.name",
+      "zh_CN": "名牌手袋",
+      "en": "Designer handbag"
+    },
+    {
+      "id": "item.luxury_bag.desc",
+      "zh_CN": "橱窗里最亮的那只包。买了也只能好好收着。",
+      "en": "The brightest bag in the window. If you buy it, you'll keep it safe."
+    },
+    {
+      "id": "item.silk_scarf.name",
+      "zh_CN": "真丝丝巾",
+      "en": "Silk scarf"
+    },
+    {
+      "id": "item.silk_scarf.desc",
+      "zh_CN": "摸起来像水一样。",
+      "en": "Feels like water."
+    },
+    {
+      "id": "item.perfume.name",
+      "zh_CN": "香水",
+      "en": "Perfume"
+    },
+    {
+      "id": "item.perfume.desc",
+      "zh_CN": "小小一瓶，抵得上好几天的饭钱。",
+      "en": "A tiny bottle worth days of meals."
+    },
+    {
+      "id": "item.luxury_watch.name",
+      "zh_CN": "机械名表",
+      "en": "Luxury watch"
+    },
+    {
+      "id": "item.luxury_watch.desc",
+      "zh_CN": "售货员说，这是“传家”的东西。",
+      "en": "The clerk calls it an heirloom."
+    },
+    {
+      "id": "item.latte.name",
+      "zh_CN": "拿铁",
+      "en": "Latte"
+    },
+    {
+      "id": "item.latte.desc",
+      "zh_CN": "一杯三十八，提神，也让人放松一会儿。",
+      "en": "Thirty-eight yuan a cup. Wakes you up and lets you breathe."
+    },
+    {
+      "id": "item.cake.name",
+      "zh_CN": "小蛋糕",
+      "en": "Little cake"
+    },
+    {
+      "id": "item.cake.desc",
+      "zh_CN": "甜的东西总能让人好受一点。",
+      "en": "Something sweet always helps a little."
+    },
+    {
+      "id": "route.1_to_downtown.name",
+      "zh_CN": "1 路 → 市中心",
+      "en": "Route 1 → Downtown"
+    },
+    {
+      "id": "route.1_to_old_town.name",
+      "zh_CN": "1 路 → 老街",
+      "en": "Route 1 → Old Street"
+    },
+    {
+      "id": "activity.window_shopping.name",
+      "zh_CN": "逛商场",
+      "en": "Browse the mall"
+    },
+    {
+      "id": "activity.window_shopping.desc",
+      "zh_CN": "不买，看看也好。空调很足，人很多。",
+      "en": "Just looking. Cold air-con, crowds."
     }
   ]
 }

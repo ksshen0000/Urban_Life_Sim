@@ -36,6 +36,62 @@
           "price_minor": 500
         }
       ]
+    },
+    {
+      "id": "shop_luxury_boutique",
+      "city_id": "CN_LINCHUAN",
+      "location_id": "luxury_boutique",
+      "name_key": "location.luxury_boutique.name",
+      "stock": [
+        {
+          "item_id": "item_luxury_bag",
+          "price_minor": 1280000
+        },
+        {
+          "item_id": "item_silk_scarf",
+          "price_minor": 260000
+        },
+        {
+          "item_id": "item_perfume",
+          "price_minor": 98000
+        }
+      ]
+    },
+    {
+      "id": "shop_watch_store",
+      "city_id": "CN_LINCHUAN",
+      "location_id": "watch_store",
+      "name_key": "location.watch_store.name",
+      "stock": [
+        {
+          "item_id": "item_luxury_watch",
+          "price_minor": 3600000
+        }
+      ]
+    },
+    {
+      "id": "shop_downtown_cafe",
+      "city_id": "CN_LINCHUAN",
+      "location_id": "downtown_cafe",
+      "name_key": "location.downtown_cafe.name",
+      "stock": [
+        {
+          "item_id": "item_latte",
+          "price_minor": 3800
+        }
+      ]
+    },
+    {
+      "id": "shop_dessert",
+      "city_id": "CN_LINCHUAN",
+      "location_id": "dessert_shop",
+      "name_key": "location.dessert_shop.name",
+      "stock": [
+        {
+          "item_id": "item_cake",
+          "price_minor": 4500
+        }
+      ]
     }
   ]
 }

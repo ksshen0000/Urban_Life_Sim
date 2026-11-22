@@ -36,6 +36,7 @@ func _run() -> void:
 		return _finish(false, "city scene did not load")
 	var s: SimulationSession = gs.session
 	for step: Array in [["sign_lease", {"housing_id": "home_shared_room_01"}],
+			["use_door", {"door_id": "door_fast_food"}],
 			["buy_item", {"shop_id": "shop_fast_food", "item_id": "item_simple_meal", "quantity": 1}],
 			["use_item", {"item_id": "item_simple_meal"}]]:
 		var c := s.submit(step[0], step[1])

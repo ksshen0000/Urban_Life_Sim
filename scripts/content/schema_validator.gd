@@ -33,6 +33,10 @@ var refs: Array[Dictionary] = []
 static var _regex_cache: Dictionary = {}
 
 
+static func clear_cache() -> void:
+	_regex_cache.clear()
+
+
 func reset() -> void:
 	errors.clear()
 	refs.clear()

@@ -12,6 +12,8 @@ func _session_at(day: int, hour: int) -> SimulationSession:
 
 
 func _choose(s: SimulationSession, tree: String, node: String, choice: String) -> CommandResult:
+	if tree.begins_with("dialogue_chen_yu"):
+		Sessions.go(s, "convenience_store")  # Chen works inside the store (D-034)
 	return s.submit("choose_dialogue", {"tree_id": tree, "node_id": node, "choice_id": choice})
 
 

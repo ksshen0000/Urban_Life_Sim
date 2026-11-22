@@ -35,18 +35,21 @@ func _answer() -> void:
 func _eat_if_hungry() -> void:
 	if s.needs.get_value(P, "hunger") >= 50:
 		if s.inventory.count(P, "item_simple_meal") == 0:
+			Sessions.go(s, "fast_food_restaurant")
 			s.submit("buy_item", {"shop_id": "shop_fast_food", "item_id": "item_simple_meal"})
 		s.submit("use_item", {"item_id": "item_simple_meal"})
 		_answer()
 
 
 func _sleep() -> void:
+	Sessions.go(s, "old_town_apartment")
 	assert_true(s.submit("perform_activity", {"activity_id": "activity_sleep"}).ok, "sleep")
 	_answer()
 
 
 func _work(job: String, day: int, tpl: String) -> void:
 	var id := JobsSystem.shift_id_for(job, day, tpl)
+	Sessions.go(s, s.content.get_record("jobs", job)["workplace_location_id"])
 	var r := s.submit("work_shift", {"shift_id": id})
 	assert_true(r.ok, "%s: %s" % [id, r.error_code])
 	_answer()
@@ -74,6 +77,7 @@ func test_reasonable_week_meets_stage_goals() -> void:
 			var on_industrial: bool = s.locations.map_of_location(job_rec["workplace_location_id"]) == "map_industrial"
 			_until(day, maxi(6, GameClock.minute_of_day_of(sh["start_minute"]) / 60 - (1 if on_industrial else 0)))
 			if on_industrial:
+				Sessions.go(s, "old_town_bus_stop")
 				assert_true(s.submit("take_route", {"route_id": "route_12_to_industrial"}).ok, "commute out")
 			_work(sh["job_id"], day, sh["template_id"])
 			if on_industrial:
@@ -81,6 +85,7 @@ func test_reasonable_week_meets_stage_goals() -> void:
 			_eat_if_hungry()
 		_until(day, 17)
 		if not s.npc_schedule.location_of("npc_chen_yu", s.world.clock.get_minute()).is_empty():
+			Sessions.go(s, s.npc_schedule.location_of("npc_chen_yu", s.world.clock.get_minute()))
 			s.submit("choose_dialogue", {"tree_id": ChooseDialogueHandler.talk_tree_for(s.content.get_record("npcs", "npc_chen_yu"), s.dialogue),
 				"node_id": "start", "choice_id": "thanks" if not s.dialogue.is_completed("dialogue_chen_yu_intro") else "talk"})
 		_answer()
@@ -106,6 +111,7 @@ func test_overspending_week_ends_in_rent_trouble_not_negative_money() -> void:
 	s.run_story_rules()
 	_answer()
 	s.submit("sign_lease", {"housing_id": "home_shared_room_01"})
+	Sessions.go(s, "convenience_store")
 	for i in 4:  # treats every day, no work at all
 		s.submit("buy_item", {"shop_id": "shop_convenience_store", "item_id": "item_simple_meal", "quantity": 5})
 	_until(1, 22)
