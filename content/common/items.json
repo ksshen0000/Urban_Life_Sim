@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "records": [
+    {
+      "id": "item_simple_meal",
+      "name_key": "item.simple_meal.name",
+      "description_key": "item.simple_meal.desc",
+      "category": "food",
+      "use_minutes": 20,
+      "use_effects": [
+        {
+          "need_id": "hunger",
+          "delta": -35
+        }
+      ]
+    },
+    {
+      "id": "item_instant_food",
+      "name_key": "item.instant_food.name",
+      "description_key": "item.instant_food.desc",
+      "category": "food",
+      "use_minutes": 10,
+      "use_effects": [
+        {
+          "need_id": "hunger",
+          "delta": -15
+        }
+      ]
+    },
+    {
+      "id": "item_drink",
+      "name_key": "item.drink.name",
+      "description_key": "item.drink.desc",
+      "category": "drink",
+      "use_minutes": 0,
+      "use_effects": [
+        {
+          "need_id": "stress",
+          "delta": -3
+        }
+      ]
+    }
+  ]
+}

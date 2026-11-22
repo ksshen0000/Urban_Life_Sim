@@ -1,0 +1,408 @@
+{
+  "schema_version": 1,
+  "records": [
+    {
+      "id": "dialogue_landlord_intro",
+      "city_id": "CN_LINCHUAN",
+      "channel": "in_person",
+      "repeatable": false,
+      "nodes": [
+        {
+          "id": "start",
+          "text_key": "dlg.landlord_intro.start",
+          "choices": [
+            {
+              "id": "ok",
+              "text_key": "dlg.landlord_intro.ok",
+              "effects": [
+                {
+                  "type": "change_relationship",
+                  "npc_id": "npc_landlord_wang",
+                  "delta": 3
+                },
+                {
+                  "type": "set_flag",
+                  "key": "story.met_landlord",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "id": "bargain",
+              "text_key": "dlg.landlord_intro.bargain",
+              "effects": [],
+              "next": "bargain"
+            }
+          ]
+        },
+        {
+          "id": "bargain",
+          "text_key": "dlg.landlord_intro.bargain_reply",
+          "choices": [
+            {
+              "id": "fine",
+              "text_key": "dlg.landlord_intro.fine",
+              "effects": [
+                {
+                  "type": "change_relationship",
+                  "npc_id": "npc_landlord_wang",
+                  "delta": 1
+                },
+                {
+                  "type": "set_flag",
+                  "key": "story.met_landlord",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "speaker_id": "npc_landlord_wang"
+    },
+    {
+      "id": "dialogue_landlord_chat",
+      "city_id": "CN_LINCHUAN",
+      "channel": "in_person",
+      "repeatable": true,
+      "nodes": [
+        {
+          "id": "start",
+          "text_key": "dlg.landlord_chat.start",
+          "choices": [
+            {
+              "id": "chat",
+              "text_key": "dlg.landlord_chat.chat",
+              "effects": [
+                {
+                  "type": "change_relationship",
+                  "npc_id": "npc_landlord_wang",
+                  "delta": 2
+                }
+              ]
+            },
+            {
+              "id": "bye",
+              "text_key": "dlg.landlord_chat.bye",
+              "effects": []
+            }
+          ]
+        }
+      ],
+      "speaker_id": "npc_landlord_wang"
+    },
+    {
+      "id": "dialogue_chen_yu_intro",
+      "city_id": "CN_LINCHUAN",
+      "channel": "in_person",
+      "repeatable": false,
+      "nodes": [
+        {
+          "id": "start",
+          "text_key": "dlg.chen_intro.start",
+          "choices": [
+            {
+              "id": "thanks",
+              "text_key": "dlg.chen_intro.thanks",
+              "effects": [
+                {
+                  "type": "change_relationship",
+                  "npc_id": "npc_chen_yu",
+                  "delta": 5
+                },
+                {
+                  "type": "set_flag",
+                  "key": "story.met_chen",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "id": "nod",
+              "text_key": "dlg.chen_intro.nod",
+              "effects": [
+                {
+                  "type": "change_relationship",
+                  "npc_id": "npc_chen_yu",
+                  "delta": 2
+                },
+                {
+                  "type": "set_flag",
+                  "key": "story.met_chen",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "speaker_id": "npc_chen_yu"
+    },
+    {
+      "id": "dialogue_chen_yu_chat",
+      "city_id": "CN_LINCHUAN",
+      "channel": "in_person",
+      "repeatable": true,
+      "nodes": [
+        {
+          "id": "start",
+          "text_key": "dlg.chen_chat.start",
+          "choices": [
+            {
+              "id": "talk",
+              "text_key": "dlg.chen_chat.talk",
+              "effects": [
+                {
+                  "type": "change_relationship",
+                  "npc_id": "npc_chen_yu",
+                  "delta": 3
+                }
+              ]
+            },
+            {
+              "id": "bye",
+              "text_key": "dlg.chen_chat.bye",
+              "effects": []
+            }
+          ]
+        }
+      ],
+      "speaker_id": "npc_chen_yu"
+    },
+    {
+      "id": "dialogue_lao_zhou_intro",
+      "city_id": "CN_LINCHUAN",
+      "channel": "in_person",
+      "repeatable": false,
+      "nodes": [
+        {
+          "id": "start",
+          "text_key": "dlg.zhou_intro.start",
+          "choices": [
+            {
+              "id": "thanks",
+              "text_key": "dlg.zhou_intro.thanks",
+              "effects": [
+                {
+                  "type": "change_relationship",
+                  "npc_id": "npc_lao_zhou",
+                  "delta": 5
+                },
+                {
+                  "type": "set_flag",
+                  "key": "story.met_lao_zhou",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "id": "nod",
+              "text_key": "dlg.zhou_intro.nod",
+              "effects": [
+                {
+                  "type": "change_relationship",
+                  "npc_id": "npc_lao_zhou",
+                  "delta": 2
+                },
+                {
+                  "type": "set_flag",
+                  "key": "story.met_lao_zhou",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "speaker_id": "npc_lao_zhou"
+    },
+    {
+      "id": "dialogue_lao_zhou_chat",
+      "city_id": "CN_LINCHUAN",
+      "channel": "in_person",
+      "repeatable": true,
+      "nodes": [
+        {
+          "id": "start",
+          "text_key": "dlg.zhou_chat.start",
+          "choices": [
+            {
+              "id": "chat",
+              "text_key": "dlg.zhou_chat.chat",
+              "effects": [
+                {
+                  "type": "change_relationship",
+                  "npc_id": "npc_lao_zhou",
+                  "delta": 3
+                }
+              ]
+            },
+            {
+              "id": "bye",
+              "text_key": "dlg.zhou_chat.bye",
+              "effects": []
+            }
+          ]
+        }
+      ],
+      "speaker_id": "npc_lao_zhou"
+    },
+    {
+      "id": "dialogue_arrival",
+      "city_id": "CN_LINCHUAN",
+      "channel": "narration",
+      "repeatable": false,
+      "nodes": [
+        {
+          "id": "start",
+          "text_key": "dlg.arrival.start",
+          "choices": [
+            {
+              "id": "go",
+              "text_key": "dlg.arrival.go",
+              "effects": [
+                {
+                  "type": "set_flag",
+                  "key": "story.arrived",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dialogue_day3_dinner",
+      "city_id": "CN_LINCHUAN",
+      "channel": "phone",
+      "repeatable": false,
+      "nodes": [
+        {
+          "id": "start",
+          "text_key": "dlg.dinner.start",
+          "choices": [
+            {
+              "id": "go",
+              "text_key": "dlg.dinner.go",
+              "effects": [
+                {
+                  "type": "debit_money",
+                  "amount": 3000
+                },
+                {
+                  "type": "change_relationship",
+                  "npc_id": "npc_chen_yu",
+                  "delta": 8
+                },
+                {
+                  "type": "change_need",
+                  "need_id": "hunger",
+                  "delta": -35
+                },
+                {
+                  "type": "change_need",
+                  "need_id": "stress",
+                  "delta": -8
+                },
+                {
+                  "type": "set_flag",
+                  "key": "story.dinner_with_chen",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "id": "skip",
+              "text_key": "dlg.dinner.skip",
+              "effects": [
+                {
+                  "type": "set_flag",
+                  "key": "story.declined_dinner",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "speaker_id": "npc_chen_yu"
+    },
+    {
+      "id": "dialogue_day4_warehouse",
+      "city_id": "CN_LINCHUAN",
+      "channel": "narration",
+      "repeatable": false,
+      "nodes": [
+        {
+          "id": "start",
+          "text_key": "dlg.warehouse.start",
+          "choices": [
+            {
+              "id": "ok",
+              "text_key": "dlg.warehouse.ok",
+              "effects": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dialogue_day6_rent",
+      "city_id": "CN_LINCHUAN",
+      "channel": "phone",
+      "repeatable": false,
+      "nodes": [
+        {
+          "id": "start",
+          "text_key": "dlg.rent6.start",
+          "choices": [
+            {
+              "id": "ok",
+              "text_key": "dlg.rent6.ok",
+              "effects": []
+            }
+          ]
+        }
+      ],
+      "speaker_id": "npc_landlord_wang"
+    },
+    {
+      "id": "dialogue_rent_overdue",
+      "city_id": "CN_LINCHUAN",
+      "channel": "phone",
+      "repeatable": false,
+      "nodes": [
+        {
+          "id": "start",
+          "text_key": "dlg.overdue.start",
+          "choices": [
+            {
+              "id": "sorry",
+              "text_key": "dlg.overdue.sorry",
+              "effects": [
+                {
+                  "type": "change_relationship",
+                  "npc_id": "npc_landlord_wang",
+                  "delta": 1
+                }
+              ]
+            },
+            {
+              "id": "silent",
+              "text_key": "dlg.overdue.silent",
+              "effects": [
+                {
+                  "type": "change_relationship",
+                  "npc_id": "npc_landlord_wang",
+                  "delta": -3
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "speaker_id": "npc_landlord_wang"
+    }
+  ]
+}

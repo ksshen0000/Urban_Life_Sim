@@ -1,0 +1,831 @@
+{
+  "schema_version": 1,
+  "id": "map_old_town",
+  "city_id": "CN_LINCHUAN",
+  "name_key": "map.old_town.name",
+  "tile_size": 32,
+  "rows": [
+    "########################################################",
+    "#......................................................#",
+    "#.BBBBBBBB......BBBBBBBB......BBBBBBBB..BBBBBBB.BBBBBBB#",
+    "#.BBBBBBBB......BBBBBBBB......BBBBBBBB..BBBBBBB.BBBBBBB#",
+    "#.BBBBBBBB......BBBBBBBB......BBBBBBBB..BBBBBBB.BBBBBBB#",
+    "#.BBBBBBBB......BBBBBBBB......BBBBBBBB..BBBBBBB.BBBBBBB#",
+    "#......................................................#",
+    "#......................................................#",
+    "#======================================================#",
+    "#======================================================#",
+    "#......................................................#",
+    "#.gggggggggggg..........................T......T.....T.#",
+    "#.gTgggggggTgg.........................................#",
+    "#.gggggggggggg.........................................#",
+    "#.gggggggggggg.........................................#",
+    "#.gTgggggggTgg.........................................#",
+    "#.gggggggggggg.........................................#",
+    "#...............BBBBBBBBBBBB..BBBBBBBB..BBBBBBBBBBBBBBB#",
+    "#...............BBBBBBBBBBBB..BBBBBBBB..BBBBBBBBBBBBBBB#",
+    "#......................................................#",
+    "#g...........gg.......gggggg.ggggggggggggggggg.gggggggg#",
+    "#g...........gg.......ggTggg.gggggggTgggggTggg.gggTgggg#",
+    "#g...........gg.......gggggg.ggggggggggTgggggg.gggggggg#",
+    "#ggggggg.ggggggggggggggggggg.ggggggggggggggggg.gggggggg#",
+    "#......................................................#",
+    "#ggggggg.ggggggggTgggggggggg.g...........ggggg.gggggggg#",
+    "#ggggggg.ggggTgggggggggggggg.g...........ggggg.gggggTgg#",
+    "#gggTggg.gggggggggggTggggTgg.g...........ggggg.gggggggg#",
+    "#ggggggg.ggggggggggggggggggg.ggggggggggggggggg.gggggggg#",
+    "#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#",
+    "#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#",
+    "########################################################"
+  ],
+  "legend": {
+    "#": "wall",
+    ".": "ground",
+    "=": "road",
+    "g": "grass",
+    "T": "tree",
+    "B": "building",
+    "~": "water"
+  },
+  "spawns": [
+    {
+      "location_id": "old_town_bus_stop",
+      "tile": [
+        35,
+        11
+      ]
+    },
+    {
+      "location_id": "old_town_apartment",
+      "tile": [
+        5,
+        6
+      ]
+    },
+    {
+      "location_id": "convenience_store",
+      "tile": [
+        20,
+        6
+      ]
+    },
+    {
+      "location_id": "fast_food_restaurant",
+      "tile": [
+        33,
+        6
+      ]
+    },
+    {
+      "location_id": "job_board",
+      "tile": [
+        20,
+        13
+      ]
+    },
+    {
+      "location_id": "park",
+      "tile": [
+        7,
+        14
+      ]
+    },
+    {
+      "location_id": "arcade",
+      "tile": [
+        43,
+        6
+      ]
+    },
+    {
+      "location_id": "billiard_hall",
+      "tile": [
+        51,
+        6
+      ]
+    }
+  ],
+  "structures": [
+    {
+      "id": "bld_apartment",
+      "tiles": [
+        2,
+        2,
+        8,
+        4
+      ],
+      "wall_rows": 2,
+      "roof_overhang_rows": 1,
+      "style": "apartment",
+      "door": [
+        5,
+        5
+      ],
+      "sign_key": "location.old_town_apartment.name"
+    },
+    {
+      "id": "bld_convenience_store",
+      "tiles": [
+        16,
+        2,
+        8,
+        4
+      ],
+      "wall_rows": 2,
+      "roof_overhang_rows": 1,
+      "style": "shop",
+      "door": [
+        20,
+        5
+      ],
+      "sign_key": "shop.convenience_store.name"
+    },
+    {
+      "id": "bld_fast_food",
+      "tiles": [
+        30,
+        2,
+        8,
+        4
+      ],
+      "wall_rows": 2,
+      "roof_overhang_rows": 1,
+      "style": "restaurant",
+      "door": [
+        33,
+        5
+      ],
+      "sign_key": "shop.fast_food.name"
+    },
+    {
+      "id": "bld_block_south_a",
+      "tiles": [
+        16,
+        17,
+        12,
+        2
+      ],
+      "wall_rows": 1,
+      "roof_overhang_rows": 1,
+      "style": "block"
+    },
+    {
+      "id": "bld_block_south_b",
+      "tiles": [
+        30,
+        17,
+        8,
+        2
+      ],
+      "wall_rows": 1,
+      "roof_overhang_rows": 1,
+      "style": "block"
+    },
+    {
+      "id": "bld_arcade",
+      "tiles": [
+        40,
+        2,
+        7,
+        4
+      ],
+      "wall_rows": 2,
+      "roof_overhang_rows": 1,
+      "style": "arcade",
+      "door": [
+        43,
+        5
+      ],
+      "sign_key": "location.arcade.name"
+    },
+    {
+      "id": "bld_billiards",
+      "tiles": [
+        48,
+        2,
+        7,
+        4
+      ],
+      "wall_rows": 2,
+      "roof_overhang_rows": 1,
+      "style": "billiards",
+      "door": [
+        51,
+        5
+      ],
+      "sign_key": "location.billiard_hall.name"
+    },
+    {
+      "id": "bld_block_south_c",
+      "tiles": [
+        40,
+        17,
+        15,
+        2
+      ],
+      "wall_rows": 1,
+      "roof_overhang_rows": 1,
+      "style": "block"
+    }
+  ],
+  "interactables": [
+    {
+      "id": "sign_bus_stop",
+      "kind": "transit",
+      "location_id": "old_town_bus_stop",
+      "tile": [
+        34,
+        10
+      ],
+      "name_key": "interactable.bus_stop.name",
+      "text_key": "interactable.bus_stop.text",
+      "prop": "bus_sign"
+    },
+    {
+      "id": "door_apartment",
+      "kind": "home",
+      "location_id": "old_town_apartment",
+      "tile": [
+        5,
+        5
+      ],
+      "name_key": "interactable.apartment.name"
+    },
+    {
+      "id": "door_convenience_store",
+      "kind": "shop",
+      "location_id": "convenience_store",
+      "tile": [
+        20,
+        5
+      ],
+      "name_key": "shop.convenience_store.name",
+      "shop_id": "shop_convenience_store"
+    },
+    {
+      "id": "door_fast_food",
+      "kind": "shop",
+      "location_id": "fast_food_restaurant",
+      "tile": [
+        33,
+        5
+      ],
+      "name_key": "shop.fast_food.name",
+      "shop_id": "shop_fast_food"
+    },
+    {
+      "id": "sign_job_board",
+      "kind": "job_board",
+      "location_id": "job_board",
+      "tile": [
+        20,
+        12
+      ],
+      "name_key": "interactable.job_board.name",
+      "prop": "board"
+    },
+    {
+      "id": "bench_park",
+      "kind": "activity",
+      "location_id": "park",
+      "tile": [
+        7,
+        13
+      ],
+      "name_key": "interactable.bench.name",
+      "activity_id": "activity_rest",
+      "prop": "bench"
+    },
+    {
+      "id": "door_arcade",
+      "kind": "activity",
+      "location_id": "arcade",
+      "tile": [
+        43,
+        5
+      ],
+      "name_key": "location.arcade.name",
+      "activity_ids": [
+        "activity_arcade_games",
+        "activity_dance_machine"
+      ]
+    },
+    {
+      "id": "door_billiards",
+      "kind": "activity",
+      "location_id": "billiard_hall",
+      "tile": [
+        51,
+        5
+      ],
+      "name_key": "location.billiard_hall.name",
+      "activity_id": "activity_billiards"
+    },
+    {
+      "id": "chess_table_watch",
+      "kind": "activity",
+      "location_id": "park",
+      "tile": [
+        4,
+        21
+      ],
+      "name_key": "interactable.chess_watch.name",
+      "activity_id": "activity_watch_chess",
+      "prop": "chess_table"
+    },
+    {
+      "id": "chess_table_play",
+      "kind": "activity",
+      "location_id": "park",
+      "tile": [
+        10,
+        21
+      ],
+      "name_key": "interactable.chess_play.name",
+      "activity_id": "activity_play_chess",
+      "prop": "chess_table"
+    },
+    {
+      "id": "speaker_pavilion",
+      "kind": "activity",
+      "location_id": "park",
+      "tile": [
+        21,
+        22
+      ],
+      "name_key": "interactable.pavilion.name",
+      "activity_id": "activity_park_singing",
+      "prop": "speaker"
+    },
+    {
+      "id": "speaker_plaza",
+      "kind": "activity",
+      "location_id": "park",
+      "tile": [
+        31,
+        25
+      ],
+      "name_key": "interactable.plaza.name",
+      "activity_ids": [
+        "activity_tai_chi",
+        "activity_square_dance"
+      ],
+      "prop": "speaker"
+    },
+    {
+      "id": "bench_river_west",
+      "kind": "activity",
+      "location_id": "park",
+      "tile": [
+        12,
+        28
+      ],
+      "name_key": "interactable.river_bench.name",
+      "activity_id": "activity_rest",
+      "prop": "bench"
+    },
+    {
+      "id": "bench_river_east",
+      "kind": "activity",
+      "location_id": "park",
+      "tile": [
+        44,
+        28
+      ],
+      "name_key": "interactable.river_bench.name",
+      "activity_id": "activity_rest",
+      "prop": "bench"
+    }
+  ],
+  "decor": [
+    {
+      "kind": "pavilion",
+      "tile": [
+        18,
+        21
+      ]
+    },
+    {
+      "kind": "lamp",
+      "tile": [
+        7,
+        19
+      ]
+    },
+    {
+      "kind": "lamp",
+      "tile": [
+        22,
+        19
+      ]
+    },
+    {
+      "kind": "lamp",
+      "tile": [
+        34,
+        19
+      ]
+    },
+    {
+      "kind": "lamp",
+      "tile": [
+        48,
+        19
+      ]
+    },
+    {
+      "kind": "lamp",
+      "tile": [
+        27,
+        24
+      ]
+    },
+    {
+      "kind": "lamp",
+      "tile": [
+        45,
+        24
+      ]
+    },
+    {
+      "kind": "flowers",
+      "tile": [
+        33,
+        21
+      ]
+    },
+    {
+      "kind": "flowers",
+      "tile": [
+        35,
+        22
+      ]
+    },
+    {
+      "kind": "flowers",
+      "tile": [
+        16,
+        27
+      ]
+    },
+    {
+      "kind": "flowers",
+      "tile": [
+        48,
+        26
+      ]
+    },
+    {
+      "kind": "flowers",
+      "tile": [
+        6,
+        26
+      ]
+    }
+  ],
+  "ambient": [
+    {
+      "id": "chess_a_left",
+      "tile": [
+        3,
+        21
+      ],
+      "pose": "chess",
+      "facing": "right",
+      "shirt": "#e9edf2",
+      "hair": "#b8b8b8",
+      "activity_id": "activity_watch_chess",
+      "hair_style": "bald",
+      "figure": "m",
+      "bottom": "#4a4a52"
+    },
+    {
+      "id": "chess_a_right",
+      "tile": [
+        5,
+        21
+      ],
+      "pose": "chess",
+      "facing": "left",
+      "shirt": "#4a6a9a",
+      "hair": "#e8e8e8",
+      "activity_id": "activity_watch_chess",
+      "hair_style": "buzz",
+      "figure": "m",
+      "bottom": "#3a3a40"
+    },
+    {
+      "id": "chess_a_watch1",
+      "tile": [
+        4,
+        20
+      ],
+      "pose": "watch",
+      "facing": "down",
+      "shirt": "#7d8a96",
+      "hair": "#b8b8b8",
+      "activity_id": "activity_watch_chess",
+      "hair_style": "short",
+      "figure": "m",
+      "bottom": "#3a3a40"
+    },
+    {
+      "id": "chess_a_watch2",
+      "tile": [
+        6,
+        20
+      ],
+      "pose": "watch",
+      "facing": "left",
+      "shirt": "#8a6a45",
+      "hair": "#2e2a28",
+      "activity_id": "activity_watch_chess",
+      "hair_style": "short",
+      "figure": "m"
+    },
+    {
+      "id": "chess_b_host",
+      "tile": [
+        11,
+        21
+      ],
+      "pose": "chess",
+      "facing": "left",
+      "shirt": "#b0473c",
+      "hair": "#e8e8e8",
+      "activity_id": "activity_play_chess",
+      "hair_style": "bald",
+      "figure": "m",
+      "bottom": "#2e3440"
+    },
+    {
+      "id": "sing_1",
+      "tile": [
+        17,
+        22
+      ],
+      "pose": "sing",
+      "facing": "down",
+      "shirt": "#d07a9a",
+      "hair": "#2e2a28",
+      "activity_id": "activity_park_singing",
+      "hair_style": "perm",
+      "figure": "f",
+      "outfit": "dress"
+    },
+    {
+      "id": "sing_2",
+      "tile": [
+        18,
+        22
+      ],
+      "pose": "sing",
+      "facing": "down",
+      "shirt": "#b0473c",
+      "hair": "#b8b8b8",
+      "activity_id": "activity_park_singing",
+      "hair_style": "bun",
+      "figure": "f",
+      "outfit": "skirt",
+      "bottom": "#3a3550"
+    },
+    {
+      "id": "sing_3",
+      "tile": [
+        19,
+        22
+      ],
+      "pose": "sing",
+      "facing": "down",
+      "shirt": "#d9b44a",
+      "hair": "#2e2a28",
+      "activity_id": "activity_park_singing",
+      "hair_style": "bob",
+      "figure": "f",
+      "outfit": "dress"
+    },
+    {
+      "id": "sing_erhu",
+      "tile": [
+        16,
+        21
+      ],
+      "pose": "erhu",
+      "facing": "right",
+      "shirt": "#7d8a96",
+      "hair": "#e8e8e8",
+      "activity_id": "activity_park_singing",
+      "hair_style": "bald",
+      "figure": "m",
+      "bottom": "#2e2a28"
+    },
+    {
+      "id": "taichi_1",
+      "tile": [
+        33,
+        26
+      ],
+      "pose": "taichi",
+      "facing": "down",
+      "shirt": "#e9edf2",
+      "hair": "#e8e8e8",
+      "activity_id": "activity_tai_chi",
+      "hair_style": "bald",
+      "figure": "m",
+      "bottom": "#f4f1e8"
+    },
+    {
+      "id": "taichi_2",
+      "tile": [
+        35,
+        26
+      ],
+      "pose": "taichi",
+      "facing": "down",
+      "shirt": "#e9edf2",
+      "hair": "#b8b8b8",
+      "activity_id": "activity_tai_chi",
+      "hair_style": "bun",
+      "figure": "f",
+      "bottom": "#f4f1e8"
+    },
+    {
+      "id": "taichi_3",
+      "tile": [
+        37,
+        26
+      ],
+      "pose": "taichi",
+      "facing": "down",
+      "shirt": "#e9edf2",
+      "hair": "#b8b8b8",
+      "activity_id": "activity_tai_chi",
+      "hair_style": "short",
+      "figure": "m",
+      "bottom": "#f4f1e8"
+    },
+    {
+      "id": "taichi_4",
+      "tile": [
+        34,
+        27
+      ],
+      "pose": "taichi",
+      "facing": "down",
+      "shirt": "#3a8a8a",
+      "hair": "#2e2a28",
+      "activity_id": "activity_tai_chi",
+      "hair_style": "perm",
+      "figure": "f",
+      "bottom": "#2e5a5a"
+    },
+    {
+      "id": "dance_1",
+      "tile": [
+        33,
+        26
+      ],
+      "pose": "dance",
+      "facing": "down",
+      "shirt": "#b0473c",
+      "hair": "#2e2a28",
+      "activity_id": "activity_square_dance",
+      "hair_style": "perm",
+      "figure": "f",
+      "outfit": "skirt",
+      "bottom": "#2e2a28"
+    },
+    {
+      "id": "dance_2",
+      "tile": [
+        35,
+        26
+      ],
+      "pose": "dance",
+      "facing": "down",
+      "shirt": "#d07a9a",
+      "hair": "#b8b8b8",
+      "activity_id": "activity_square_dance",
+      "hair_style": "bun",
+      "figure": "f",
+      "outfit": "dress"
+    },
+    {
+      "id": "dance_3",
+      "tile": [
+        37,
+        26
+      ],
+      "pose": "dance",
+      "facing": "down",
+      "shirt": "#7a5a9a",
+      "hair": "#2e2a28",
+      "activity_id": "activity_square_dance",
+      "hair_style": "bob",
+      "figure": "f",
+      "outfit": "skirt",
+      "bottom": "#2e2a28"
+    },
+    {
+      "id": "dance_4",
+      "tile": [
+        39,
+        26
+      ],
+      "pose": "dance",
+      "facing": "down",
+      "shirt": "#d9b44a",
+      "hair": "#2e2a28",
+      "activity_id": "activity_square_dance",
+      "hair_style": "perm",
+      "figure": "f",
+      "outfit": "dress"
+    },
+    {
+      "id": "dance_5",
+      "tile": [
+        34,
+        27
+      ],
+      "pose": "dance",
+      "facing": "down",
+      "shirt": "#b0473c",
+      "hair": "#b8b8b8",
+      "activity_id": "activity_square_dance",
+      "hair_style": "short",
+      "figure": "m",
+      "bottom": "#3a3a40"
+    },
+    {
+      "id": "dance_6",
+      "tile": [
+        36,
+        27
+      ],
+      "pose": "dance",
+      "facing": "down",
+      "shirt": "#3a8a8a",
+      "hair": "#2e2a28",
+      "activity_id": "activity_square_dance",
+      "hair_style": "long",
+      "figure": "f",
+      "outfit": "skirt",
+      "bottom": "#2e2a28"
+    },
+    {
+      "id": "dance_7",
+      "tile": [
+        38,
+        27
+      ],
+      "pose": "dance",
+      "facing": "down",
+      "shirt": "#d07a9a",
+      "hair": "#b8b8b8",
+      "activity_id": "activity_square_dance",
+      "hair_style": "bun",
+      "figure": "f",
+      "outfit": "dress"
+    },
+    {
+      "id": "fisher",
+      "tile": [
+        50,
+        28
+      ],
+      "pose": "fish",
+      "facing": "down",
+      "shirt": "#3f8a5a",
+      "hair": "#b8b8b8",
+      "hours": [
+        {
+          "start_minute_of_day": 360,
+          "end_minute_of_day": 1080
+        }
+      ],
+      "hair_style": "buzz",
+      "figure": "m",
+      "bottom": "#4a4a52"
+    },
+    {
+      "id": "walker_kid",
+      "tile": [
+        26,
+        24
+      ],
+      "pose": "stand",
+      "facing": "right",
+      "shirt": "#d9b44a",
+      "hair": "#2e2a28",
+      "hours": [
+        {
+          "start_minute_of_day": 960,
+          "end_minute_of_day": 1140
+        }
+      ],
+      "hair_style": "spiky",
+      "figure": "m",
+      "bottom": "#2f5aa0"
+    }
+  ]
+}

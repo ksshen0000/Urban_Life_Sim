@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "records": [
+    {"id": "OLD_TOWN", "city_id": "CN_LINCHUAN", "name_key": "district.cn_linchuan.old_town.name"},
+    {"id": "INDUSTRIAL", "city_id": "CN_LINCHUAN", "name_key": "district.cn_linchuan.industrial.name"}
+  ]
+}

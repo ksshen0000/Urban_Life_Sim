@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "records": [
+    {
+      "id": "quest_settle_in",
+      "city_id": "CN_LINCHUAN",
+      "name_key": "quest.settle_in.name",
+      "steps": [
+        {
+          "id": "rent_room",
+          "text_key": "quest.settle_in.rent_room",
+          "hint_key": "quest.settle_in.rent_room.hint",
+          "conditions": [
+            {
+              "type": "lease_active",
+              "value": true
+            }
+          ]
+        },
+        {
+          "id": "find_job",
+          "text_key": "quest.settle_in.find_job",
+          "hint_key": "quest.settle_in.find_job.hint",
+          "conditions": [
+            {
+              "type": "shifts_booked_at_least",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "eat",
+          "text_key": "quest.settle_in.eat",
+          "hint_key": "quest.settle_in.eat.hint",
+          "conditions": [
+            {
+              "type": "stat_at_least",
+              "key": "food_eaten",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "first_shift",
+          "text_key": "quest.settle_in.first_shift",
+          "hint_key": "quest.settle_in.first_shift.hint",
+          "conditions": [
+            {
+              "type": "shifts_completed_at_least",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "id": "second_shift",
+          "text_key": "quest.settle_in.second_shift",
+          "hint_key": "quest.settle_in.second_shift.hint",
+          "conditions": [
+            {
+              "type": "shifts_completed_at_least",
+              "value": 2
+            }
+          ]
+        },
+        {
+          "id": "acquaintance",
+          "text_key": "quest.settle_in.acquaintance",
+          "hint_key": "quest.settle_in.acquaintance.hint",
+          "conditions": [
+            {
+              "type": "any_relationship_at_least",
+              "value": 10
+            }
+          ]
+        },
+        {
+          "id": "first_rent",
+          "text_key": "quest.settle_in.first_rent",
+          "hint_key": "quest.settle_in.first_rent.hint",
+          "conditions": [
+            {
+              "type": "rent_periods_paid_at_least",
+              "value": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

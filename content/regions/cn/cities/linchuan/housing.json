@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "records": [
+    {
+      "id": "home_shared_room_01",
+      "city_id": "CN_LINCHUAN",
+      "location_id": "old_town_apartment",
+      "name_key": "housing.shared_room_01.name",
+      "description_key": "housing.shared_room_01.desc",
+      "rent_minor": 60000,
+      "deposit_minor": 60000,
+      "period_days": 7,
+      "first_due_after_days": 6
+    }
+  ]
+}

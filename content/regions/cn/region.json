@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "id": "CN",
+  "display_name_key": "region.cn.name",
+  "country_id": "CN",
+  "currency_code": "CNY",
+  "currency_minor_digits": 2,
+  "default_language": "zh_CN",
+  "policy_config_id": "cn_default_policy"
+}

@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "id": "CN_LINCHUAN",
+  "region_id": "CN",
+  "country_id": "CN",
+  "display_name_key": "city.cn_linchuan.name",
+  "currency_code": "CNY",
+  "language": "zh_CN",
+  "starting_money_minor": 140000,
+  "starting_day": 1,
+  "starting_hour": 8,
+  "default_spawn": "old_town_bus_stop",
+  "district_ids": [
+    "OLD_TOWN",
+    "INDUSTRIAL"
+  ],
+  "start_map_id": "map_old_town",
+  "game_rules_id": "default"
+}

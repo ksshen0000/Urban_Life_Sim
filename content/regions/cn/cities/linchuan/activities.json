@@ -1,0 +1,290 @@
+{
+  "schema_version": 1,
+  "records": [
+    {
+      "id": "activity_arcade_games",
+      "name_key": "activity.arcade_games.name",
+      "description_key": "activity.arcade_games.desc",
+      "category": "rest",
+      "duration_minutes": 60,
+      "min_minutes": 30,
+      "max_minutes": 180,
+      "duration_presets_minutes": [
+        30,
+        60,
+        120
+      ],
+      "time_mode": "awake",
+      "location_ids": [
+        "arcade"
+      ],
+      "hours": [
+        {
+          "start_minute_of_day": 600,
+          "end_minute_of_day": 1440
+        }
+      ],
+      "price_per_hour_minor": 1500,
+      "rates_per_hour": [
+        {
+          "need_id": "energy",
+          "per_hour": -2
+        },
+        {
+          "need_id": "stress",
+          "per_hour": -9
+        }
+      ]
+    },
+    {
+      "id": "activity_dance_machine",
+      "name_key": "activity.dance_machine.name",
+      "description_key": "activity.dance_machine.desc",
+      "category": "rest",
+      "duration_minutes": 30,
+      "min_minutes": 15,
+      "max_minutes": 60,
+      "duration_presets_minutes": [
+        15,
+        30,
+        60
+      ],
+      "time_mode": "awake",
+      "location_ids": [
+        "arcade"
+      ],
+      "hours": [
+        {
+          "start_minute_of_day": 600,
+          "end_minute_of_day": 1440
+        }
+      ],
+      "price_per_hour_minor": 2400,
+      "rates_per_hour": [
+        {
+          "need_id": "energy",
+          "per_hour": -8
+        },
+        {
+          "need_id": "stress",
+          "per_hour": -12
+        },
+        {
+          "need_id": "hunger",
+          "per_hour": 7
+        }
+      ]
+    },
+    {
+      "id": "activity_billiards",
+      "name_key": "activity.billiards.name",
+      "description_key": "activity.billiards.desc",
+      "category": "rest",
+      "duration_minutes": 60,
+      "min_minutes": 30,
+      "max_minutes": 180,
+      "duration_presets_minutes": [
+        30,
+        60,
+        120,
+        180
+      ],
+      "time_mode": "awake",
+      "location_ids": [
+        "billiard_hall"
+      ],
+      "hours": [
+        {
+          "start_minute_of_day": 720,
+          "end_minute_of_day": 1440
+        }
+      ],
+      "price_per_hour_minor": 2000,
+      "rates_per_hour": [
+        {
+          "need_id": "energy",
+          "per_hour": -2
+        },
+        {
+          "need_id": "stress",
+          "per_hour": -7
+        }
+      ]
+    },
+    {
+      "id": "activity_watch_chess",
+      "name_key": "activity.watch_chess.name",
+      "description_key": "activity.watch_chess.desc",
+      "category": "rest",
+      "duration_minutes": 30,
+      "min_minutes": 15,
+      "max_minutes": 120,
+      "duration_presets_minutes": [
+        15,
+        30,
+        60,
+        120
+      ],
+      "time_mode": "resting",
+      "location_ids": [
+        "park"
+      ],
+      "hours": [
+        {
+          "start_minute_of_day": 480,
+          "end_minute_of_day": 1080
+        }
+      ],
+      "rates_per_hour": [
+        {
+          "need_id": "stress",
+          "per_hour": -3
+        }
+      ]
+    },
+    {
+      "id": "activity_play_chess",
+      "name_key": "activity.play_chess.name",
+      "description_key": "activity.play_chess.desc",
+      "category": "rest",
+      "duration_minutes": 60,
+      "min_minutes": 30,
+      "max_minutes": 120,
+      "duration_presets_minutes": [
+        30,
+        60,
+        120
+      ],
+      "time_mode": "resting",
+      "location_ids": [
+        "park"
+      ],
+      "hours": [
+        {
+          "start_minute_of_day": 480,
+          "end_minute_of_day": 1080
+        }
+      ],
+      "rates_per_hour": [
+        {
+          "need_id": "energy",
+          "per_hour": -1
+        },
+        {
+          "need_id": "stress",
+          "per_hour": -5
+        }
+      ]
+    },
+    {
+      "id": "activity_park_singing",
+      "name_key": "activity.park_singing.name",
+      "description_key": "activity.park_singing.desc",
+      "category": "rest",
+      "duration_minutes": 30,
+      "min_minutes": 15,
+      "max_minutes": 120,
+      "duration_presets_minutes": [
+        15,
+        30,
+        60
+      ],
+      "time_mode": "awake",
+      "location_ids": [
+        "park"
+      ],
+      "hours": [
+        {
+          "start_minute_of_day": 420,
+          "end_minute_of_day": 600
+        },
+        {
+          "start_minute_of_day": 1080,
+          "end_minute_of_day": 1260
+        }
+      ],
+      "rates_per_hour": [
+        {
+          "need_id": "energy",
+          "per_hour": -2
+        },
+        {
+          "need_id": "stress",
+          "per_hour": -7
+        }
+      ]
+    },
+    {
+      "id": "activity_tai_chi",
+      "name_key": "activity.tai_chi.name",
+      "description_key": "activity.tai_chi.desc",
+      "category": "rest",
+      "duration_minutes": 30,
+      "min_minutes": 15,
+      "max_minutes": 90,
+      "duration_presets_minutes": [
+        15,
+        30,
+        60
+      ],
+      "time_mode": "awake",
+      "location_ids": [
+        "park"
+      ],
+      "hours": [
+        {
+          "start_minute_of_day": 360,
+          "end_minute_of_day": 540
+        }
+      ],
+      "rates_per_hour": [
+        {
+          "need_id": "energy",
+          "per_hour": 1
+        },
+        {
+          "need_id": "stress",
+          "per_hour": -5
+        }
+      ]
+    },
+    {
+      "id": "activity_square_dance",
+      "name_key": "activity.square_dance.name",
+      "description_key": "activity.square_dance.desc",
+      "category": "rest",
+      "duration_minutes": 30,
+      "min_minutes": 15,
+      "max_minutes": 120,
+      "duration_presets_minutes": [
+        15,
+        30,
+        60
+      ],
+      "time_mode": "awake",
+      "location_ids": [
+        "park"
+      ],
+      "hours": [
+        {
+          "start_minute_of_day": 1140,
+          "end_minute_of_day": 1260
+        }
+      ],
+      "rates_per_hour": [
+        {
+          "need_id": "energy",
+          "per_hour": -5
+        },
+        {
+          "need_id": "stress",
+          "per_hour": -6
+        },
+        {
+          "need_id": "hunger",
+          "per_hour": 6
+        }
+      ]
+    }
+  ]
+}

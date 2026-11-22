@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "records": [
+    {
+      "id": "old_town_bus_stop",
+      "city_id": "CN_LINCHUAN",
+      "district_id": "OLD_TOWN",
+      "kind": "bus_stop",
+      "name_key": "location.old_town_bus_stop.name",
+      "map_id": "map_old_town"
+    },
+    {
+      "id": "old_town_apartment",
+      "city_id": "CN_LINCHUAN",
+      "district_id": "OLD_TOWN",
+      "kind": "home",
+      "name_key": "location.old_town_apartment.name",
+      "map_id": "map_old_town"
+    },
+    {
+      "id": "convenience_store",
+      "city_id": "CN_LINCHUAN",
+      "district_id": "OLD_TOWN",
+      "kind": "shop",
+      "name_key": "location.convenience_store.name",
+      "map_id": "map_old_town"
+    },
+    {
+      "id": "fast_food_restaurant",
+      "city_id": "CN_LINCHUAN",
+      "district_id": "OLD_TOWN",
+      "kind": "restaurant",
+      "name_key": "location.fast_food_restaurant.name",
+      "map_id": "map_old_town"
+    },
+    {
+      "id": "job_board",
+      "city_id": "CN_LINCHUAN",
+      "district_id": "OLD_TOWN",
+      "kind": "job_board",
+      "name_key": "location.job_board.name",
+      "map_id": "map_old_town"
+    },
+    {
+      "id": "park",
+      "city_id": "CN_LINCHUAN",
+      "district_id": "OLD_TOWN",
+      "kind": "park",
+      "name_key": "location.park.name",
+      "map_id": "map_old_town"
+    },
+    {
+      "id": "industrial_warehouse",
+      "city_id": "CN_LINCHUAN",
+      "district_id": "INDUSTRIAL",
+      "kind": "workplace",
+      "name_key": "location.industrial_warehouse.name",
+      "map_id": "map_industrial"
+    },
+    {
+      "id": "industrial_bus_stop",
+      "city_id": "CN_LINCHUAN",
+      "district_id": "INDUSTRIAL",
+      "kind": "bus_stop",
+      "name_key": "location.industrial_bus_stop.name",
+      "map_id": "map_industrial"
+    },
+    {
+      "id": "arcade",
+      "city_id": "CN_LINCHUAN",
+      "district_id": "OLD_TOWN",
+      "kind": "leisure",
+      "name_key": "location.arcade.name",
+      "map_id": "map_old_town"
+    },
+    {
+      "id": "billiard_hall",
+      "city_id": "CN_LINCHUAN",
+      "district_id": "OLD_TOWN",
+      "kind": "leisure",
+      "name_key": "location.billiard_hall.name",
+      "map_id": "map_old_town"
+    }
+  ]
+}

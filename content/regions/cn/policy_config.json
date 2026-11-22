@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "id": "cn_default_policy",
+  "region_id": "CN",
+  "implementation": "china",
+  "currency_code": "CNY",
+  "gamified": true,
+  "notes": "游戏化参数，不代表真实税费、社保或劳动法规。",
+  "settings": {
+    "payroll_deduction_bp": 500,
+    "max_work_minutes_per_day": 720,
+    "recurring_cost_multiplier_bp": {},
+    "calendar_modifiers": {}
+  }
+}

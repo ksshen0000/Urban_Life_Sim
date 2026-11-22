@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "id": "map_industrial",
+  "city_id": "CN_LINCHUAN",
+  "name_key": "map.industrial.name",
+  "tile_size": 32,
+  "rows": [
+    "################################",
+    "#..............................#",
+    "#.BBBBBBBBBBBBBB...............#",
+    "#.BBBBBBBBBBBBBB....BBBBBBBBBB.#",
+    "#.BBBBBBBBBBBBBB....BBBBBBBBBB.#",
+    "#.BBBBBBBBBBBBBB....BBBBBBBBBB.#",
+    "#..............................#",
+    "#..............................#",
+    "#..............................#",
+    "#==============================#",
+    "#==============================#",
+    "#..............................#",
+    "#..............................#",
+    "#.gTgggggg...ggggTg............#",
+    "#.gggggggg...gTgggg..BBBBBBBBB.#",
+    "#.ggggggTg...gggggg..BBBBBBBBB.#",
+    "#..............................#",
+    "################################"
+  ],
+  "legend": {
+    "#": "wall",
+    ".": "ground",
+    "=": "road",
+    "g": "grass",
+    "T": "tree",
+    "B": "building"
+  },
+  "spawns": [
+    {
+      "location_id": "industrial_bus_stop",
+      "tile": [
+        28,
+        12
+      ]
+    },
+    {
+      "location_id": "industrial_warehouse",
+      "tile": [
+        8,
+        6
+      ]
+    }
+  ],
+  "structures": [
+    {
+      "id": "bld_warehouse",
+      "tiles": [
+        2,
+        2,
+        14,
+        4
+      ],
+      "wall_rows": 2,
+      "roof_overhang_rows": 1,
+      "style": "warehouse",
+      "door": [
+        8,
+        5
+      ],
+      "sign_key": "location.industrial_warehouse.name"
+    },
+    {
+      "id": "bld_workshop",
+      "tiles": [
+        20,
+        3,
+        10,
+        3
+      ],
+      "wall_rows": 2,
+      "roof_overhang_rows": 1,
+      "style": "block"
+    },
+    {
+      "id": "bld_sheds",
+      "tiles": [
+        21,
+        14,
+        9,
+        2
+      ],
+      "wall_rows": 1,
+      "roof_overhang_rows": 1,
+      "style": "block"
+    }
+  ],
+  "interactables": [
+    {
+      "id": "door_warehouse",
+      "kind": "workplace",
+      "location_id": "industrial_warehouse",
+      "tile": [
+        8,
+        5
+      ],
+      "name_key": "interactable.warehouse.name"
+    },
+    {
+      "id": "sign_bus_stop_industrial",
+      "kind": "transit",
+      "location_id": "industrial_bus_stop",
+      "tile": [
+        27,
+        11
+      ],
+      "name_key": "interactable.bus_stop.name",
+      "text_key": "interactable.bus_stop_industrial.text",
+      "prop": "bus_sign"
+    }
+  ]
+}

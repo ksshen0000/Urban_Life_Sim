@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "records": [
+    {
+      "id": "npc_chen_yu",
+      "city_id": "CN_LINCHUAN",
+      "name_key": "npc.chen_yu.name",
+      "role_key": "npc.chen_yu.role",
+      "home_location_id": "old_town_apartment",
+      "schedule": [
+        {
+          "start_minute_of_day": 480,
+          "end_minute_of_day": 960,
+          "location_id": "convenience_store"
+        },
+        {
+          "start_minute_of_day": 990,
+          "end_minute_of_day": 1140,
+          "location_id": "park"
+        }
+      ],
+      "initial_relationship": 0,
+      "dialogue_tree_id": "dialogue_chen_yu_intro",
+      "chat_tree_id": "dialogue_chen_yu_chat",
+      "appearance": {
+        "shirt": "#f4f1e8",
+        "hair": "#2e221c",
+        "hair_style": "ponytail",
+        "figure": "f",
+        "outfit": "pants",
+        "bottom": "#3d4656",
+        "vest": "#3fa06a",
+        "shoes": "#f4f1e8"
+      }
+    },
+    {
+      "id": "npc_landlord_wang",
+      "city_id": "CN_LINCHUAN",
+      "name_key": "npc.landlord_wang.name",
+      "role_key": "npc.landlord_wang.role",
+      "home_location_id": "old_town_apartment",
+      "schedule": [
+        {
+          "start_minute_of_day": 420,
+          "end_minute_of_day": 600,
+          "location_id": "park"
+        },
+        {
+          "start_minute_of_day": 600,
+          "end_minute_of_day": 1200,
+          "location_id": "old_town_apartment"
+        }
+      ],
+      "initial_relationship": 0,
+      "dialogue_tree_id": "dialogue_landlord_intro",
+      "chat_tree_id": "dialogue_landlord_chat",
+      "appearance": {
+        "shirt": "#b0473c",
+        "hair": "#4a3a34",
+        "hair_style": "perm",
+        "figure": "f",
+        "outfit": "skirt",
+        "bottom": "#3a3550",
+        "shoes": "#2e2a28",
+        "skin": "#ecc09a"
+      }
+    },
+    {
+      "id": "npc_lao_zhou",
+      "city_id": "CN_LINCHUAN",
+      "name_key": "npc.lao_zhou.name",
+      "role_key": "npc.lao_zhou.role",
+      "home_location_id": "industrial_bus_stop",
+      "schedule": [
+        {
+          "start_minute_of_day": 450,
+          "end_minute_of_day": 1170,
+          "location_id": "industrial_warehouse"
+        },
+        {
+          "start_minute_of_day": 1200,
+          "end_minute_of_day": 1290,
+          "location_id": "fast_food_restaurant"
+        }
+      ],
+      "initial_relationship": 0,
+      "dialogue_tree_id": "dialogue_lao_zhou_intro",
+      "chat_tree_id": "dialogue_lao_zhou_chat",
+      "appearance": {
+        "shirt": "#6a7a5a",
+        "hair": "#8a8680",
+        "hair_style": "bald",
+        "figure": "m",
+        "outfit": "pants",
+        "bottom": "#4a4a52",
+        "shoes": "#3a2e26",
+        "skin": "#e2b48c"
+      }
+    }
+  ]
+}

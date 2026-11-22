@@ -1,0 +1,516 @@
+{
+  "schema_version": 1,
+  "records": [
+    {
+      "id": "city.cn_linchuan.name",
+      "zh_CN": "临川市"
+    },
+    {
+      "id": "district.cn_linchuan.old_town.name",
+      "zh_CN": "老城"
+    },
+    {
+      "id": "district.cn_linchuan.industrial.name",
+      "zh_CN": "工业区"
+    },
+    {
+      "id": "location.old_town_bus_stop.name",
+      "zh_CN": "老城公交站"
+    },
+    {
+      "id": "location.old_town_apartment.name",
+      "zh_CN": "出租屋"
+    },
+    {
+      "id": "location.convenience_store.name",
+      "zh_CN": "便利店"
+    },
+    {
+      "id": "location.fast_food_restaurant.name",
+      "zh_CN": "快餐店"
+    },
+    {
+      "id": "location.job_board.name",
+      "zh_CN": "招聘公告栏"
+    },
+    {
+      "id": "location.park.name",
+      "zh_CN": "街心公园"
+    },
+    {
+      "id": "location.industrial_warehouse.name",
+      "zh_CN": "工业区仓库"
+    },
+    {
+      "id": "shop.convenience_store.name",
+      "zh_CN": "转角便利店"
+    },
+    {
+      "id": "shop.fast_food.name",
+      "zh_CN": "老街快餐"
+    },
+    {
+      "id": "map.old_town.name",
+      "zh_CN": "老城街区"
+    },
+    {
+      "id": "interactable.bus_stop.name",
+      "zh_CN": "公交站牌"
+    },
+    {
+      "id": "interactable.bus_stop.text",
+      "zh_CN": "老城站。站牌上写着：12 路，开往工业区，首班 6:00，末班 22:00。"
+    },
+    {
+      "id": "interactable.apartment.name",
+      "zh_CN": "出租屋"
+    },
+    {
+      "id": "interactable.job_board.name",
+      "zh_CN": "招聘公告栏"
+    },
+    {
+      "id": "interactable.job_board.text",
+      "zh_CN": "公告栏上贴着几张招工启事：便利店店员、餐饮服务员、仓储分拣员。纸角被风吹得卷了起来。"
+    },
+    {
+      "id": "interactable.bench.name",
+      "zh_CN": "公园长椅"
+    },
+    {
+      "id": "location.industrial_bus_stop.name",
+      "zh_CN": "工业区公交站"
+    },
+    {
+      "id": "map.industrial.name",
+      "zh_CN": "工业区"
+    },
+    {
+      "id": "interactable.warehouse.name",
+      "zh_CN": "仓库员工入口"
+    },
+    {
+      "id": "interactable.bus_stop_industrial.text",
+      "zh_CN": "工业区站。12 路开往老城，首班 6:00，末班 22:00。"
+    },
+    {
+      "id": "job.convenience_clerk.name",
+      "zh_CN": "便利店店员"
+    },
+    {
+      "id": "job.convenience_clerk.desc",
+      "zh_CN": "收银、理货、补货。站一整个班，腿会酸。"
+    },
+    {
+      "id": "job.restaurant_server.name",
+      "zh_CN": "餐饮服务员"
+    },
+    {
+      "id": "job.restaurant_server.desc",
+      "zh_CN": "点单、端盘、收桌。饭点很忙，偶尔被催。"
+    },
+    {
+      "id": "job.warehouse_sorter.name",
+      "zh_CN": "仓储分拣员"
+    },
+    {
+      "id": "job.warehouse_sorter.desc",
+      "zh_CN": "扫码、分拣、搬箱子。钱多一些，但很累，而且要坐公交去工业区。"
+    },
+    {
+      "id": "housing.shared_room_01.name",
+      "zh_CN": "老城合租房（次卧）"
+    },
+    {
+      "id": "housing.shared_room_01.desc",
+      "zh_CN": "一间朝北的小次卧，和别人合用厨房和卫生间。押一付一，按周交租。"
+    },
+    {
+      "id": "route.12_to_industrial.name",
+      "zh_CN": "12 路 → 工业区"
+    },
+    {
+      "id": "route.12_to_old_town.name",
+      "zh_CN": "12 路 → 老城"
+    },
+    {
+      "id": "npc.chen_yu.name",
+      "zh_CN": "陈雨"
+    },
+    {
+      "id": "npc.chen_yu.role",
+      "zh_CN": "便利店店员 · 住你楼上"
+    },
+    {
+      "id": "npc.landlord_wang.name",
+      "zh_CN": "王阿姨"
+    },
+    {
+      "id": "npc.landlord_wang.role",
+      "zh_CN": "房东"
+    },
+    {
+      "id": "npc.lao_zhou.name",
+      "zh_CN": "老周"
+    },
+    {
+      "id": "npc.lao_zhou.role",
+      "zh_CN": "仓库老员工"
+    },
+    {
+      "id": "dlg.landlord_intro.start",
+      "zh_CN": "“新来的吧？我姓王，这栋楼的次卧在出租。押金六百，房租一周六百，到日子自动从你账上扣，别拖。想租就到出租屋门口签。”"
+    },
+    {
+      "id": "dlg.landlord_intro.ok",
+      "zh_CN": "“好的，王阿姨。”"
+    },
+    {
+      "id": "dlg.landlord_intro.bargain",
+      "zh_CN": "“能便宜点吗？”"
+    },
+    {
+      "id": "dlg.landlord_intro.bargain_reply",
+      "zh_CN": "王阿姨笑了：“这价在老城已经很实在了。你先住着，好好找活儿干，比什么都强。”"
+    },
+    {
+      "id": "dlg.landlord_intro.fine",
+      "zh_CN": "“……也是。”"
+    },
+    {
+      "id": "dlg.landlord_chat.start",
+      "zh_CN": "王阿姨正坐在小板凳上择菜：“吃了没？”"
+    },
+    {
+      "id": "dlg.landlord_chat.chat",
+      "zh_CN": "陪她聊几句家常"
+    },
+    {
+      "id": "dlg.landlord_chat.bye",
+      "zh_CN": "打个招呼就走"
+    },
+    {
+      "id": "dlg.chen_intro.start",
+      "zh_CN": "一个扎马尾的女孩抬头看你：“新搬来的吧？我是陈雨，住你楼上。店里最近缺人，公告栏上贴了招工，你要是在找活儿，可以去看看。”"
+    },
+    {
+      "id": "dlg.chen_intro.thanks",
+      "zh_CN": "“谢谢，我这就去看看。”"
+    },
+    {
+      "id": "dlg.chen_intro.nod",
+      "zh_CN": "“嗯，好。”"
+    },
+    {
+      "id": "dlg.chen_chat.start",
+      "zh_CN": "陈雨：“今天怎么样？还习惯吗？”"
+    },
+    {
+      "id": "dlg.chen_chat.talk",
+      "zh_CN": "聊聊这几天的事"
+    },
+    {
+      "id": "dlg.chen_chat.bye",
+      "zh_CN": "“有点累，先走了。”"
+    },
+    {
+      "id": "dlg.zhou_intro.start",
+      "zh_CN": "一个四十多岁的男人递给你一副线手套：“新来的？我是老周。搬箱子用腿使劲，别用腰，不然干不了一个月。”"
+    },
+    {
+      "id": "dlg.zhou_intro.thanks",
+      "zh_CN": "“谢谢周师傅。”"
+    },
+    {
+      "id": "dlg.zhou_intro.nod",
+      "zh_CN": "点点头，接过手套"
+    },
+    {
+      "id": "dlg.zhou_chat.start",
+      "zh_CN": "老周擦了把汗：“今天货多，悠着点干。”"
+    },
+    {
+      "id": "dlg.zhou_chat.chat",
+      "zh_CN": "跟他聊两句"
+    },
+    {
+      "id": "dlg.zhou_chat.bye",
+      "zh_CN": "“好，先走了。”"
+    },
+    {
+      "id": "dlg.arrival.start",
+      "zh_CN": "你拎着旅行包下了公交。临川老城比想象中旧一些，路边的梧桐叶落了一地。兜里还有一千五百块。\n先找个地方住下吧——听说左上角那栋楼有次卧在出租。"
+    },
+    {
+      "id": "dlg.arrival.go",
+      "zh_CN": "出发"
+    },
+    {
+      "id": "dlg.dinner.start",
+      "zh_CN": "陈雨发来消息：“下班一起去老街快餐吃个饭？我请不起，AA 哈，大概三十块。”"
+    },
+    {
+      "id": "dlg.dinner.go",
+      "zh_CN": "“好啊，一起去。”（¥30）"
+    },
+    {
+      "id": "dlg.dinner.skip",
+      "zh_CN": "“这次算了，最近想省点钱。”"
+    },
+    {
+      "id": "dlg.warehouse.start",
+      "zh_CN": "公告栏上新贴了一张启事：工业区仓库招分拣员，时薪 32 元，五小时一班。要坐 12 路过去，单程三块。"
+    },
+    {
+      "id": "dlg.warehouse.ok",
+      "zh_CN": "记下了"
+    },
+    {
+      "id": "dlg.rent6.start",
+      "zh_CN": "王阿姨发来消息：“明天交房租哈，六百，从你账上自动扣，记得留够钱。”"
+    },
+    {
+      "id": "dlg.rent6.ok",
+      "zh_CN": "“知道了，王阿姨。”"
+    },
+    {
+      "id": "dlg.overdue.start",
+      "zh_CN": "王阿姨发来消息：“房租还没到账哦。手头紧的话先跟我说一声，别躲着。”"
+    },
+    {
+      "id": "dlg.overdue.sorry",
+      "zh_CN": "“对不起，我会尽快补上。”"
+    },
+    {
+      "id": "dlg.overdue.silent",
+      "zh_CN": "先不回"
+    },
+    {
+      "id": "quest.settle_in.name",
+      "zh_CN": "在临川站稳脚跟"
+    },
+    {
+      "id": "quest.settle_in.rent_room",
+      "zh_CN": "租下住处"
+    },
+    {
+      "id": "quest.settle_in.rent_room.hint",
+      "zh_CN": "出租屋在地图左上角那栋楼，走到它的门口按 E 签约（押金 ¥600）。"
+    },
+    {
+      "id": "quest.settle_in.find_job",
+      "zh_CN": "预约一个班次"
+    },
+    {
+      "id": "quest.settle_in.find_job.hint",
+      "zh_CN": "去公交站左边的招聘公告栏按 E。岗位第 2 天起招人，第 1 天就可以先约第 2 天的班。"
+    },
+    {
+      "id": "quest.settle_in.eat",
+      "zh_CN": "吃顿饭"
+    },
+    {
+      "id": "quest.settle_in.eat.hint",
+      "zh_CN": "在便利店或快餐店门口按 E 买吃的，再按 I 打开背包吃掉。饥饿太高会让压力上升。"
+    },
+    {
+      "id": "quest.settle_in.first_shift",
+      "zh_CN": "上完第一个班"
+    },
+    {
+      "id": "quest.settle_in.first_shift.hint",
+      "zh_CN": "按时到上班的店门口按 E 开工，最多可以提前两小时到。按 J 查看你的班次时间。"
+    },
+    {
+      "id": "quest.settle_in.first_rent",
+      "zh_CN": "交上第一期房租"
+    },
+    {
+      "id": "quest.settle_in.first_rent.hint",
+      "zh_CN": "第 7 天开始时会自动从钱包扣 ¥600。在那之前攒够钱。"
+    },
+    {
+      "id": "summary.money_overdue",
+      "zh_CN": "第一期房租没交上。王阿姨说可以宽限几天，可账上的数字让人心里发紧。"
+    },
+    {
+      "id": "summary.money_saved",
+      "zh_CN": "交了房租，手里还剩一些。下个星期也许能喘口气。"
+    },
+    {
+      "id": "summary.money_tight",
+      "zh_CN": "交了房租，但几乎没有存款。"
+    },
+    {
+      "id": "summary.money_unsettled",
+      "zh_CN": "你还没有在这座城市真正安顿下来。"
+    },
+    {
+      "id": "summary.work_busy",
+      "zh_CN": "这一周你上了不少班，收入不错，但很少有时间休息。"
+    },
+    {
+      "id": "summary.work_started",
+      "zh_CN": "你开始有了干活的节奏，虽然只是兼职。"
+    },
+    {
+      "id": "summary.work_none",
+      "zh_CN": "这一周你还没有真正开始工作。"
+    },
+    {
+      "id": "summary.people_friend",
+      "zh_CN": "你认识了第一个可以说话的朋友。"
+    },
+    {
+      "id": "summary.people_familiar",
+      "zh_CN": "你和几个邻居打过招呼，算是脸熟了。"
+    },
+    {
+      "id": "summary.people_alone",
+      "zh_CN": "在这座城市里，你还谁都不认识。"
+    },
+    {
+      "id": "summary.body_stressed",
+      "zh_CN": "你太累了，压力压得人喘不过气。"
+    },
+    {
+      "id": "summary.body_tired",
+      "zh_CN": "身体在提醒你：该好好睡一觉了。"
+    },
+    {
+      "id": "summary.body_ok",
+      "zh_CN": "身体还撑得住。"
+    },
+    {
+      "id": "quest.settle_in.second_shift",
+      "zh_CN": "再上一个班"
+    },
+    {
+      "id": "quest.settle_in.second_shift.hint",
+      "zh_CN": "在公告栏再约一个班。仓库从第 4 天起招人，钱多但更累，要坐 12 路过去。"
+    },
+    {
+      "id": "quest.settle_in.acquaintance",
+      "zh_CN": "和一个人熟起来"
+    },
+    {
+      "id": "quest.settle_in.acquaintance.hint",
+      "zh_CN": "走到人跟前按 E 聊聊。每个人每天聊一次才会更熟一点。"
+    },
+    {
+      "id": "location.arcade.name",
+      "zh_CN": "星光游戏厅",
+      "en": "Starlight Arcade"
+    },
+    {
+      "id": "location.billiard_hall.name",
+      "zh_CN": "老街台球厅",
+      "en": "Old Street Billiards"
+    },
+    {
+      "id": "activity.arcade_games.name",
+      "zh_CN": "打街机",
+      "en": "Play arcade games"
+    },
+    {
+      "id": "activity.arcade_games.desc",
+      "zh_CN": "换一把游戏币，拍拍按钮，打几局格斗和赛车。很解压，就是费币。",
+      "en": "Buy a handful of tokens and mash buttons through some fighting and racing games. Great for stress, hard on the wallet."
+    },
+    {
+      "id": "activity.dance_machine.name",
+      "zh_CN": "跳舞机",
+      "en": "Dance machine"
+    },
+    {
+      "id": "activity.dance_machine.desc",
+      "zh_CN": "踩着箭头跳一身汗。最解压，也最累，跳完会饿。",
+      "en": "Stomp the arrows until you sweat. The best stress relief and the most tiring; you'll be hungry after."
+    },
+    {
+      "id": "activity.billiards.name",
+      "zh_CN": "打台球",
+      "en": "Play billiards"
+    },
+    {
+      "id": "activity.billiards.desc",
+      "zh_CN": "开一张桌，按小时计费。老板会顺手教你两招。",
+      "en": "Rent a table by the hour. The owner throws in a tip or two."
+    },
+    {
+      "id": "activity.watch_chess.name",
+      "zh_CN": "看大爷下象棋",
+      "en": "Watch the chess game"
+    },
+    {
+      "id": "activity.watch_chess.desc",
+      "zh_CN": "围在石桌边看两位大爷杀得难解难分。观棋不语真君子。",
+      "en": "Gather round the stone table while two old men fight it out. A true gentleman watches in silence."
+    },
+    {
+      "id": "activity.play_chess.name",
+      "zh_CN": "和大爷杀一盘",
+      "en": "Play a game of chess"
+    },
+    {
+      "id": "activity.play_chess.desc",
+      "zh_CN": "石桌对面的大爷正等人。赢了他会不服气，输了他会教你。",
+      "en": "The old man across the stone table is waiting for an opponent. Win and he wants a rematch; lose and he'll teach you."
+    },
+    {
+      "id": "activity.park_singing.name",
+      "zh_CN": "跟着唱两句",
+      "en": "Sing along"
+    },
+    {
+      "id": "activity.park_singing.desc",
+      "zh_CN": "凉亭里有人拉二胡，阿姨们在唱老歌。早上和傍晚都有。",
+      "en": "Someone plays the erhu in the pavilion while the aunties sing old songs. Mornings and evenings."
+    },
+    {
+      "id": "activity.tai_chi.name",
+      "zh_CN": "跟着打太极",
+      "en": "Join the tai chi"
+    },
+    {
+      "id": "activity.tai_chi.desc",
+      "zh_CN": "清晨的广场，一群老人慢慢地推手。跟着比划，人会松下来。",
+      "en": "Early morning on the plaza, a group moving slowly. Follow along and you loosen up."
+    },
+    {
+      "id": "activity.square_dance.name",
+      "zh_CN": "跟着跳广场舞",
+      "en": "Join the square dancing"
+    },
+    {
+      "id": "activity.square_dance.desc",
+      "zh_CN": "晚上七点，音箱一开，广场就热闹起来。跳完会累也会饿。",
+      "en": "At seven the speaker comes on and the plaza fills up. Tiring, and you'll be hungry."
+    },
+    {
+      "id": "interactable.chess_watch.name",
+      "zh_CN": "石桌（象棋）",
+      "en": "Stone table (chess)"
+    },
+    {
+      "id": "interactable.chess_play.name",
+      "zh_CN": "石桌（空着一个座）",
+      "en": "Stone table (one seat free)"
+    },
+    {
+      "id": "interactable.pavilion.name",
+      "zh_CN": "凉亭",
+      "en": "Pavilion"
+    },
+    {
+      "id": "interactable.plaza.name",
+      "zh_CN": "广场音箱",
+      "en": "Plaza speaker"
+    },
+    {
+      "id": "interactable.river_bench.name",
+      "zh_CN": "河边长椅",
+      "en": "Riverside bench"
+    }
+  ]
+}

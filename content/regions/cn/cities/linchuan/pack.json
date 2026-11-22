@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "pack_id": "city_cn_linchuan",
+  "pack_version": "0.2.0",
+  "description": "Fictional city Linchuan: first playable vertical slice.",
+  "scope": {
+    "region_id": "CN",
+    "country_id": "CN",
+    "city_id": "CN_LINCHUAN"
+  },
+  "dependencies": [
+    "region_cn"
+  ],
+  "files": [
+    {
+      "path": "text.json",
+      "table": "text"
+    },
+    {
+      "path": "city.json",
+      "table": "cities"
+    },
+    {
+      "path": "districts.json",
+      "table": "districts"
+    },
+    {
+      "path": "locations.json",
+      "table": "locations"
+    },
+    {
+      "path": "activities.json",
+      "table": "activities"
+    },
+    {
+      "path": "shops.json",
+      "table": "shops"
+    },
+    {
+      "path": "maps/old_town.json",
+      "table": "maps"
+    },
+    {
+      "path": "maps/industrial.json",
+      "table": "maps"
+    },
+    {
+      "path": "jobs.json",
+      "table": "jobs"
+    },
+    {
+      "path": "housing.json",
+      "table": "housing"
+    },
+    {
+      "path": "transit_routes.json",
+      "table": "transit_routes"
+    },
+    {
+      "path": "npcs.json",
+      "table": "npcs"
+    },
+    {
+      "path": "dialogues.json",
+      "table": "dialogues"
+    },
+    {
+      "path": "events.json",
+      "table": "events"
+    },
+    {
+      "path": "quests.json",
+      "table": "quests"
+    },
+    {
+      "path": "summary_lines.json",
+      "table": "summary_lines"
+    }
+  ],
+  "story_providers": [
+    {
+      "provider_id": "template_story_provider",
+      "schema_version": 1,
+      "provider_version": "0.1.0"
+    }
+  ]
+}

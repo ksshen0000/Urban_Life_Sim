@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "records": [
+    {
+      "id": "hunger",
+      "name_key": "need.hunger.name",
+      "initial_value": 25,
+      "high_is_bad": true,
+      "rates_per_hour": {
+        "awake": 4,
+        "resting": 3,
+        "sleeping": 2
+      }
+    },
+    {
+      "id": "energy",
+      "name_key": "need.energy.name",
+      "initial_value": 80,
+      "high_is_bad": false,
+      "rates_per_hour": {
+        "awake": -3,
+        "resting": 2,
+        "sleeping": 10
+      },
+      "mode_caps": {
+        "sleeping": 90
+      }
+    },
+    {
+      "id": "stress",
+      "name_key": "need.stress.name",
+      "initial_value": 20,
+      "high_is_bad": true,
+      "rates_per_hour": {
+        "awake": 0,
+        "resting": -4,
+        "sleeping": -2
+      },
+      "pressure_rules": [
+        {
+          "when_need": "hunger",
+          "op": "at_least",
+          "value": 70,
+          "add_per_hour": 2
+        },
+        {
+          "when_need": "energy",
+          "op": "at_most",
+          "value": 20,
+          "add_per_hour": 2
+        }
+      ]
+    }
+  ]
+}

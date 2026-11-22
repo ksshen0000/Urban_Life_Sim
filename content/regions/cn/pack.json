@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "pack_id": "region_cn",
+  "pack_version": "0.2.0",
+  "description": "China region rules (gamified; not real tax or labour law).",
+  "scope": {
+    "region_id": "CN",
+    "country_id": "CN"
+  },
+  "dependencies": [
+    "common"
+  ],
+  "files": [
+    {
+      "path": "text.json",
+      "table": "text"
+    },
+    {
+      "path": "region.json",
+      "table": "regions"
+    },
+    {
+      "path": "policy_config.json",
+      "table": "region_policy_configs"
+    }
+  ]
+}

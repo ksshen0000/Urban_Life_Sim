@@ -1,0 +1,34 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/world/player_controller.gd" id="1_player"]
+
+[sub_resource type="RectangleShape2D" id="Shape_body"]
+size = Vector2(16, 10)
+
+[sub_resource type="CircleShape2D" id="Shape_sensor"]
+radius = 24.0
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 1
+motion_mode = 1
+script = ExtResource("1_player")
+
+[node name="Body" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+shape = SubResource("Shape_body")
+
+[node name="InteractionSensor" type="Area2D" parent="."]
+position = Vector2(0, -8)
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="Shape" type="CollisionShape2D" parent="InteractionSensor"]
+shape = SubResource("Shape_sensor")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -16)
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0

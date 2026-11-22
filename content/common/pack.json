@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "pack_id": "common",
+  "pack_version": "0.2.0",
+  "description": "Region-independent rules, needs, items, activities and UI text.",
+  "scope": {},
+  "dependencies": [],
+  "files": [
+    {
+      "path": "text.json",
+      "table": "text"
+    },
+    {
+      "path": "game_rules.json",
+      "table": "game_rules"
+    },
+    {
+      "path": "needs.json",
+      "table": "needs"
+    },
+    {
+      "path": "items.json",
+      "table": "items"
+    },
+    {
+      "path": "activities.json",
+      "table": "activities"
+    }
+  ]
+}

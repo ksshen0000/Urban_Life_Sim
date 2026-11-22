@@ -1,0 +1,200 @@
+{
+  "schema_version": 1,
+  "records": [
+    {
+      "id": "event_arrival",
+      "city_id": "CN_LINCHUAN",
+      "priority": 100,
+      "once": true,
+      "conditions": [
+        {
+          "type": "day_at_least",
+          "value": 1
+        }
+      ],
+      "effects": [],
+      "dialogue_tree_id": "dialogue_arrival"
+    },
+    {
+      "id": "event_day2_chen_intro",
+      "city_id": "CN_LINCHUAN",
+      "priority": 50,
+      "once": true,
+      "conditions": [
+        {
+          "type": "day_at_least",
+          "value": 2
+        },
+        {
+          "type": "npc_present",
+          "npc_id": "npc_chen_yu"
+        },
+        {
+          "type": "flag_equals",
+          "key": "story.met_chen",
+          "value": false
+        }
+      ],
+      "effects": [],
+      "dialogue_tree_id": "dialogue_chen_yu_intro"
+    },
+    {
+      "id": "event_meet_lao_zhou",
+      "city_id": "CN_LINCHUAN",
+      "priority": 45,
+      "once": true,
+      "conditions": [
+        {
+          "type": "on_map",
+          "map_id": "map_industrial"
+        },
+        {
+          "type": "npc_present",
+          "npc_id": "npc_lao_zhou"
+        },
+        {
+          "type": "flag_equals",
+          "key": "story.met_lao_zhou",
+          "value": false
+        }
+      ],
+      "effects": [],
+      "dialogue_tree_id": "dialogue_lao_zhou_intro"
+    },
+    {
+      "id": "event_day3_dinner",
+      "city_id": "CN_LINCHUAN",
+      "priority": 40,
+      "once": true,
+      "conditions": [
+        {
+          "type": "day_at_least",
+          "value": 3
+        },
+        {
+          "type": "minute_of_day_at_least",
+          "value": 1020
+        },
+        {
+          "type": "flag_equals",
+          "key": "story.met_chen",
+          "value": true
+        }
+      ],
+      "effects": [],
+      "dialogue_tree_id": "dialogue_day3_dinner"
+    },
+    {
+      "id": "event_day4_warehouse",
+      "city_id": "CN_LINCHUAN",
+      "priority": 30,
+      "once": true,
+      "conditions": [
+        {
+          "type": "day_at_least",
+          "value": 4
+        },
+        {
+          "type": "minute_of_day_at_least",
+          "value": 420
+        }
+      ],
+      "effects": [],
+      "dialogue_tree_id": "dialogue_day4_warehouse"
+    },
+    {
+      "id": "event_day6_rent_reminder",
+      "city_id": "CN_LINCHUAN",
+      "priority": 60,
+      "once": true,
+      "conditions": [
+        {
+          "type": "day_at_least",
+          "value": 6
+        },
+        {
+          "type": "lease_active",
+          "value": true
+        },
+        {
+          "type": "rent_periods_paid_at_least",
+          "value": 0
+        }
+      ],
+      "effects": [],
+      "dialogue_tree_id": "dialogue_day6_rent"
+    },
+    {
+      "id": "event_rent_overdue",
+      "city_id": "CN_LINCHUAN",
+      "priority": 70,
+      "once": true,
+      "conditions": [
+        {
+          "type": "rent_overdue",
+          "value": true
+        }
+      ],
+      "effects": [],
+      "dialogue_tree_id": "dialogue_rent_overdue"
+    },
+    {
+      "id": "event_week1_summary",
+      "city_id": "CN_LINCHUAN",
+      "priority": 90,
+      "once": true,
+      "conditions": [
+        {
+          "type": "day_at_least",
+          "value": 7
+        },
+        {
+          "type": "minute_of_day_at_least",
+          "value": 1200
+        },
+        {
+          "type": "flag_equals",
+          "key": "story.week1_summarized",
+          "value": false
+        }
+      ],
+      "effects": [
+        {
+          "type": "show_summary"
+        },
+        {
+          "type": "set_flag",
+          "key": "story.week1_summarized",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "event_week1_summary_late",
+      "city_id": "CN_LINCHUAN",
+      "priority": 90,
+      "once": true,
+      "conditions": [
+        {
+          "type": "day_at_least",
+          "value": 8
+        },
+        {
+          "type": "flag_equals",
+          "key": "story.week1_summarized",
+          "value": false
+        }
+      ],
+      "effects": [
+        {
+          "type": "show_summary"
+        },
+        {
+          "type": "set_flag",
+          "key": "story.week1_summarized",
+          "value": true
+        }
+      ]
+    }
+  ]
+}

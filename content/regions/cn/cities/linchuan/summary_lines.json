@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "records": [
+    {
+      "id": "money_overdue",
+      "city_id": "CN_LINCHUAN",
+      "group": "money",
+      "group_rank": 0,
+      "order": 0,
+      "conditions": [
+        {
+          "type": "rent_overdue",
+          "value": true
+        }
+      ],
+      "text_key": "summary.money_overdue"
+    },
+    {
+      "id": "money_saved",
+      "city_id": "CN_LINCHUAN",
+      "group": "money",
+      "group_rank": 0,
+      "order": 1,
+      "conditions": [
+        {
+          "type": "rent_periods_paid_at_least",
+          "value": 1
+        },
+        {
+          "type": "wallet_at_least",
+          "value": 50000
+        }
+      ],
+      "text_key": "summary.money_saved"
+    },
+    {
+      "id": "money_tight",
+      "city_id": "CN_LINCHUAN",
+      "group": "money",
+      "group_rank": 0,
+      "order": 2,
+      "conditions": [
+        {
+          "type": "rent_periods_paid_at_least",
+          "value": 1
+        }
+      ],
+      "text_key": "summary.money_tight"
+    },
+    {
+      "id": "money_unsettled",
+      "city_id": "CN_LINCHUAN",
+      "group": "money",
+      "group_rank": 0,
+      "order": 3,
+      "conditions": [],
+      "text_key": "summary.money_unsettled"
+    },
+    {
+      "id": "work_busy",
+      "city_id": "CN_LINCHUAN",
+      "group": "work",
+      "group_rank": 1,
+      "order": 0,
+      "conditions": [
+        {
+          "type": "shifts_completed_at_least",
+          "value": 4
+        }
+      ],
+      "text_key": "summary.work_busy"
+    },
+    {
+      "id": "work_started",
+      "city_id": "CN_LINCHUAN",
+      "group": "work",
+      "group_rank": 1,
+      "order": 1,
+      "conditions": [
+        {
+          "type": "shifts_completed_at_least",
+          "value": 1
+        }
+      ],
+      "text_key": "summary.work_started"
+    },
+    {
+      "id": "work_none",
+      "city_id": "CN_LINCHUAN",
+      "group": "work",
+      "group_rank": 1,
+      "order": 2,
+      "conditions": [],
+      "text_key": "summary.work_none"
+    },
+    {
+      "id": "people_friend",
+      "city_id": "CN_LINCHUAN",
+      "group": "people",
+      "group_rank": 2,
+      "order": 0,
+      "conditions": [
+        {
+          "type": "any_relationship_at_least",
+          "value": 15
+        }
+      ],
+      "text_key": "summary.people_friend"
+    },
+    {
+      "id": "people_familiar",
+      "city_id": "CN_LINCHUAN",
+      "group": "people",
+      "group_rank": 2,
+      "order": 1,
+      "conditions": [
+        {
+          "type": "any_relationship_at_least",
+          "value": 5
+        }
+      ],
+      "text_key": "summary.people_familiar"
+    },
+    {
+      "id": "people_alone",
+      "city_id": "CN_LINCHUAN",
+      "group": "people",
+      "group_rank": 2,
+      "order": 2,
+      "conditions": [],
+      "text_key": "summary.people_alone"
+    },
+    {
+      "id": "body_stressed",
+      "city_id": "CN_LINCHUAN",
+      "group": "body",
+      "group_rank": 3,
+      "order": 0,
+      "conditions": [
+        {
+          "type": "need_above",
+          "need_id": "stress",
+          "value": 69
+        }
+      ],
+      "text_key": "summary.body_stressed"
+    },
+    {
+      "id": "body_tired",
+      "city_id": "CN_LINCHUAN",
+      "group": "body",
+      "group_rank": 3,
+      "order": 1,
+      "conditions": [
+        {
+          "type": "need_below",
+          "need_id": "energy",
+          "value": 25
+        }
+      ],
+      "text_key": "summary.body_tired"
+    },
+    {
+      "id": "body_ok",
+      "city_id": "CN_LINCHUAN",
+      "group": "body",
+      "group_rank": 3,
+      "order": 2,
+      "conditions": [],
+      "text_key": "summary.body_ok"
+    }
+  ]
+}

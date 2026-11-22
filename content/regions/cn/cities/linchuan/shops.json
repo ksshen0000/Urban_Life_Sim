@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "records": [
+    {
+      "id": "shop_convenience_store",
+      "city_id": "CN_LINCHUAN",
+      "location_id": "convenience_store",
+      "name_key": "shop.convenience_store.name",
+      "stock": [
+        {
+          "item_id": "item_instant_food",
+          "price_minor": 800
+        },
+        {
+          "item_id": "item_drink",
+          "price_minor": 500
+        },
+        {
+          "item_id": "item_simple_meal",
+          "price_minor": 1800
+        }
+      ]
+    },
+    {
+      "id": "shop_fast_food",
+      "city_id": "CN_LINCHUAN",
+      "location_id": "fast_food_restaurant",
+      "name_key": "shop.fast_food.name",
+      "stock": [
+        {
+          "item_id": "item_simple_meal",
+          "price_minor": 1800
+        },
+        {
+          "item_id": "item_drink",
+          "price_minor": 500
+        }
+      ]
+    }
+  ]
+}

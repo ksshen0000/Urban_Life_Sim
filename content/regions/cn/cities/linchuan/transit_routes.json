@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "records": [
+    {
+      "id": "route_12_to_industrial",
+      "city_id": "CN_LINCHUAN",
+      "name_key": "route.12_to_industrial.name",
+      "from_location_id": "old_town_bus_stop",
+      "to_location_id": "industrial_bus_stop",
+      "fare_minor": 300,
+      "travel_minutes": 30,
+      "first_departure_minute_of_day": 360,
+      "last_departure_minute_of_day": 1320
+    },
+    {
+      "id": "route_12_to_old_town",
+      "city_id": "CN_LINCHUAN",
+      "name_key": "route.12_to_old_town.name",
+      "from_location_id": "industrial_bus_stop",
+      "to_location_id": "old_town_bus_stop",
+      "fare_minor": 300,
+      "travel_minutes": 30,
+      "first_departure_minute_of_day": 360,
+      "last_departure_minute_of_day": 1320
+    }
+  ]
+}

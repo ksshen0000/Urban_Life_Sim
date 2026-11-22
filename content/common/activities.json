@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "records": [
+    {
+      "id": "activity_sleep",
+      "name_key": "activity.sleep.name",
+      "description_key": "activity.sleep.desc",
+      "category": "sleep",
+      "duration_minutes": 480,
+      "min_minutes": 30,
+      "max_minutes": 720,
+      "duration_presets_minutes": [
+        60,
+        120,
+        240,
+        360,
+        480,
+        600
+      ],
+      "until_hour": 7,
+      "time_mode": "sleeping",
+      "requires_home": true
+    },
+    {
+      "id": "activity_home_lie_down",
+      "name_key": "activity.lie_down.name",
+      "description_key": "activity.lie_down.desc",
+      "category": "rest",
+      "duration_minutes": 60,
+      "min_minutes": 15,
+      "max_minutes": 240,
+      "duration_presets_minutes": [
+        30,
+        60,
+        120,
+        180
+      ],
+      "time_mode": "resting",
+      "requires_home": true
+    },
+    {
+      "id": "activity_phone_news",
+      "name_key": "activity.phone_news.name",
+      "description_key": "activity.phone_news.desc",
+      "category": "rest",
+      "duration_minutes": 30,
+      "min_minutes": 15,
+      "max_minutes": 180,
+      "duration_presets_minutes": [
+        15,
+        30,
+        60,
+        120
+      ],
+      "time_mode": "resting",
+      "requires_home": true,
+      "rates_per_hour": [
+        {
+          "need_id": "energy",
+          "per_hour": 1
+        },
+        {
+          "need_id": "stress",
+          "per_hour": -2
+        }
+      ]
+    },
+    {
+      "id": "activity_short_videos",
+      "name_key": "activity.short_videos.name",
+      "description_key": "activity.short_videos.desc",
+      "category": "rest",
+      "duration_minutes": 30,
+      "min_minutes": 15,
+      "max_minutes": 240,
+      "duration_presets_minutes": [
+        15,
+        30,
+        60,
+        120,
+        180
+      ],
+      "time_mode": "resting",
+      "requires_home": true,
+      "rates_per_hour": [
+        {
+          "need_id": "energy",
+          "per_hour": -2
+        },
+        {
+          "need_id": "stress",
+          "per_hour": -7
+        }
+      ]
+    },
+    {
+      "id": "activity_rest",
+      "name_key": "activity.rest.name",
+      "description_key": "activity.rest.desc",
+      "category": "rest",
+      "duration_minutes": 60,
+      "min_minutes": 15,
+      "max_minutes": 180,
+      "duration_presets_minutes": [
+        30,
+        60,
+        120
+      ],
+      "time_mode": "resting",
+      "location_ids": [
+        "park"
+      ]
+    }
+  ]
+}

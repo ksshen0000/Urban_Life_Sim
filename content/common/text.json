@@ -1,0 +1,1225 @@
+{
+  "schema_version": 1,
+  "records": [
+    {
+      "id": "need.hunger.name",
+      "zh_CN": "饥饿",
+      "en": "Hunger"
+    },
+    {
+      "id": "need.energy.name",
+      "zh_CN": "精力",
+      "en": "Energy"
+    },
+    {
+      "id": "need.stress.name",
+      "zh_CN": "压力",
+      "en": "Stress"
+    },
+    {
+      "id": "need.hunger.hint",
+      "zh_CN": "越高越饿",
+      "en": "Higher is hungrier"
+    },
+    {
+      "id": "need.energy.hint",
+      "zh_CN": "越高越充沛",
+      "en": "Higher is more rested"
+    },
+    {
+      "id": "need.stress.hint",
+      "zh_CN": "越高越紧绷",
+      "en": "Higher is more tense"
+    },
+    {
+      "id": "item.simple_meal.name",
+      "zh_CN": "简餐",
+      "en": "Meal box"
+    },
+    {
+      "id": "item.simple_meal.desc",
+      "zh_CN": "一份热乎的盒饭，能顶好几个小时。",
+      "en": "A hot boxed meal. Keeps you going for hours."
+    },
+    {
+      "id": "item.instant_food.name",
+      "zh_CN": "速食",
+      "en": "Instant food"
+    },
+    {
+      "id": "item.instant_food.desc",
+      "zh_CN": "泡面或面包，便宜，但不太顶饱。",
+      "en": "Noodles or bread. Cheap, but not very filling."
+    },
+    {
+      "id": "item.drink.name",
+      "zh_CN": "饮料",
+      "en": "Drink"
+    },
+    {
+      "id": "item.drink.desc",
+      "zh_CN": "一瓶冰饮料，能让人稍微放松一点。",
+      "en": "A cold bottled drink. Takes the edge off a little."
+    },
+    {
+      "id": "activity.sleep.name",
+      "zh_CN": "睡觉",
+      "en": "Sleep"
+    },
+    {
+      "id": "activity.rest.name",
+      "zh_CN": "休息",
+      "en": "Rest"
+    },
+    {
+      "id": "ui.boot.new_game",
+      "zh_CN": "新游戏",
+      "en": "New game"
+    },
+    {
+      "id": "ui.boot.quit",
+      "zh_CN": "退出",
+      "en": "Quit"
+    },
+    {
+      "id": "ui.hud.day",
+      "zh_CN": "第 {day} 天",
+      "en": "Day {day}"
+    },
+    {
+      "id": "ui.hud.cash",
+      "zh_CN": "现金 {cash}",
+      "en": "Cash {cash}"
+    },
+    {
+      "id": "ui.hud.need_value",
+      "zh_CN": "{value}/100",
+      "en": "{value}/100"
+    },
+    {
+      "id": "ui.prompt.interact",
+      "zh_CN": "[E] {name}",
+      "en": "[E] {name}"
+    },
+    {
+      "id": "ui.common.ok",
+      "zh_CN": "确定",
+      "en": "OK"
+    },
+    {
+      "id": "ui.common.cancel",
+      "zh_CN": "取消",
+      "en": "Cancel"
+    },
+    {
+      "id": "ui.common.close",
+      "zh_CN": "关闭",
+      "en": "Close"
+    },
+    {
+      "id": "ui.pause.title",
+      "zh_CN": "暂停",
+      "en": "Paused"
+    },
+    {
+      "id": "ui.pause.resume",
+      "zh_CN": "继续",
+      "en": "Resume"
+    },
+    {
+      "id": "ui.pause.title_screen",
+      "zh_CN": "返回标题",
+      "en": "Title screen"
+    },
+    {
+      "id": "ui.pause.quit",
+      "zh_CN": "退出游戏",
+      "en": "Quit game"
+    },
+    {
+      "id": "ui.shop.cash",
+      "zh_CN": "持有现金：{cash}",
+      "en": "Cash: {cash}"
+    },
+    {
+      "id": "ui.shop.buy",
+      "zh_CN": "购买",
+      "en": "Buy"
+    },
+    {
+      "id": "ui.shop.price",
+      "zh_CN": "{price}",
+      "en": "{price}"
+    },
+    {
+      "id": "ui.shop.after",
+      "zh_CN": "买后剩 {after}",
+      "en": "{after} left after"
+    },
+    {
+      "id": "ui.shop.cannot_afford",
+      "zh_CN": "钱不够",
+      "en": "Not enough money"
+    },
+    {
+      "id": "ui.shop.bought",
+      "zh_CN": "买了{item}，花了 {price}。还剩 {cash}。",
+      "en": "Bought {item} for {price}. {cash} left."
+    },
+    {
+      "id": "ui.inventory.title",
+      "zh_CN": "背包",
+      "en": "Bag"
+    },
+    {
+      "id": "ui.inventory.empty",
+      "zh_CN": "背包是空的。",
+      "en": "The bag is empty."
+    },
+    {
+      "id": "ui.inventory.use",
+      "zh_CN": "使用",
+      "en": "Use"
+    },
+    {
+      "id": "ui.inventory.count",
+      "zh_CN": "×{count}",
+      "en": "×{count}"
+    },
+    {
+      "id": "ui.inventory.used",
+      "zh_CN": "用掉了{item}。",
+      "en": "Used {item}."
+    },
+    {
+      "id": "ui.effect.need_delta",
+      "zh_CN": "{need} {delta}",
+      "en": "{need} {delta}"
+    },
+    {
+      "id": "ui.effect.minutes",
+      "zh_CN": "耗时 {minutes} 分钟",
+      "en": "takes {minutes} min"
+    },
+    {
+      "id": "ui.activity.done",
+      "zh_CN": "{activity}结束。现在是第 {day} 天 {time}。",
+      "en": "{activity} finished. It is now day {day}, {time}."
+    },
+    {
+      "id": "ui.error.generic",
+      "zh_CN": "没能完成（{code}）。",
+      "en": "That didn't work ({code})."
+    },
+    {
+      "id": "ui.error.e_insufficient_funds",
+      "zh_CN": "钱不够。",
+      "en": "Not enough money."
+    },
+    {
+      "id": "ui.error.e_not_enough_items",
+      "zh_CN": "没有这样东西了。",
+      "en": "You don't have any left."
+    },
+    {
+      "id": "ui.error.e_inventory_full",
+      "zh_CN": "背包里这样东西已经放不下了。",
+      "en": "No room for more of that."
+    },
+    {
+      "id": "ui.error.e_unknown_shop",
+      "zh_CN": "这家店不存在。",
+      "en": "That shop does not exist."
+    },
+    {
+      "id": "ui.error.e_item_not_sold",
+      "zh_CN": "这里不卖这个。",
+      "en": "They don't sell that here."
+    },
+    {
+      "id": "ui.error.e_unknown_item",
+      "zh_CN": "未知物品。",
+      "en": "Unknown item."
+    },
+    {
+      "id": "ui.error.e_unknown_activity",
+      "zh_CN": "这里做不了这件事。",
+      "en": "You can't do that here."
+    },
+    {
+      "id": "ui.error.e_invalid_arguments",
+      "zh_CN": "操作参数有误。",
+      "en": "Invalid action."
+    },
+    {
+      "id": "ui.error.e_forbidden_actor",
+      "zh_CN": "你不能这么做。",
+      "en": "You can't do that."
+    },
+    {
+      "id": "ui.menu.title",
+      "zh_CN": "要做什么？",
+      "en": "What will you do?"
+    },
+    {
+      "id": "ui.menu.shop",
+      "zh_CN": "购物",
+      "en": "Shop"
+    },
+    {
+      "id": "ui.menu.work",
+      "zh_CN": "上班（{job}）",
+      "en": "Work ({job})"
+    },
+    {
+      "id": "ui.menu.sleep",
+      "zh_CN": "睡觉",
+      "en": "Sleep"
+    },
+    {
+      "id": "ui.menu.lease",
+      "zh_CN": "签约租房",
+      "en": "Sign the lease"
+    },
+    {
+      "id": "ui.menu.bills",
+      "zh_CN": "看看账单",
+      "en": "Check the bills"
+    },
+    {
+      "id": "ui.menu.pay_rent",
+      "zh_CN": "补交房租",
+      "en": "Pay overdue rent"
+    },
+    {
+      "id": "ui.jobs.title",
+      "zh_CN": "招聘公告栏",
+      "en": "Job board"
+    },
+    {
+      "id": "ui.jobs.wage",
+      "zh_CN": "时薪 {wage} · 每班到手约 {net}",
+      "en": "{wage}/hour · about {net} take-home per shift"
+    },
+    {
+      "id": "ui.jobs.where",
+      "zh_CN": "地点：{place}",
+      "en": "Where: {place}"
+    },
+    {
+      "id": "ui.jobs.cost",
+      "zh_CN": "每班精力 {energy} · 压力 {stress}",
+      "en": "Per shift: energy {energy} · stress {stress}"
+    },
+    {
+      "id": "ui.jobs.commute",
+      "zh_CN": "需坐公交通勤（单程 {fare}，{minutes} 分钟）",
+      "en": "Bus commute ({fare} each way, {minutes} min)"
+    },
+    {
+      "id": "ui.jobs.not_yet",
+      "zh_CN": "第 {day} 天起招人",
+      "en": "Hiring from day {day}"
+    },
+    {
+      "id": "ui.jobs.book",
+      "zh_CN": "预约 {when}",
+      "en": "Book {when}"
+    },
+    {
+      "id": "ui.jobs.booked",
+      "zh_CN": "已预约",
+      "en": "Booked"
+    },
+    {
+      "id": "ui.jobs.today",
+      "zh_CN": "今天",
+      "en": "today"
+    },
+    {
+      "id": "ui.jobs.tomorrow",
+      "zh_CN": "明天",
+      "en": "tomorrow"
+    },
+    {
+      "id": "ui.jobs.slot",
+      "zh_CN": "{day} {start}–{end}",
+      "en": "{day} {start}–{end}"
+    },
+    {
+      "id": "ui.jobs.my_shifts",
+      "zh_CN": "我的班次",
+      "en": "My shifts"
+    },
+    {
+      "id": "ui.jobs.no_shifts",
+      "zh_CN": "还没有预约任何班次。",
+      "en": "No shifts booked yet."
+    },
+    {
+      "id": "ui.jobs.shift_line",
+      "zh_CN": "{job} · 第 {day} 天 {start}–{end} · {status}",
+      "en": "{job} · day {day} {start}–{end} · {status}"
+    },
+    {
+      "id": "ui.shift.status.booked",
+      "zh_CN": "待上班",
+      "en": "upcoming"
+    },
+    {
+      "id": "ui.shift.status.completed",
+      "zh_CN": "已完成，到手 {net}",
+      "en": "done, took home {net}"
+    },
+    {
+      "id": "ui.shift.status.missed",
+      "zh_CN": "缺勤",
+      "en": "missed"
+    },
+    {
+      "id": "ui.jobs.booked_msg",
+      "zh_CN": "预约好了：{job}，第 {day} 天 {start} 开始。别迟到。",
+      "en": "Booked: {job}, day {day} from {start}. Don't be late."
+    },
+    {
+      "id": "ui.work.done",
+      "zh_CN": "下班了。工作 {minutes} 分钟，工资 {gross}，到手 {net}。",
+      "en": "Shift over. Worked {minutes} min, wage {gross}, take-home {net}."
+    },
+    {
+      "id": "ui.work.late",
+      "zh_CN": "迟到 {late} 分钟，按实际工时计薪。",
+      "en": "{late} min late; paid for the time actually worked."
+    },
+    {
+      "id": "ui.work.waited",
+      "zh_CN": "提前到了，等到 {start} 才开工。",
+      "en": "Early; waited until {start} to start."
+    },
+    {
+      "id": "ui.work.none",
+      "zh_CN": "今天这里没有你的班。",
+      "en": "You have no shift here today."
+    },
+    {
+      "id": "ui.transit.title",
+      "zh_CN": "公交",
+      "en": "Bus"
+    },
+    {
+      "id": "ui.transit.route",
+      "zh_CN": "{route} · 票价 {fare} · {minutes} 分钟",
+      "en": "{route} · fare {fare} · {minutes} min"
+    },
+    {
+      "id": "ui.transit.ride",
+      "zh_CN": "乘车",
+      "en": "Ride"
+    },
+    {
+      "id": "ui.transit.arrived",
+      "zh_CN": "到站了。现在是 {time}。",
+      "en": "Arrived. It is now {time}."
+    },
+    {
+      "id": "ui.home.title",
+      "zh_CN": "出租屋",
+      "en": "Rented room"
+    },
+    {
+      "id": "ui.home.offer",
+      "zh_CN": "{name}\n房租 {rent} / {days} 天，押金 {deposit}。\n签约时付押金，第一次房租在第 {due} 天交。",
+      "en": "{name}\nRent {rent} / {days} days, deposit {deposit}.\nThe deposit is paid on signing; the first rent is due on day {due}."
+    },
+    {
+      "id": "ui.home.signed",
+      "zh_CN": "签好了。押金 {deposit} 已付。第一次房租第 {due} 天交，到时会从钱包自动扣。",
+      "en": "Signed. Deposit {deposit} paid. The first rent is due on day {due} and is taken from your wallet automatically."
+    },
+    {
+      "id": "ui.home.status",
+      "zh_CN": "房租 {rent} / {days} 天 · 下次交租：第 {due} 天",
+      "en": "Rent {rent} / {days} days · next due: day {due}"
+    },
+    {
+      "id": "ui.home.overdue",
+      "zh_CN": "已欠租（从第 {since} 天起）。钱够了就补交。",
+      "en": "Rent overdue (since day {since}). Pay it once you have the money."
+    },
+    {
+      "id": "ui.home.paid",
+      "zh_CN": "房租交上了。下次是第 {due} 天。",
+      "en": "Rent paid. Next due on day {due}."
+    },
+    {
+      "id": "ui.error.e_not_here",
+      "zh_CN": "你不在那里。",
+      "en": "You are not there."
+    },
+    {
+      "id": "ui.error.e_no_home",
+      "zh_CN": "你还没有租到住处。",
+      "en": "You don't have a place yet."
+    },
+    {
+      "id": "ui.error.e_already_leased",
+      "zh_CN": "你已经租了房子。",
+      "en": "You already rent a room."
+    },
+    {
+      "id": "ui.error.e_shift_conflict",
+      "zh_CN": "这个时间已经有别的班了。",
+      "en": "You already have a shift at that time."
+    },
+    {
+      "id": "ui.error.e_shift_unavailable",
+      "zh_CN": "这个班现在约不了。",
+      "en": "That shift can't be booked now."
+    },
+    {
+      "id": "ui.error.e_shift_not_started",
+      "zh_CN": "还没到上班时间（最多提前两小时到）。",
+      "en": "Too early (arrive at most two hours before)."
+    },
+    {
+      "id": "ui.error.e_shift_too_late",
+      "zh_CN": "来得太晚，这个班已经上不了了。",
+      "en": "Too late, this shift is gone."
+    },
+    {
+      "id": "ui.error.e_shift_not_booked",
+      "zh_CN": "你没有约这个班。",
+      "en": "You didn't book this shift."
+    },
+    {
+      "id": "ui.error.e_shift_limit",
+      "zh_CN": "这一天排的工时太多了。",
+      "en": "Too many working hours on that day."
+    },
+    {
+      "id": "ui.error.e_job_not_open",
+      "zh_CN": "这个岗位还没开始招人。",
+      "en": "This job isn't hiring yet."
+    },
+    {
+      "id": "ui.error.e_no_departure",
+      "zh_CN": "这个时间没有车。",
+      "en": "No bus at this time."
+    },
+    {
+      "id": "ui.error.e_nothing_due",
+      "zh_CN": "现在没有要交的房租。",
+      "en": "No rent is due right now."
+    },
+    {
+      "id": "ui.error.e_unknown_route",
+      "zh_CN": "没有这条线路。",
+      "en": "No such route."
+    },
+    {
+      "id": "ui.dialogue.narrator",
+      "zh_CN": "旁白",
+      "en": "Narrator"
+    },
+    {
+      "id": "ui.dialogue.phone",
+      "zh_CN": "手机消息 · {name}",
+      "en": "Phone message · {name}"
+    },
+    {
+      "id": "ui.dialogue.cooldown",
+      "zh_CN": "（今天已经聊过了，好感不再增加。）",
+      "en": "(You've already chatted today; no more closeness gained.)"
+    },
+    {
+      "id": "ui.summary.title",
+      "zh_CN": "第一周",
+      "en": "The first week"
+    },
+    {
+      "id": "ui.summary.continue",
+      "zh_CN": "继续",
+      "en": "Continue"
+    },
+    {
+      "id": "ui.hud.objective",
+      "zh_CN": "目标：{text}",
+      "en": "Goal: {text}"
+    },
+    {
+      "id": "ui.journal.title",
+      "zh_CN": "日志",
+      "en": "Journal"
+    },
+    {
+      "id": "ui.journal.quest_done",
+      "zh_CN": "✓ {text}",
+      "en": "✓ {text}"
+    },
+    {
+      "id": "ui.journal.quest_now",
+      "zh_CN": "→ {text}",
+      "en": "→ {text}"
+    },
+    {
+      "id": "ui.journal.quest_later",
+      "zh_CN": "· {text}",
+      "en": "· {text}"
+    },
+    {
+      "id": "ui.journal.people",
+      "zh_CN": "认识的人",
+      "en": "People you know"
+    },
+    {
+      "id": "ui.journal.person",
+      "zh_CN": "{name}（{role}）：关系 {value}",
+      "en": "{name} ({role}): relationship {value}"
+    },
+    {
+      "id": "ui.journal.rent",
+      "zh_CN": "住处",
+      "en": "Home"
+    },
+    {
+      "id": "ui.journal.no_lease",
+      "zh_CN": "还没有租房。",
+      "en": "No place rented yet."
+    },
+    {
+      "id": "ui.journal.quest_complete",
+      "zh_CN": "全部完成。接下来怎么过，由你决定。",
+      "en": "All done. What comes next is up to you."
+    },
+    {
+      "id": "ui.menu.talk",
+      "zh_CN": "和 {name} 说话",
+      "en": "Talk to {name}"
+    },
+    {
+      "id": "ui.error.e_npc_not_here",
+      "zh_CN": "对方现在不在这里。",
+      "en": "They aren't here right now."
+    },
+    {
+      "id": "ui.error.e_dialogue_done",
+      "zh_CN": "这段对话已经结束了。",
+      "en": "That conversation is over."
+    },
+    {
+      "id": "ui.journal.nobody",
+      "zh_CN": "还没有认识谁。走到人跟前按 E 打个招呼。",
+      "en": "You haven't met anyone yet. Walk up to someone and press E to say hello."
+    },
+    {
+      "id": "ui.pause.save",
+      "zh_CN": "保存游戏",
+      "en": "Save game"
+    },
+    {
+      "id": "ui.pause.load",
+      "zh_CN": "读取存档",
+      "en": "Load game"
+    },
+    {
+      "id": "ui.pause.settings",
+      "zh_CN": "设置",
+      "en": "Settings"
+    },
+    {
+      "id": "ui.boot.continue",
+      "zh_CN": "读取存档",
+      "en": "Load game"
+    },
+    {
+      "id": "ui.boot.settings",
+      "zh_CN": "设置",
+      "en": "Settings"
+    },
+    {
+      "id": "ui.boot.back",
+      "zh_CN": "返回",
+      "en": "Back"
+    },
+    {
+      "id": "ui.save.title",
+      "zh_CN": "保存游戏",
+      "en": "Save game"
+    },
+    {
+      "id": "ui.load.title",
+      "zh_CN": "读取存档",
+      "en": "Load game"
+    },
+    {
+      "id": "ui.save.slot_name",
+      "zh_CN": "存档 {n}",
+      "en": "Slot {n}"
+    },
+    {
+      "id": "ui.save.slot_empty",
+      "zh_CN": "（空）",
+      "en": "(empty)"
+    },
+    {
+      "id": "ui.save.slot_corrupt",
+      "zh_CN": "存档损坏，无法读取",
+      "en": "Damaged save, cannot be loaded"
+    },
+    {
+      "id": "ui.save.slot_info",
+      "zh_CN": "第 {day} 天 {time} · 现金 {cash}\n保存于 {saved_at}",
+      "en": "Day {day} {time} · Cash {cash}\nSaved {saved_at}"
+    },
+    {
+      "id": "ui.save.save_here",
+      "zh_CN": "保存到这里",
+      "en": "Save here"
+    },
+    {
+      "id": "ui.save.load_this",
+      "zh_CN": "读取",
+      "en": "Load"
+    },
+    {
+      "id": "ui.save.overwrite_title",
+      "zh_CN": "覆盖存档？",
+      "en": "Overwrite save?"
+    },
+    {
+      "id": "ui.save.overwrite_body",
+      "zh_CN": "{slot} 里已有进度，保存后会被替换。",
+      "en": "{slot} already has a game. Saving replaces it."
+    },
+    {
+      "id": "ui.save.saved",
+      "zh_CN": "已保存到{slot}。",
+      "en": "Saved to {slot}."
+    },
+    {
+      "id": "ui.save.load_confirm_title",
+      "zh_CN": "读取存档？",
+      "en": "Load this save?"
+    },
+    {
+      "id": "ui.save.load_confirm_body",
+      "zh_CN": "当前没有保存的进度会丢失。",
+      "en": "Unsaved progress in the current game will be lost."
+    },
+    {
+      "id": "ui.save.load_failed",
+      "zh_CN": "读取失败：{reason}",
+      "en": "Could not load: {reason}"
+    },
+    {
+      "id": "ui.save.hint",
+      "zh_CN": "存档只保存在这台电脑上。",
+      "en": "Saves are kept on this computer only."
+    },
+    {
+      "id": "ui.menu.save",
+      "zh_CN": "存档",
+      "en": "Save"
+    },
+    {
+      "id": "ui.error.e_save_corrupt",
+      "zh_CN": "存档文件已损坏或格式不对。原有存档没有被改动。",
+      "en": "The save file is damaged or not a save. Nothing was overwritten."
+    },
+    {
+      "id": "ui.error.e_save_not_found",
+      "zh_CN": "这个位置没有存档。",
+      "en": "There is no save in this slot."
+    },
+    {
+      "id": "ui.error.e_save_too_new",
+      "zh_CN": "这个存档来自更新版本的游戏，请先升级游戏。",
+      "en": "This save comes from a newer version of the game."
+    },
+    {
+      "id": "ui.error.e_save_no_migration",
+      "zh_CN": "这个存档版本太旧，无法转换。",
+      "en": "This save is too old to convert."
+    },
+    {
+      "id": "ui.error.e_save_migration_failed",
+      "zh_CN": "存档转换失败。",
+      "en": "The save could not be converted."
+    },
+    {
+      "id": "ui.error.e_save_pack_missing",
+      "zh_CN": "存档需要的内容包没有安装。",
+      "en": "A content pack this save needs is not installed."
+    },
+    {
+      "id": "ui.error.e_save_unknown_city",
+      "zh_CN": "存档里的城市不存在。",
+      "en": "The city in this save does not exist."
+    },
+    {
+      "id": "ui.error.e_save_region_mismatch",
+      "zh_CN": "存档的地区与城市不符。",
+      "en": "The save's region does not match its city."
+    },
+    {
+      "id": "ui.error.e_currency_mismatch",
+      "zh_CN": "存档的货币与城市不一致。",
+      "en": "The save's currency does not match the city."
+    },
+    {
+      "id": "ui.error.e_save_unknown_id",
+      "zh_CN": "存档引用了不存在的内容（地点、物品或剧情）。",
+      "en": "The save refers to places, items or story that no longer exist."
+    },
+    {
+      "id": "ui.error.e_save_inconsistent",
+      "zh_CN": "存档内部数据不一致。",
+      "en": "The save's data is inconsistent."
+    },
+    {
+      "id": "ui.error.e_save_write_failed",
+      "zh_CN": "无法写入存档文件，原有存档没有被改动。",
+      "en": "Could not write the save file. The old save is untouched."
+    },
+    {
+      "id": "ui.error.e_save_verify_failed",
+      "zh_CN": "保存后的校验没有通过，原有存档没有被改动。",
+      "en": "The new save failed its check. The old save is untouched."
+    },
+    {
+      "id": "ui.error.e_save_too_large",
+      "zh_CN": "存档过大。",
+      "en": "The save is too large."
+    },
+    {
+      "id": "ui.error.e_save_read_failed",
+      "zh_CN": "无法读取存档文件。",
+      "en": "Could not read the save file."
+    },
+    {
+      "id": "ui.error.e_save_bad_slot",
+      "zh_CN": "无效的存档位置。",
+      "en": "Invalid save slot."
+    },
+    {
+      "id": "ui.error.e_no_game",
+      "zh_CN": "当前没有进行中的游戏。",
+      "en": "No game is running."
+    },
+    {
+      "id": "ui.settings.title",
+      "zh_CN": "设置",
+      "en": "Settings"
+    },
+    {
+      "id": "ui.settings.master_volume",
+      "zh_CN": "主音量",
+      "en": "Master volume"
+    },
+    {
+      "id": "ui.settings.sfx_volume",
+      "zh_CN": "音效",
+      "en": "Sound effects"
+    },
+    {
+      "id": "ui.settings.window",
+      "zh_CN": "窗口",
+      "en": "Window"
+    },
+    {
+      "id": "ui.settings.window_1280",
+      "zh_CN": "1280 × 720",
+      "en": "1280 × 720"
+    },
+    {
+      "id": "ui.settings.window_1600",
+      "zh_CN": "1600 × 900",
+      "en": "1600 × 900"
+    },
+    {
+      "id": "ui.settings.window_1920",
+      "zh_CN": "1920 × 1080",
+      "en": "1920 × 1080"
+    },
+    {
+      "id": "ui.settings.fullscreen",
+      "zh_CN": "全屏",
+      "en": "Fullscreen"
+    },
+    {
+      "id": "ui.settings.language",
+      "zh_CN": "语言",
+      "en": "Language"
+    },
+    {
+      "id": "ui.settings.locale_zh_cn",
+      "zh_CN": "简体中文",
+      "en": "简体中文 (Simplified Chinese)"
+    },
+    {
+      "id": "ui.settings.locale_en",
+      "zh_CN": "English（界面部分翻译）",
+      "en": "English (interface only, partial)"
+    },
+    {
+      "id": "ui.settings.note",
+      "zh_CN": "设置立即生效并自动保存。英文目前只覆盖界面，剧情与地名仍显示中文。",
+      "en": "Changes apply and save immediately. English covers the interface only; story text and place names stay in Chinese for now."
+    },
+    {
+      "id": "ui.hud.need_name",
+      "zh_CN": "{name}（{hint}）",
+      "en": "{name} ({hint})"
+    },
+    {
+      "id": "activity.sleep.desc",
+      "zh_CN": "躺到床上好好睡一觉。睡着时精力恢复得最快（最多到 90），压力也会慢慢降下来。",
+      "en": "Get into bed and sleep. Energy recovers fastest while asleep (up to 90) and stress eases."
+    },
+    {
+      "id": "activity.lie_down.name",
+      "zh_CN": "躺着休息",
+      "en": "Lie down"
+    },
+    {
+      "id": "activity.lie_down.desc",
+      "zh_CN": "不睡，就在床上躺一会儿，什么也不想。",
+      "en": "Not sleeping, just lying on the bed for a while, thinking of nothing."
+    },
+    {
+      "id": "activity.phone_news.name",
+      "zh_CN": "刷手机新闻",
+      "en": "Read news on the phone"
+    },
+    {
+      "id": "activity.phone_news.desc",
+      "zh_CN": "看看城里发生了什么。能歇歇脑子，但新闻不全是好消息。",
+      "en": "See what's happening in town. A small break, though not all news is good news."
+    },
+    {
+      "id": "activity.short_videos.name",
+      "zh_CN": "刷短视频",
+      "en": "Scroll short videos"
+    },
+    {
+      "id": "activity.short_videos.desc",
+      "zh_CN": "一条接一条，很解压，但越刷越累，精力不会恢复。",
+      "en": "One after another. Very relaxing, but it wears you out; energy does not recover."
+    },
+    {
+      "id": "activity.rest.desc",
+      "zh_CN": "在长椅上坐一会儿，看看路过的人。",
+      "en": "Sit on the bench for a while and watch people go by."
+    },
+    {
+      "id": "ui.home.sleep",
+      "zh_CN": "睡觉…",
+      "en": "Sleep…"
+    },
+    {
+      "id": "ui.home.rest",
+      "zh_CN": "在家休息…",
+      "en": "Rest at home…"
+    },
+    {
+      "id": "ui.rest.title",
+      "zh_CN": "在家做点什么",
+      "en": "Something to do at home"
+    },
+    {
+      "id": "ui.duration.per_hour",
+      "zh_CN": "每小时：{effects}",
+      "en": "Per hour: {effects}"
+    },
+    {
+      "id": "ui.duration.sleep_cap",
+      "zh_CN": "（睡眠中精力最多恢复到 90）",
+      "en": "(sleep restores energy up to 90)"
+    },
+    {
+      "id": "ui.duration.choose",
+      "zh_CN": "选一个时长：",
+      "en": "How long?"
+    },
+    {
+      "id": "ui.duration.hours",
+      "zh_CN": "{h} 小时",
+      "en": "{h} h"
+    },
+    {
+      "id": "ui.duration.hours_minutes",
+      "zh_CN": "{h} 小时 {m} 分",
+      "en": "{h} h {m} min"
+    },
+    {
+      "id": "ui.duration.minutes",
+      "zh_CN": "{m} 分钟",
+      "en": "{m} min"
+    },
+    {
+      "id": "ui.duration.option",
+      "zh_CN": "{length}（到 {end}）",
+      "en": "{length} (until {end})"
+    },
+    {
+      "id": "ui.duration.until",
+      "zh_CN": "{what}到 {end}（{length}）",
+      "en": "{what} until {end} ({length})"
+    },
+    {
+      "id": "ui.duration.next_day",
+      "zh_CN": "明天",
+      "en": "tomorrow"
+    },
+    {
+      "id": "ui.duration.misses_shift",
+      "zh_CN": "· 会耽误约好的班",
+      "en": "· makes you late for a shift"
+    },
+    {
+      "id": "ui.duration.shift_warning",
+      "zh_CN": "提醒：你约了 {job}，第 {day} 天 {start} 开始。",
+      "en": "Reminder: you have {job} booked, day {day} at {start}."
+    },
+    {
+      "id": "ui.activity.result",
+      "zh_CN": "{activity}结束，现在是第 {day} 天 {time}。\n{changes}",
+      "en": "{activity} finished. It is now day {day}, {time}.\n{changes}"
+    },
+    {
+      "id": "ui.activity.change",
+      "zh_CN": "{need} {before} → {after}",
+      "en": "{need} {before} → {after}"
+    },
+    {
+      "id": "ui.error.e_invalid_duration",
+      "zh_CN": "这个时长不行。",
+      "en": "That length isn't possible."
+    },
+    {
+      "id": "ui.activity.price",
+      "zh_CN": "费用：每小时 {price}",
+      "en": "Cost: {price} per hour"
+    },
+    {
+      "id": "ui.activity.hours",
+      "zh_CN": "开放时间：{hours}",
+      "en": "Open: {hours}"
+    },
+    {
+      "id": "ui.activity.closed",
+      "zh_CN": "现在没有开（{hours}）。",
+      "en": "Not open right now ({hours})."
+    },
+    {
+      "id": "ui.activity.closes_soon",
+      "zh_CN": "快关门了，来不及玩一轮。",
+      "en": "Closing soon; not enough time for a round."
+    },
+    {
+      "id": "ui.activity.menu_line",
+      "zh_CN": "{name} · {info}",
+      "en": "{name} · {info}"
+    },
+    {
+      "id": "ui.activity.free",
+      "zh_CN": "免费",
+      "en": "free"
+    },
+    {
+      "id": "ui.activity.per_hour",
+      "zh_CN": "{price}/小时",
+      "en": "{price}/hour"
+    },
+    {
+      "id": "ui.activity.paid",
+      "zh_CN": "花了 {cost}。",
+      "en": "Spent {cost}."
+    },
+    {
+      "id": "ui.duration.cost",
+      "zh_CN": "· {cost}",
+      "en": "· {cost}"
+    },
+    {
+      "id": "ui.error.e_activity_closed",
+      "zh_CN": "现在没有开。",
+      "en": "It isn't open now."
+    },
+    {
+      "id": "ui.error.e_closes_before_end",
+      "zh_CN": "还没结束就要关门了，选短一点吧。",
+      "en": "It closes before you'd finish; pick a shorter time."
+    },
+    {
+      "id": "ui.creator.title",
+      "zh_CN": "创建角色",
+      "en": "Create your character"
+    },
+    {
+      "id": "ui.creator.mirror_title",
+      "zh_CN": "照镜子",
+      "en": "Mirror"
+    },
+    {
+      "id": "ui.creator.name",
+      "zh_CN": "名字",
+      "en": "Name"
+    },
+    {
+      "id": "ui.creator.name_hint",
+      "zh_CN": "可以不填",
+      "en": "Optional"
+    },
+    {
+      "id": "ui.creator.gender",
+      "zh_CN": "性别",
+      "en": "Gender"
+    },
+    {
+      "id": "ui.creator.male",
+      "zh_CN": "男",
+      "en": "Male"
+    },
+    {
+      "id": "ui.creator.female",
+      "zh_CN": "女",
+      "en": "Female"
+    },
+    {
+      "id": "ui.creator.hair_style",
+      "zh_CN": "发型",
+      "en": "Hair"
+    },
+    {
+      "id": "ui.creator.hair_color",
+      "zh_CN": "发色",
+      "en": "Hair colour"
+    },
+    {
+      "id": "ui.creator.skin",
+      "zh_CN": "肤色",
+      "en": "Skin"
+    },
+    {
+      "id": "ui.creator.top",
+      "zh_CN": "上衣",
+      "en": "Top"
+    },
+    {
+      "id": "ui.creator.bottom",
+      "zh_CN": "下装",
+      "en": "Bottoms"
+    },
+    {
+      "id": "ui.creator.bottom_color",
+      "zh_CN": "下装颜色",
+      "en": "Bottoms colour"
+    },
+    {
+      "id": "ui.creator.shoes",
+      "zh_CN": "鞋子",
+      "en": "Shoes"
+    },
+    {
+      "id": "ui.creator.pants",
+      "zh_CN": "裤子",
+      "en": "Trousers"
+    },
+    {
+      "id": "ui.creator.skirt",
+      "zh_CN": "短裙",
+      "en": "Skirt"
+    },
+    {
+      "id": "ui.creator.dress",
+      "zh_CN": "连衣裙",
+      "en": "Dress"
+    },
+    {
+      "id": "ui.creator.turn",
+      "zh_CN": "转身",
+      "en": "Turn"
+    },
+    {
+      "id": "ui.creator.random",
+      "zh_CN": "随机",
+      "en": "Random"
+    },
+    {
+      "id": "ui.creator.cancel",
+      "zh_CN": "返回",
+      "en": "Back"
+    },
+    {
+      "id": "ui.creator.start",
+      "zh_CN": "开始新生活",
+      "en": "Start a new life"
+    },
+    {
+      "id": "ui.creator.save",
+      "zh_CN": "就这样",
+      "en": "Done"
+    },
+    {
+      "id": "ui.creator.hair.short",
+      "zh_CN": "短发",
+      "en": "Short"
+    },
+    {
+      "id": "ui.creator.hair.spiky",
+      "zh_CN": "刺猬头",
+      "en": "Spiky"
+    },
+    {
+      "id": "ui.creator.hair.buzz",
+      "zh_CN": "平头",
+      "en": "Buzz cut"
+    },
+    {
+      "id": "ui.creator.hair.bald",
+      "zh_CN": "谢顶",
+      "en": "Balding"
+    },
+    {
+      "id": "ui.creator.hair.long",
+      "zh_CN": "长发",
+      "en": "Long"
+    },
+    {
+      "id": "ui.creator.hair.bob",
+      "zh_CN": "波波头",
+      "en": "Bob"
+    },
+    {
+      "id": "ui.creator.hair.ponytail",
+      "zh_CN": "马尾",
+      "en": "Ponytail"
+    },
+    {
+      "id": "ui.creator.hair.bun",
+      "zh_CN": "盘发",
+      "en": "Bun"
+    },
+    {
+      "id": "ui.creator.hair.perm",
+      "zh_CN": "卷发",
+      "en": "Perm"
+    },
+    {
+      "id": "ui.home.mirror",
+      "zh_CN": "照镜子（换造型）",
+      "en": "Mirror (change look)"
+    },
+    {
+      "id": "ui.error.e_invalid_profile",
+      "zh_CN": "这个造型保存不了。",
+      "en": "That look can't be saved."
+    },
+    {
+      "id": "ui.journal.title_named",
+      "zh_CN": "{name}的日志",
+      "en": "{name}'s journal"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "id": "default",
+  "exploration_real_ms_per_game_minute": 1000,
+  "exploration_step_minutes": 5,
+  "ledger_keep_entries": 200,
+  "inventory_stack_limit": 99
+}
