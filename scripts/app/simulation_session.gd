@@ -92,11 +92,13 @@ static func create_new(p_content: ContentRegistry, policies: RegionPolicyRegistr
 			["events", s.events], ["dialogue", s.dialogue], ["quests", s.quests], ["profile", s.profile]]:
 		s.world.register_component(pair[0], pair[1])
 
+	# need_effects (D-037): off only for mechanics tests that fast-forward without sleeping
+	s.rules["need_effects"] = bool(overrides.get("need_effects", true))
 	s.processor = CommandProcessor.new(s.world, {"content": p_content, "region_policy": s.policy, "rules": s.rules})
 	for handler: CommandHandler in [AdvanceTimeHandler.new(), BuyItemHandler.new(), UseItemHandler.new(),
 			PerformActivityHandler.new(), BookShiftHandler.new(), WorkShiftHandler.new(), SignLeaseHandler.new(),
 			PayRentHandler.new(), TakeRouteHandler.new(), TriggerEventHandler.new(), ChooseDialogueHandler.new(),
-			DismissStoryHandler.new(), AdvanceQuestHandler.new(), SetProfileHandler.new(), UseDoorHandler.new(), GetHaircutHandler.new()]:
+			DismissStoryHandler.new(), AdvanceQuestHandler.new(), SetProfileHandler.new(), UseDoorHandler.new(), GetHaircutHandler.new(), ApproachNpcHandler.new()]:
 		s.processor.register_handler(handler)
 	return {"ok": true, "error_code": null, "message": "", "session": s}
 
@@ -194,6 +196,13 @@ func view_player() -> Dictionary:
 		"shifts": jobs.get_shifts(PLAYER_ID),
 		"relationships": relationships.get_all(),
 	}
+
+
+## The player's active need states (D-037), or none when need effects are switched off.
+func need_states() -> Array[Dictionary]:
+	if not rules.get("need_effects", true):
+		return [] as Array[Dictionary]
+	return NeedStates.active(content, needs.get_values(PLAYER_ID))
 
 
 ## NPCs visible on the player's current map right now: {npc_id: location_id}.

@@ -34,6 +34,8 @@ static func apply(ctx: CommandContext, effects: Array, actor_id: String, source:
 				err = (ctx.world.get_component("needs") as NeedsSystem).change(ctx, actor_id, e["need_id"], e["delta"], source)
 			"change_relationship":
 				err = (ctx.world.get_component("relationships") as RelationshipSystem).change(ctx, e["npc_id"], e["delta"], rate_limited, source)
+			"give_item":
+				err = (ctx.world.get_component("inventory") as InventorySystem).add(ctx, actor_id, e["item_id"], int(e["count"]))
 			"show_summary":
 				err = (ctx.world.get_component("dialogue") as DialogueSystem).enqueue_summary(ctx,
 					SummaryBuilder.build(ctx.world, ctx.get_service("content"), actor_id), source)

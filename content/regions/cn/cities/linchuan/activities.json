@@ -34,7 +34,8 @@
           "need_id": "stress",
           "per_hour": -9
         }
-      ]
+      ],
+      "minigame": "breakout"
     },
     {
       "id": "activity_dance_machine",
@@ -73,7 +74,8 @@
           "need_id": "hunger",
           "per_hour": 7
         }
-      ]
+      ],
+      "minigame": "dance"
     },
     {
       "id": "activity_billiards",
@@ -109,7 +111,8 @@
           "need_id": "stress",
           "per_hour": -7
         }
-      ]
+      ],
+      "minigame": "billiards"
     },
     {
       "id": "activity_watch_chess",
@@ -174,7 +177,8 @@
           "need_id": "stress",
           "per_hour": -5
         }
-      ]
+      ],
+      "minigame": "xiangqi"
     },
     {
       "id": "activity_park_singing",
@@ -284,7 +288,8 @@
           "need_id": "hunger",
           "per_hour": 6
         }
-      ]
+      ],
+      "minigame": "square_dance"
     },
     {
       "id": "activity_window_shopping",

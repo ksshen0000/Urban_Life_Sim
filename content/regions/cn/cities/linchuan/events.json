@@ -26,7 +26,7 @@
           "value": 2
         },
         {
-          "type": "npc_present",
+          "type": "npc_nearby",
           "npc_id": "npc_chen_yu"
         },
         {
@@ -49,7 +49,7 @@
           "map_id": "map_industrial"
         },
         {
-          "type": "npc_present",
+          "type": "npc_nearby",
           "npc_id": "npc_lao_zhou"
         },
         {
@@ -195,6 +195,75 @@
           "value": true
         }
       ]
+    },
+    {
+      "id": "event_lost_wallet",
+      "city_id": "CN_LINCHUAN",
+      "priority": 40,
+      "once": true,
+      "conditions": [
+        {
+          "type": "day_at_least",
+          "value": 2
+        },
+        {
+          "type": "npc_nearby",
+          "npc_id": "npc_xiao_wu"
+        },
+        {
+          "type": "flag_equals",
+          "key": "story.met_xiao_wu",
+          "value": false
+        }
+      ],
+      "effects": [],
+      "dialogue_tree_id": "dialogue_xiao_wu_intro"
+    },
+    {
+      "id": "event_lost_kid",
+      "city_id": "CN_LINCHUAN",
+      "priority": 40,
+      "once": true,
+      "conditions": [
+        {
+          "type": "day_at_least",
+          "value": 3
+        },
+        {
+          "type": "npc_nearby",
+          "npc_id": "npc_doudou"
+        },
+        {
+          "type": "flag_equals",
+          "key": "story.met_doudou",
+          "value": false
+        }
+      ],
+      "effects": [],
+      "dialogue_tree_id": "dialogue_doudou_intro"
+    },
+    {
+      "id": "event_granny_asks_way",
+      "city_id": "CN_LINCHUAN",
+      "priority": 40,
+      "once": true,
+      "conditions": [
+        {
+          "type": "day_at_least",
+          "value": 4
+        },
+        {
+          "type": "npc_nearby",
+          "npc_id": "npc_granny_liu"
+        },
+        {
+          "type": "flag_equals",
+          "key": "story.met_granny_liu",
+          "value": false
+        }
+      ],
+      "effects": [],
+      "dialogue_tree_id": "dialogue_granny_liu_intro"
     }
   ]
 }

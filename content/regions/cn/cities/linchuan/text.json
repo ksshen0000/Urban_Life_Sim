@@ -731,6 +731,336 @@
       "id": "activity.window_shopping.desc",
       "zh_CN": "不买，看看也好。空调很足，人很多。",
       "en": "Just looking. Cold air-con, crowds."
+    },
+    {
+      "id": "npc.xiao_wu.name",
+      "zh_CN": "小吴",
+      "en": "Xiao Wu"
+    },
+    {
+      "id": "npc.xiao_wu.role",
+      "zh_CN": "赶早班的上班族",
+      "en": "Commuter on the early bus"
+    },
+    {
+      "id": "npc.doudou.name",
+      "zh_CN": "豆豆",
+      "en": "Doudou"
+    },
+    {
+      "id": "npc.doudou.role",
+      "zh_CN": "走丢的小孩",
+      "en": "A lost little boy"
+    },
+    {
+      "id": "npc.granny_liu.name",
+      "zh_CN": "刘奶奶",
+      "en": "Granny Liu"
+    },
+    {
+      "id": "npc.granny_liu.role",
+      "zh_CN": "提菜篮的老奶奶",
+      "en": "Granny with a shopping basket"
+    },
+    {
+      "id": "dlg.xiao_wu_intro.start",
+      "zh_CN": "一个穿衬衫的年轻人在站台前把每个口袋翻了一遍，急得满头汗：“我的钱包……刚才还在的！车马上就来了！”",
+      "en": "A young man in a shirt is turning out every pocket at the stop: \"My wallet… it was here a minute ago! The bus is coming!\""
+    },
+    {
+      "id": "dlg.xiao_wu_intro.help",
+      "zh_CN": "“别急，我帮你找找。”",
+      "en": "\"Hang on, I'll help you look.\""
+    },
+    {
+      "id": "dlg.xiao_wu_intro.shrug",
+      "zh_CN": "“不好意思，我也没看见。”",
+      "en": "\"Sorry, I haven't seen it.\""
+    },
+    {
+      "id": "dlg.xiao_wu_intro.found",
+      "zh_CN": "你在站台的长椅底下摸到一个黑色钱包。他一把接过去，长长出了口气，从里面抽出二十块非要塞给你：“一点心意，你一定收着！我叫小吴，天天坐这趟车。”",
+      "en": "You find a black wallet under the bench. He grabs it, lets out a long breath, and pulls out twenty yuan: \"Please, take it! I'm Xiao Wu, I'm on this bus every day.\""
+    },
+    {
+      "id": "dlg.xiao_wu_intro.accept",
+      "zh_CN": "“那……谢谢啦。”（收下二十块）",
+      "en": "\"Well… thanks.\" (take the twenty)"
+    },
+    {
+      "id": "dlg.xiao_wu_intro.refuse",
+      "zh_CN": "“举手之劳，钱你收着吧。”",
+      "en": "\"It was nothing, keep your money.\""
+    },
+    {
+      "id": "dlg.xiao_wu_chat.start",
+      "zh_CN": "小吴揉着眼睛：“又是加班到半夜的一周……对了，上回真谢谢你。”",
+      "en": "Xiao Wu rubs his eyes: \"Another week of working till midnight… thanks again for last time.\""
+    },
+    {
+      "id": "dlg.xiao_wu_chat.talk",
+      "zh_CN": "“注意身体啊。”",
+      "en": "\"Look after yourself.\""
+    },
+    {
+      "id": "dlg.doudou_intro.start",
+      "zh_CN": "一个五六岁的小男孩跑到你跟前，眼睛红红的，攥着你的衣角：“我、我找不到奶奶了……”",
+      "en": "A little boy of five or six runs up, eyes red, and grabs your sleeve: \"I… I can't find my grandma…\""
+    },
+    {
+      "id": "dlg.doudou_intro.help",
+      "zh_CN": "“别哭，我带你去找奶奶。”",
+      "en": "\"Don't cry, let's go find her.\""
+    },
+    {
+      "id": "dlg.doudou_intro.wait",
+      "zh_CN": "“你在这儿别动，我去帮你喊人。”",
+      "en": "\"Stay right here, I'll get someone.\""
+    },
+    {
+      "id": "dlg.doudou_intro.found",
+      "zh_CN": "你牵着豆豆在公园里转了一圈，在广场边找到了急得团团转的奶奶。奶奶一把搂住孙子，连声道谢，又从布袋里掏出一个饭团塞到你手里：“孩子，拿着，热乎的。”",
+      "en": "You walk Doudou round the park and find his grandmother pacing by the plaza. She hugs him tight, thanks you again and again, and presses a rice ball into your hand: \"Here, it's still warm.\""
+    },
+    {
+      "id": "dlg.doudou_intro.ok",
+      "zh_CN": "“找到就好。”（收下饭团）",
+      "en": "\"I'm glad he's safe.\" (take the rice ball)"
+    },
+    {
+      "id": "dlg.doudou_chat.start",
+      "zh_CN": "豆豆冲你挥手：“大哥哥／大姐姐，你看我会翻跟头！”",
+      "en": "Doudou waves at you: \"Look, I can do a cartwheel!\""
+    },
+    {
+      "id": "dlg.doudou_chat.talk",
+      "zh_CN": "“厉害！别跑远了啊。”",
+      "en": "\"Wow! Don't wander off, OK?\""
+    },
+    {
+      "id": "dlg.granny_liu_intro.start",
+      "zh_CN": "一位提着菜篮的老奶奶拦住你，眯着眼睛问：“孩子，去新河里菜市场是往这边走吧？我这眼睛不中用了……”",
+      "en": "A granny with a shopping basket stops you and squints: \"Dear, is the Xinhe market this way? My eyes aren't what they were…\""
+    },
+    {
+      "id": "dlg.granny_liu_intro.walk",
+      "zh_CN": "“我陪您走一段吧。”（陪她走到路口）",
+      "en": "\"I'll walk you there.\" (walk her to the crossing)"
+    },
+    {
+      "id": "dlg.granny_liu_intro.point",
+      "zh_CN": "“一直往东走，过了路口就是。”",
+      "en": "\"Straight east, just past the crossing.\""
+    },
+    {
+      "id": "dlg.granny_liu_chat.start",
+      "zh_CN": "刘奶奶笑眯眯的：“今天的青菜可新鲜了，你也该多吃点菜。”",
+      "en": "Granny Liu beams: \"The greens are lovely today. You should eat more vegetables.\""
+    },
+    {
+      "id": "dlg.granny_liu_chat.talk",
+      "zh_CN": "“好嘞，听您的。”",
+      "en": "\"Will do, Granny.\""
+    },
+    {
+      "id": "ped.auntie",
+      "zh_CN": "阿姨",
+      "en": "Auntie"
+    },
+    {
+      "id": "ped.commuter",
+      "zh_CN": "上班族",
+      "en": "Commuter"
+    },
+    {
+      "id": "ped.rider",
+      "zh_CN": "外卖小哥",
+      "en": "Delivery rider"
+    },
+    {
+      "id": "ped.student",
+      "zh_CN": "学生",
+      "en": "Student"
+    },
+    {
+      "id": "ped.grandpa",
+      "zh_CN": "遛弯的大爷",
+      "en": "Old man out for a stroll"
+    },
+    {
+      "id": "ped.jogger",
+      "zh_CN": "跑步的人",
+      "en": "Jogger"
+    },
+    {
+      "id": "ped.worker",
+      "zh_CN": "工人",
+      "en": "Worker"
+    },
+    {
+      "id": "ped.shopper",
+      "zh_CN": "逛街的人",
+      "en": "Shopper"
+    },
+    {
+      "id": "ped.tourist",
+      "zh_CN": "游客",
+      "en": "Tourist"
+    },
+    {
+      "id": "ped.young_man",
+      "zh_CN": "年轻人",
+      "en": "Young man"
+    },
+    {
+      "id": "street.rent",
+      "zh_CN": "“这片的房租又涨了，还是王阿姨那儿实在。”",
+      "en": "\"Rents round here keep going up. Mrs Wang's place is still fair.\""
+    },
+    {
+      "id": "street.dinner_deal",
+      "zh_CN": "“快餐店晚上那个套餐划算，吃得饱。”",
+      "en": "\"The fast-food dinner set is good value. Fills you up.\""
+    },
+    {
+      "id": "street.greens",
+      "zh_CN": "“新河里菜市场的青菜比超市便宜一半。”",
+      "en": "\"Greens at the Xinhe market are half the supermarket price.\""
+    },
+    {
+      "id": "street.bus_late",
+      "zh_CN": "“这班车又晚点了……”",
+      "en": "\"Late again, this bus…\""
+    },
+    {
+      "id": "street.overtime",
+      "zh_CN": "“昨晚加班到十一点，今天又要早起。”",
+      "en": "\"Worked till eleven last night, and up early again.\""
+    },
+    {
+      "id": "street.bus_route",
+      "zh_CN": "“坐 1 路能到市中心，35 分钟。”",
+      "en": "\"Route 1 takes you downtown, thirty-five minutes.\""
+    },
+    {
+      "id": "street.delivery",
+      "zh_CN": "“让一让！这单要超时了！”",
+      "en": "\"Coming through! This order's about to be late!\""
+    },
+    {
+      "id": "street.rain",
+      "zh_CN": "“一下雨单子就多，人也累。”",
+      "en": "\"When it rains the orders pile up. So does the tiredness.\""
+    },
+    {
+      "id": "street.exam",
+      "zh_CN": "“下周就考试了，我还一页都没看……”",
+      "en": "\"Exam next week and I haven't read a page…\""
+    },
+    {
+      "id": "street.arcade_tip",
+      "zh_CN": "“游戏厅十点才开，跳舞机最好玩！”",
+      "en": "\"The arcade opens at ten. The dance machine's the best!\""
+    },
+    {
+      "id": "street.chess_tip",
+      "zh_CN": "“公园石桌那儿天天有人下棋，你会下吗？”",
+      "en": "\"There's chess at the stone tables every day. You play?\""
+    },
+    {
+      "id": "street.square_dance_tip",
+      "zh_CN": "“晚上七点广场舞，音箱一开全公园都听得见。”",
+      "en": "\"Square dancing at seven. You'll hear the speaker across the park.\""
+    },
+    {
+      "id": "street.young_days",
+      "zh_CN": "“我年轻那会儿，这条街还是一片菜地。”",
+      "en": "\"When I was young this street was all vegetable plots.\""
+    },
+    {
+      "id": "street.jog",
+      "zh_CN": "“跑一跑，压力就没那么大了。”",
+      "en": "\"A run takes the edge off the stress.\""
+    },
+    {
+      "id": "street.hungry_tip",
+      "zh_CN": "“饿着肚子可干不好活，先吃饭！”",
+      "en": "\"You can't work well on an empty stomach. Eat first!\""
+    },
+    {
+      "id": "street.site_pay",
+      "zh_CN": "“工地钱是多，就是一天下来腰都直不起来。”",
+      "en": "\"The site pays well, but by evening you can't straighten your back.\""
+    },
+    {
+      "id": "street.site_tired",
+      "zh_CN": "“累到不行就歇会儿，硬撑容易出事。”",
+      "en": "\"If you're done in, rest. Pushing on is how accidents happen.\""
+    },
+    {
+      "id": "street.hard_hat",
+      "zh_CN": "“进工地记得戴安全帽！”",
+      "en": "\"Hard hat on before you go on site!\""
+    },
+    {
+      "id": "street.market",
+      "zh_CN": "“早点去菜市场，晚了好菜都没了。”",
+      "en": "\"Get to the market early or the good stuff's gone.\""
+    },
+    {
+      "id": "street.barber_tip",
+      "zh_CN": "“阿强理发三十块，手艺不错。”",
+      "en": "\"Ah Qiang cuts hair for thirty. Good hands.\""
+    },
+    {
+      "id": "street.luxury_price",
+      "zh_CN": "“一个包一万多……看看就好。”",
+      "en": "\"Over ten thousand for a bag… I'll just look.\""
+    },
+    {
+      "id": "street.sale",
+      "zh_CN": "“商场打折了！虽然打完折也买不起。”",
+      "en": "\"The mall's on sale! Still can't afford it.\""
+    },
+    {
+      "id": "street.coffee_tip",
+      "zh_CN": "“云端咖啡的拿铁三十八，提神。”",
+      "en": "\"Thirty-eight for a latte at Cloud Café. Wakes you up.\""
+    },
+    {
+      "id": "street.meeting",
+      "zh_CN": "“开不完的会……”",
+      "en": "\"Meetings, meetings, meetings…\""
+    },
+    {
+      "id": "street.stress_tip",
+      "zh_CN": "“压力大到快崩溃就别硬撑了，去公园坐坐。”",
+      "en": "\"If the stress is getting to you, don't push it. Sit in the park.\""
+    },
+    {
+      "id": "street.photo",
+      "zh_CN": "“能帮我们拍张照吗？背景要那栋最高的楼！”",
+      "en": "\"Could you take our picture? With the tallest tower behind us!\""
+    },
+    {
+      "id": "street.tall_building",
+      "zh_CN": "“这么高的楼，晚上亮灯一定很好看。”",
+      "en": "\"A tower that tall must look amazing lit up at night.\""
+    },
+    {
+      "id": "street.date",
+      "zh_CN": "“第一次约会，你说去哪儿好？”",
+      "en": "\"First date. Where should we go, do you think?\""
+    },
+    {
+      "id": "street.mall_tip",
+      "zh_CN": "“临川中心空调足，夏天来逛最舒服。”",
+      "en": "\"Linchuan Centre's air-con is great. Best place on a hot day.\""
+    },
+    {
+      "id": "street.night_city",
+      "zh_CN": "“夜里的市中心真好看，就是有点冷清。”",
+      "en": "\"Downtown's beautiful at night. A bit lonely, though.\""
     }
   ]
 }

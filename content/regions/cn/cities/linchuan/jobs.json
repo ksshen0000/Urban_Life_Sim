@@ -34,7 +34,8 @@
           "need_id": "stress",
           "per_hour": 2
         }
-      ]
+      ],
+      "minigame": "cashier"
     },
     {
       "id": "job_restaurant_server",
@@ -69,7 +70,8 @@
           "need_id": "stress",
           "per_hour": 3
         }
-      ]
+      ],
+      "minigame": "order_up"
     },
     {
       "id": "job_warehouse_sorter",
@@ -104,7 +106,8 @@
           "need_id": "stress",
           "per_hour": 3
         }
-      ]
+      ],
+      "minigame": "sorting"
     },
     {
       "id": "job_construction_labor",
@@ -134,7 +137,8 @@
           "need_id": "stress",
           "per_hour": 2
         }
-      ]
+      ],
+      "minigame": "bricks"
     }
   ]
 }

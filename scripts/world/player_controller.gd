@@ -14,6 +14,10 @@ const DIRECTIONS := {
 }
 
 var facing := Vector2.DOWN
+## Frozen in place during a short cutscene (an NPC walking over to talk, D-036).
+var locked := false
+## Hunger and exhaustion slow you down (NeedStates.walk_factor, D-037); set by CityWorld.
+var speed_factor := 1.0
 ## The player's look (PixelPerson): a young newcomer in a blue jacket.
 var look: Dictionary = PixelPerson.normalize_look({"hair": "#2b2b33", "hair_style": "spiky", "top": "#3a6fd8",
 	"bottom": "#3d4656", "shoes": "#e8e4da"})
@@ -43,6 +47,8 @@ func get_focus() -> Interactable:
 
 
 func get_move_direction() -> Vector2:
+	if locked:
+		return Vector2.ZERO
 	return DIRECTIONS[_held[-1]] if not _held.is_empty() else Vector2.ZERO
 
 
@@ -52,7 +58,7 @@ func _physics_process(_delta: float) -> void:
 	if dir != Vector2.ZERO and dir != facing:
 		facing = dir
 		queue_redraw()
-	velocity = dir * SPEED
+	velocity = dir * SPEED * speed_factor
 	var before := position
 	move_and_slide()
 	var moved := position.distance_to(before)
@@ -63,7 +69,7 @@ func _physics_process(_delta: float) -> void:
 		_step = 0.0
 		queue_redraw()
 	_update_focus()
-	if Input.is_action_just_pressed("interact") and get_focus() != null:
+	if Input.is_action_just_pressed("interact") and get_focus() != null and not locked:
 		interact_requested.emit(get_focus())
 
 
@@ -80,7 +86,8 @@ func _update_focus() -> void:
 	var best: Interactable = null
 	var best_d := INF
 	for area in _sensor.get_overlapping_areas():
-		if area is Interactable:
+		# street ends are walked through, never "used": no [E] prompt for them
+		if area is Interactable and not (area as Interactable).is_walk_through():
 			var d := global_position.distance_squared_to(area.global_position)
 			if d < best_d:
 				best_d = d

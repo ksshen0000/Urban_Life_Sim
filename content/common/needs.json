@@ -10,7 +10,25 @@
         "awake": 4,
         "resting": 3,
         "sleeping": 2
-      }
+      },
+      "states": [
+        {
+          "id": "hungry",
+          "name_key": "need.state.hungry",
+          "op": "at_least",
+          "value": 70,
+          "walk_speed_pct": 85,
+          "work_efficiency_pct": 90
+        },
+        {
+          "id": "starving",
+          "name_key": "need.state.starving",
+          "op": "at_least",
+          "value": 90,
+          "walk_speed_pct": 65,
+          "work_efficiency_pct": 75
+        }
+      ]
     },
     {
       "id": "energy",
@@ -24,7 +42,26 @@
       },
       "mode_caps": {
         "sleeping": 90
-      }
+      },
+      "states": [
+        {
+          "id": "tired",
+          "name_key": "need.state.tired",
+          "op": "at_most",
+          "value": 20,
+          "walk_speed_pct": 85,
+          "work_efficiency_pct": 85
+        },
+        {
+          "id": "exhausted",
+          "name_key": "need.state.exhausted",
+          "op": "at_most",
+          "value": 5,
+          "walk_speed_pct": 60,
+          "work_efficiency_pct": 70,
+          "blocks_work": "E_TOO_TIRED"
+        }
+      ]
     },
     {
       "id": "stress",
@@ -48,6 +85,22 @@
           "op": "at_most",
           "value": 20,
           "add_per_hour": 2
+        }
+      ],
+      "states": [
+        {
+          "id": "stressed",
+          "name_key": "need.state.stressed",
+          "op": "at_least",
+          "value": 70,
+          "work_efficiency_pct": 85
+        },
+        {
+          "id": "breaking",
+          "name_key": "need.state.breaking",
+          "op": "at_least",
+          "value": 90,
+          "blocks_work": "E_TOO_STRESSED"
         }
       ]
     }

@@ -11,6 +11,7 @@ var _day_label: Label
 var _phase_label: Label  # 清晨 / 白天 / 傍晚 / 夜里 (D-035)
 var _cash_label: Label
 var _needs_box: VBoxContainer
+var _state_label: Label  # "饿了、很累 · 走得慢 · 干活效率 77%" (D-037)
 var _need_rows: Dictionary = {}  # need_id -> {bar: ProgressBar, value: Label}
 
 ## Bar colours are a reading aid only; the numeric value is always shown next to the bar.
@@ -49,6 +50,7 @@ func refresh() -> void:
 	if _session == null:
 		return
 	var v := _session.view_player()
+	_refresh_states()
 	var mod: int = v["minute_of_day"]
 	@warning_ignore("integer_division")
 	var hh := mod / 60
@@ -87,6 +89,29 @@ func set_prompt(display_name: String) -> void:
 
 
 # Read-back helpers for tests and accessibility tooling.
+func _refresh_states() -> void:
+	var states := _session.need_states()
+	_state_label.visible = not states.is_empty()
+	if states.is_empty():
+		return
+	var names: PackedStringArray = []
+	for st in states:
+		names.append(tr(st["name_key"]))
+	var parts: PackedStringArray = ["、".join(names)]
+	var pct := NeedStates.work_efficiency_bp(states) / 100
+	if not NeedStates.work_block(states).is_empty():
+		parts.append(tr("ui.hud.state_blocked"))
+	elif NeedStates.walk_factor(states) < 0.99:
+		parts.append(Localizer.text("ui.hud.state_effects", {"pct": pct}))
+	elif pct < 100:
+		parts.append(Localizer.text("ui.hud.state_effects_work_only", {"pct": pct}))
+	_state_label.text = " · ".join(parts)
+
+
+func get_state_text() -> String:
+	return _state_label.text if _state_label.visible else ""
+
+
 func get_phase_text() -> String:
 	return _phase_label.text
 
@@ -173,8 +198,16 @@ func _build() -> void:
 	column.add_child(bottom)
 	var needs_panel := PanelContainer.new()
 	bottom.add_child(needs_panel)
+	var needs_col := VBoxContainer.new()
+	needs_panel.add_child(needs_col)
 	_needs_box = VBoxContainer.new()
-	needs_panel.add_child(_needs_box)
+	needs_col.add_child(_needs_box)
+	_state_label = Label.new()
+	_state_label.name = "NeedStates"
+	_state_label.add_theme_font_size_override("font_size", 19)
+	_state_label.add_theme_color_override("font_color", Color("#f2a35a"))
+	_state_label.visible = false
+	needs_col.add_child(_state_label)
 	bottom.add_child(_spacer(true, false))
 	_ignore_mouse(margin)
 

@@ -165,7 +165,7 @@ func test_region_policy_swap_changes_pay_not_flow() -> void:
 	assert_true(content.load_root(fx.write()), "\n".join(content.get_error_strings()))
 	var policies := RegionPolicyRegistry.with_builtin_implementations()
 	policies.register_implementation("flat_fee", FlatFeePolicy)
-	var r := SimulationSession.create_new(content, policies, "CN_LINCHUAN")
+	var r := SimulationSession.create_new(content, policies, "CN_LINCHUAN", {"need_effects": false})
 	assert_true(r["ok"])
 	var s: SimulationSession = r["session"]
 	_book(s, CLERK, 2, "morning")

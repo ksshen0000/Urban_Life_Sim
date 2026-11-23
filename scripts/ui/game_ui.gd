@@ -98,7 +98,14 @@ func set_prompt(target: Interactable) -> void:
 	hud.set_prompt(target.get_display_name() if target != null else "")
 
 
+## A minigame or a work montage is on screen: it owns the keyboard (Esc ends the minigame).
+func overlay_busy() -> bool:
+	return get_node_or_null("MinigameHost") != null or get_node_or_null("WorkMontage") != null
+
+
 func _process(_delta: float) -> void:
+	if overlay_busy():
+		return
 	if Input.is_action_just_pressed("pause_menu"):
 		if _modal and _story_open:
 			open_pause()
@@ -436,14 +443,96 @@ func open_work(location_id: String) -> void:
 		open_message(tr(_session.content.get_record("locations", location_id)["name_key"]), tr("ui.work.none"))
 		return
 	var job := _session.content.get_record("jobs", sh["job_id"])
-	open_confirm(tr(job["name_key"]), Localizer.text("ui.jobs.shift_line", {"job": tr(job["name_key"]), "day": sh["day"],
-		"start": _hhmm(sh["start_minute"]), "end": _hhmm(sh["end_minute"]), "status": tr("ui.shift.status.booked")}),
-		_work.bind(sh["shift_id"]))
+	var body := Localizer.text("ui.jobs.shift_line", {"job": tr(job["name_key"]), "day": sh["day"],
+		"start": _hhmm(sh["start_minute"]), "end": _hhmm(sh["end_minute"]), "status": tr("ui.shift.status.booked")})
+	var states := _session.need_states()
+	if not NeedStates.work_block(states).is_empty():
+		open_message(tr(job["name_key"]), error_text(NeedStates.work_block(states)))
+		return
+	var bp := NeedStates.work_efficiency_bp(states)
+	if bp < 10000:
+		body += "\n" + Localizer.text("ui.work.efficiency", {"states": state_names(states), "pct": bp / 100})
+	_begin("work_start", tr(job["name_key"]))
+	_add_body(body)
+	var game_id: String = job.get("minigame", "")
+	var buttons: Array = []
+	if MinigameRegistry.has(game_id):
+		_add_body(tr("ui.work.minigame_hint"))
+		buttons.append(["Play", tr("ui.work.play"), _play_work.bind(sh["shift_id"], game_id)])
+	buttons.append(["Skip", tr("ui.work.skip"), _skip_work.bind(sh["shift_id"])])
+	buttons.append(["Cancel", tr("ui.common.cancel"), close])
+	_add_buttons(buttons)
+	_show()
 
 
-func _work(shift_id: String) -> void:
+## Work as a minigame (D-038): its 0..100 score becomes the shift's performance (pay ±10 %).
+func _play_work(shift_id: String, game_id: String) -> void:
+	close()
+	MinigameHost.open(self, game_id, {"kind": "work", "seed": _session.world.clock.get_day_index() * 7 + 1},
+		_session, func(result: Dictionary) -> void:
+			if result["skipped"]:
+				_skip_work(shift_id)
+			else:
+				_work(shift_id, int(result["score"])))
+
+
+## Skipping still shows the shift happening: a short montage, then the pay slip (performance 50).
+func _skip_work(shift_id: String) -> void:
+	close()
+	var sh := _session.jobs.get_shift(shift_id)
+	var job := _session.content.get_record("jobs", sh["job_id"])
+	var game_id: String = job.get("minigame", "")
+	play_montage(tr(job["name_key"]), game_id, maxi(_session.world.clock.get_minute(), int(sh["start_minute"])),
+		int(sh["end_minute"]), _work.bind(shift_id, WorkShiftHandler.DEFAULT_PERFORMANCE))
+
+
+const MONTAGE_STATIONS := {"cashier": "cashier_counter", "order_up": "order_counter", "sorting": "shelf",
+	"bricks": "bricks", "xiangqi": "chess_table", "billiards": "table", "breakout": "snack_rack",
+	"dance": "speaker", "square_dance": "speaker"}
+
+
+## Full-screen "time passes" scene (WorkMontage), then `then`.
+func play_montage(title: String, game_id: String, from_minute: int, to_minute: int, then: Callable) -> void:
+	var m := WorkMontage.new()
+	m.name = "WorkMontage"
+	m.title_text = title
+	m.look = _session.profile.get_look(SimulationSession.PLAYER_ID)
+	m.station = MONTAGE_STATIONS.get(game_id, "cashier_counter")
+	var key := "mg.%s.montage" % game_id
+	m.captions = PackedStringArray(tr(key).split("|")) if tr(key) != key else PackedStringArray()
+	m.from_minute = from_minute
+	m.to_minute = to_minute
+	add_child(m)
+	_session.world.clock.push_pause("montage")
+	var was_paused := get_tree().paused
+	get_tree().paused = true
+	m.finished.connect(func() -> void:
+		m.queue_free()
+		_session.world.clock.pop_pause("montage")
+		get_tree().paused = was_paused
+		then.call())
+
+
+func get_montage() -> WorkMontage:
+	return get_node_or_null("WorkMontage") as WorkMontage
+
+
+func get_minigame_host() -> MinigameHost:
+	return get_node_or_null("MinigameHost") as MinigameHost
+
+
+## "饿了、很累" for the active need states.
+func state_names(states: Array[Dictionary]) -> String:
+	var names: PackedStringArray = []
+	for st in states:
+		names.append(tr(st["name_key"]))
+	return "、".join(names) if TranslationServer.get_locale().begins_with("zh") else ", ".join(names)
+
+
+func _work(shift_id: String, performance: int = WorkShiftHandler.DEFAULT_PERFORMANCE) -> void:
 	var before := _session.world.clock.get_minute()
-	var r := _session.submit("work_shift", {"shift_id": shift_id})
+	var bp := NeedStates.work_efficiency_bp(_session.need_states())
+	var r := _session.submit("work_shift", {"shift_id": shift_id, "performance": performance})
 	var job := _session.content.get_record("jobs", _session.jobs.get_shift(shift_id)["job_id"])
 	if not r.ok:
 		open_message(tr(job["name_key"]), error_text(r.error_code))
@@ -454,6 +543,11 @@ func _work(shift_id: String) -> void:
 		lines.append(Localizer.text("ui.work.waited", {"start": _hhmm(sh["start_minute"])}))
 	if int(sh["late_minutes"]) > 0:
 		lines.append(Localizer.text("ui.work.late", {"late": sh["late_minutes"]}))
+	if bp < 10000:
+		lines.append(Localizer.text("ui.work.efficiency_done", {"pct": bp / 100}))
+	if performance != WorkShiftHandler.DEFAULT_PERFORMANCE:
+		lines.append(Localizer.text("ui.work.performance", {"rating": MinigameHost.rating(performance),
+			"score": performance, "pct": WorkShiftHandler.performance_bp(performance) / 100}))
 	lines.append(Localizer.text("ui.work.done", {"minutes": sh["worked_minutes"], "gross": _money(sh["gross_minor"]),
 		"net": _money(sh["net_minor"])}))
 	open_message(tr(job["name_key"]), "\n".join(lines))
@@ -912,6 +1006,36 @@ func _use(item_id: String) -> void:
 
 func _perform_activity(activity_id: String, minutes: int) -> void:
 	var activity := _session.content.get_record("activities", activity_id)
+	var game_id: String = activity.get("minigame", "")
+	if MinigameRegistry.has(game_id):
+		_begin("activity_play", tr(activity["name_key"]))
+		_add_body(tr("ui.activity.play_or_pass"))
+		_add_buttons([["Play", tr("ui.activity.play"), _play_activity.bind(activity_id, minutes, game_id)],
+			["Pass", tr("ui.activity.pass"), _pass_activity.bind(activity_id, minutes, game_id)]])
+		_show()
+		return
+	_do_activity(activity_id, minutes)
+
+
+func _play_activity(activity_id: String, minutes: int, game_id: String) -> void:
+	close()
+	MinigameHost.open(self, game_id, {"kind": "leisure"}, _session, func(result: Dictionary) -> void:
+		if result["skipped"]:
+			_pass_activity(activity_id, minutes, game_id)
+		else:
+			_do_activity(activity_id, minutes, int(result["score"])))
+
+
+func _pass_activity(activity_id: String, minutes: int, game_id: String) -> void:
+	close()
+	var now := _session.world.clock.get_minute()
+	play_montage(tr(_session.content.get_record("activities", activity_id)["name_key"]), game_id, now, now + minutes,
+		_do_activity.bind(activity_id, minutes, -1))
+
+
+## Runs the activity command and shows what changed (and the minigame rating, if played).
+func _do_activity(activity_id: String, minutes: int, score: int = -1) -> void:
+	var activity := _session.content.get_record("activities", activity_id)
 	var before: Dictionary = _session.view_player()["needs"]
 	var r := _session.submit("perform_activity", {"activity_id": activity_id, "minutes": minutes})
 	var body := error_text(r.error_code)
@@ -927,6 +1051,8 @@ func _perform_activity(activity_id: String, minutes: int) -> void:
 		var cost := ActivityRules.cost_minor(activity, minutes)
 		if cost > 0:
 			body += "\n" + Localizer.text("ui.activity.paid", {"cost": _money(cost)})
+		if score >= 0:
+			body += "\n" + Localizer.text("ui.activity.minigame_result", {"rating": MinigameHost.rating(score), "score": score})
 	open_message(tr(activity["name_key"]), body)
 
 

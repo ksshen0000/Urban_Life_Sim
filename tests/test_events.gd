@@ -40,6 +40,15 @@ func _answer_all(s: SimulationSession, choice_index: int = 0) -> void:
 			s.submit("choose_dialogue", {"tree_id": e["tree_id"], "node_id": e["node_id"], "choice_id": c["id"], "entry_id": e["entry_id"]})
 
 
+## Day 2, 09:00: walk into the store and up to Chen (introductions are face to face, D-036).
+func _meet_chen(s: SimulationSession) -> void:
+	_to(s, 2, 9)
+	Sessions.go(s, "convenience_store")
+	s.submit("approach_npc", {"npc_id": "npc_chen_yu"})
+	_answer_all(s)
+	Sessions.go(s, "park")
+
+
 func _fired_count(s: SimulationSession, event_id: String) -> int:
 	return s.events.to_dict()["fired"].get(event_id, {"count": 0})["count"]
 
@@ -76,7 +85,9 @@ func test_day2_intro_needs_chen_present() -> void:
 	_to(s, 2, 9)
 	assert_false(s.events.has_fired("event_day2_chen_intro"), "she works inside the store (D-034)")
 	Sessions.go(s, "convenience_store")
-	assert_true(s.events.has_fired("event_day2_chen_intro"), "meeting her inside")
+	assert_false(s.events.has_fired("event_day2_chen_intro"), "same room is not enough: walk up to her")
+	s.submit("approach_npc", {"npc_id": "npc_chen_yu"})
+	assert_true(s.events.has_fired("event_day2_chen_intro"), "meeting her face to face")
 	_answer_all(s)
 	assert_eq(s.flags.get_flag("story.met_chen"), true)
 	assert_true(s.relationships.get_value("npc_chen_yu") > 0)
@@ -84,10 +95,7 @@ func test_day2_intro_needs_chen_present() -> void:
 
 func test_dinner_invite_choice_and_atomic_failure() -> void:
 	var s := _story()
-	_to(s, 2, 9)
-	Sessions.go(s, "convenience_store")
-	_answer_all(s)
-	Sessions.go(s, "park")
+	_meet_chen(s)
 	_to(s, 3, 16)
 	assert_eq(s.flags.get_flag("story.met_chen"), true)
 	s.submit("advance_time", {"minutes": 60}, "system")  # 17:00: invite arrives
@@ -101,6 +109,7 @@ func test_dinner_invite_choice_and_atomic_failure() -> void:
 
 func test_unaffordable_choice_changes_nothing() -> void:
 	var s := Sessions.create({"story_enabled": true, "starting_money_minor": 1000})
+	_meet_chen(s)
 	_to(s, 3, 16)
 	s.submit("advance_time", {"minutes": 60}, "system")  # invite arrives; leave it unanswered
 	var e := s.dialogue.peek()
@@ -155,6 +164,8 @@ func _week(money: int, lease: bool, shifts: int, dinner: bool, chat_days: int) -
 		if day - 1 <= chat_days and day >= 2:
 			_to(s, day, 17)
 			Sessions.go(s, "park")
+			s.submit("approach_npc", {"npc_id": "npc_chen_yu"})
+			_answer_all(s)
 			s.submit("choose_dialogue", {"tree_id": "dialogue_chen_yu_chat", "node_id": "start", "choice_id": "talk"})
 		if day == 3:
 			_to(s, 3, 17)
@@ -182,3 +193,16 @@ func test_week1_summary_has_distinct_variants() -> void:
 	for v in [worker, idle, homeless, broke]:
 		distinct["|".join(v)] = true
 	assert_true(distinct.size() >= 3, "at least three different summaries from real state")
+
+
+func test_lao_zhou_gives_gloves_only_face_to_face() -> void:
+	var s := _story()
+	_to(s, 1, 9)
+	s.submit("take_route", {"route_id": "route_12_to_industrial"})
+	_answer_all(s)
+	assert_false(s.events.has_fired("event_meet_lao_zhou"), "getting off the bus is not meeting him")
+	assert_eq(s.submit("approach_npc", {"npc_id": "npc_landlord_wang"}).error_code, "E_NPC_NOT_HERE")
+	assert_true(s.submit("approach_npc", {"npc_id": "npc_lao_zhou"}).ok)
+	assert_true(s.events.has_fired("event_meet_lao_zhou"), "walking up to him at the warehouse")
+	s.submit("advance_time", {"minutes": 30}, "system")
+	assert_eq(s.stats.get_stat(P, "approached_at.npc_lao_zhou") > 0, true)

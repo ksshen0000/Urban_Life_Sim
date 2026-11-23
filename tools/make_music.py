@@ -5,7 +5,7 @@ Synthesised from scratch (no samples, no third-party material), so it is free of
 C-major pentatonic lead, electric-piano chords, round bass, soft kick / snap / shaker.
 96 BPM, 4/4, 24 bars = 60 s. Pure Python (no numpy), deterministic.
 
-    python3 tools/make_music.py out.wav
+    python3 tools/make_music.py out.wav [bars]
 """
 import array, math, random, struct, sys, wave
 
@@ -13,7 +13,7 @@ SR = 44100
 BPM = 96
 BEAT = 60.0 / BPM
 BAR = 4 * BEAT
-BARS = 24
+BARS = int(sys.argv[2]) if len(sys.argv) > 2 else 24  # 24 bars = 60 s; pass more for a longer reel
 DUR = BARS * BAR + 2.0  # ring-out tail
 
 L = array.array("f", [0.0]) * int(DUR * SR)

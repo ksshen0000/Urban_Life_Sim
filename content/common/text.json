@@ -1270,6 +1270,581 @@
       "id": "ui.inventory.keepsake",
       "zh_CN": "收藏品",
       "en": "Keepsake"
+    },
+    {
+      "id": "need.state.hungry",
+      "zh_CN": "饿了",
+      "en": "Hungry"
+    },
+    {
+      "id": "need.state.starving",
+      "zh_CN": "饿得发慌",
+      "en": "Starving"
+    },
+    {
+      "id": "need.state.tired",
+      "zh_CN": "很累",
+      "en": "Tired"
+    },
+    {
+      "id": "need.state.exhausted",
+      "zh_CN": "精疲力竭",
+      "en": "Exhausted"
+    },
+    {
+      "id": "need.state.stressed",
+      "zh_CN": "压力大",
+      "en": "Stressed"
+    },
+    {
+      "id": "need.state.breaking",
+      "zh_CN": "快崩溃了",
+      "en": "At breaking point"
+    },
+    {
+      "id": "ui.hud.states",
+      "zh_CN": "{states}",
+      "en": "{states}"
+    },
+    {
+      "id": "ui.hud.state_effects",
+      "zh_CN": "走得慢 · 干活效率 {pct}%",
+      "en": "walking slower · working at {pct}%"
+    },
+    {
+      "id": "ui.hud.state_effects_work_only",
+      "zh_CN": "干活效率 {pct}%",
+      "en": "working at {pct}%"
+    },
+    {
+      "id": "ui.hud.state_blocked",
+      "zh_CN": "不能开工",
+      "en": "can't start work"
+    },
+    {
+      "id": "ui.work.efficiency",
+      "zh_CN": "状态：{states}，这一班效率约 {pct}%，工资按效率折算。",
+      "en": "Condition: {states}. You'll work at about {pct}%, and be paid accordingly."
+    },
+    {
+      "id": "ui.work.efficiency_done",
+      "zh_CN": "今天状态不好，效率 {pct}%。",
+      "en": "Not at your best today: {pct}% efficiency."
+    },
+    {
+      "id": "ui.error.e_too_tired",
+      "zh_CN": "你已经精疲力竭，站都站不稳了。先睡一觉或者在长椅上歇会儿。",
+      "en": "You're exhausted and can barely stand. Sleep or rest on a bench first."
+    },
+    {
+      "id": "ui.error.e_too_stressed",
+      "zh_CN": "你现在快崩溃了，没法上班。先去公园走走、唱唱歌，或者回家躺一会儿。",
+      "en": "You're at breaking point and can't work. Walk in the park, sing, or lie down at home first."
+    },
+    {
+      "id": "mg.common.start",
+      "zh_CN": "开始",
+      "en": "Start"
+    },
+    {
+      "id": "mg.common.skip",
+      "zh_CN": "跳过",
+      "en": "Skip"
+    },
+    {
+      "id": "mg.common.continue",
+      "zh_CN": "继续",
+      "en": "Continue"
+    },
+    {
+      "id": "mg.common.esc",
+      "zh_CN": "Esc 结束",
+      "en": "Esc to stop"
+    },
+    {
+      "id": "mg.common.time_left",
+      "zh_CN": "剩余 %d 秒",
+      "en": "%d s left"
+    },
+    {
+      "id": "mg.common.time_up",
+      "zh_CN": "时间到。",
+      "en": "Time's up."
+    },
+    {
+      "id": "mg.common.quit_early",
+      "zh_CN": "提前结束了。",
+      "en": "You stopped early."
+    },
+    {
+      "id": "mg.common.score",
+      "zh_CN": "得分：%d / 100",
+      "en": "Score: %d / 100"
+    },
+    {
+      "id": "mg.common.rating_great",
+      "zh_CN": "干得漂亮！",
+      "en": "Excellent!"
+    },
+    {
+      "id": "mg.common.rating_good",
+      "zh_CN": "不错",
+      "en": "Good"
+    },
+    {
+      "id": "mg.common.rating_ok",
+      "zh_CN": "还行",
+      "en": "Not bad"
+    },
+    {
+      "id": "mg.common.rating_poor",
+      "zh_CN": "有点吃力",
+      "en": "A struggle"
+    },
+    {
+      "id": "ui.work.play",
+      "zh_CN": "开始干活（小游戏）",
+      "en": "Start working (minigame)"
+    },
+    {
+      "id": "ui.work.skip",
+      "zh_CN": "直接干完",
+      "en": "Just get it done"
+    },
+    {
+      "id": "ui.work.minigame_hint",
+      "zh_CN": "玩小游戏的表现会影响工资（最多 ±10%）；直接干完按正常工资算。",
+      "en": "How you do in the minigame changes your pay (up to ±10%); getting it done without playing pays normally."
+    },
+    {
+      "id": "ui.work.performance",
+      "zh_CN": "表现：{rating}（{score} 分），工资按 {pct}% 结算。",
+      "en": "Performance: {rating} ({score}), paid at {pct}%."
+    },
+    {
+      "id": "ui.activity.play_or_pass",
+      "zh_CN": "要玩一局吗？",
+      "en": "Play a round?"
+    },
+    {
+      "id": "ui.activity.play",
+      "zh_CN": "玩一局",
+      "en": "Play"
+    },
+    {
+      "id": "ui.activity.pass",
+      "zh_CN": "随便打发时间",
+      "en": "Just pass the time"
+    },
+    {
+      "id": "ui.activity.minigame_result",
+      "zh_CN": "这一局：{rating}（{score} 分）",
+      "en": "This round: {rating} ({score})"
+    },
+    {
+      "id": "mg.cashier.title",
+      "zh_CN": "便利店收银",
+      "en": "Corner-store checkout"
+    },
+    {
+      "id": "mg.cashier.help",
+      "zh_CN": "点击商品扫码（或按空格），全部扫完后顾客会付钱。用硬币按钮（或数字键 1–6）凑出找零，回车确认，退格重来。\n找对一位 +20 分，找错 -10 分，共 75 秒。",
+      "en": "Click each item (or press Space) to scan it. When the basket is done the customer pays; build the change with the coin buttons (or keys 1–6), Enter to hand it over, Backspace to start again.\nEach correct customer +20, wrong change -10. 75 seconds."
+    },
+    {
+      "id": "mg.cashier.montage",
+      "zh_CN": "扫码……|找零……|补货……|“欢迎光临！”",
+      "en": "Scanning…|Giving change…|Restocking…|\"Welcome!\""
+    },
+    {
+      "id": "mg.cashier.undo",
+      "zh_CN": "重来",
+      "en": "Again"
+    },
+    {
+      "id": "mg.cashier.give",
+      "zh_CN": "找零",
+      "en": "Give change"
+    },
+    {
+      "id": "mg.cashier.total",
+      "zh_CN": "合计：%s",
+      "en": "Total: %s"
+    },
+    {
+      "id": "mg.cashier.paid",
+      "zh_CN": "顾客付：%s",
+      "en": "Paid: %s"
+    },
+    {
+      "id": "mg.cashier.given",
+      "zh_CN": "已找：%s",
+      "en": "Change: %s"
+    },
+    {
+      "id": "mg.cashier.scan_hint",
+      "zh_CN": "先把商品都扫一遍",
+      "en": "Scan every item first"
+    },
+    {
+      "id": "mg.cashier.status",
+      "zh_CN": "已服务 %d 位 · 找错 %d 次",
+      "en": "Served %d · mistakes %d"
+    },
+    {
+      "id": "mg.cashier.correct",
+      "zh_CN": "找零正确！",
+      "en": "Correct change!"
+    },
+    {
+      "id": "mg.cashier.wrong",
+      "zh_CN": "找错了，应找 %s",
+      "en": "Wrong: the change was %s"
+    },
+    {
+      "id": "mg.cashier.item.water",
+      "zh_CN": "矿泉水",
+      "en": "Water"
+    },
+    {
+      "id": "mg.cashier.item.noodles",
+      "zh_CN": "方便面",
+      "en": "Instant noodles"
+    },
+    {
+      "id": "mg.cashier.item.bread",
+      "zh_CN": "面包",
+      "en": "Bread"
+    },
+    {
+      "id": "mg.cashier.item.milk",
+      "zh_CN": "牛奶",
+      "en": "Milk"
+    },
+    {
+      "id": "mg.cashier.item.gum",
+      "zh_CN": "口香糖",
+      "en": "Gum"
+    },
+    {
+      "id": "mg.cashier.item.crisps",
+      "zh_CN": "薯片",
+      "en": "Crisps"
+    },
+    {
+      "id": "mg.cashier.item.yogurt",
+      "zh_CN": "酸奶",
+      "en": "Yogurt"
+    },
+    {
+      "id": "mg.cashier.item.onigiri",
+      "zh_CN": "饭团",
+      "en": "Rice ball"
+    },
+    {
+      "id": "mg.cashier.item.coffee",
+      "zh_CN": "罐装咖啡",
+      "en": "Canned coffee"
+    },
+    {
+      "id": "mg.cashier.item.tissues",
+      "zh_CN": "纸巾",
+      "en": "Tissues"
+    },
+    {
+      "id": "mg.order_up.title",
+      "zh_CN": "快餐店出餐",
+      "en": "Fast-food orders"
+    },
+    {
+      "id": "mg.order_up.help",
+      "zh_CN": "照着小票配餐：点菜品按钮（或数字键 1–6）放上托盘，回车出餐，退格清空。\n配对一单 +17 分，配错 -8 分，共 75 秒。",
+      "en": "Match the ticket: add dishes with the buttons (or keys 1–6), Enter to serve, Backspace to clear the tray.\nEach correct order +17, a wrong one -8. 75 seconds."
+    },
+    {
+      "id": "mg.order_up.montage",
+      "zh_CN": "打包……|“三号餐好了！”|擦桌子……|收拾托盘……",
+      "en": "Packing…|\"Order three!\"|Wiping tables…|Stacking trays…"
+    },
+    {
+      "id": "mg.order_up.clear",
+      "zh_CN": "清空",
+      "en": "Clear"
+    },
+    {
+      "id": "mg.order_up.serve",
+      "zh_CN": "出餐",
+      "en": "Serve"
+    },
+    {
+      "id": "mg.order_up.ticket",
+      "zh_CN": "小票",
+      "en": "Ticket"
+    },
+    {
+      "id": "mg.order_up.tray",
+      "zh_CN": "托盘",
+      "en": "Tray"
+    },
+    {
+      "id": "mg.order_up.status",
+      "zh_CN": "已出餐 %d 单 · 出错 %d 次",
+      "en": "Served %d · mistakes %d"
+    },
+    {
+      "id": "mg.order_up.correct",
+      "zh_CN": "出餐！",
+      "en": "Served!"
+    },
+    {
+      "id": "mg.order_up.wrong",
+      "zh_CN": "配错了……",
+      "en": "Wrong order…"
+    },
+    {
+      "id": "mg.order_up.dish.burger",
+      "zh_CN": "汉堡",
+      "en": "Burger"
+    },
+    {
+      "id": "mg.order_up.dish.chicken_rice",
+      "zh_CN": "鸡腿饭",
+      "en": "Chicken rice"
+    },
+    {
+      "id": "mg.order_up.dish.beef_noodles",
+      "zh_CN": "牛肉面",
+      "en": "Beef noodles"
+    },
+    {
+      "id": "mg.order_up.dish.fries",
+      "zh_CN": "薯条",
+      "en": "Fries"
+    },
+    {
+      "id": "mg.order_up.dish.cola",
+      "zh_CN": "可乐",
+      "en": "Cola"
+    },
+    {
+      "id": "mg.order_up.dish.soy_milk",
+      "zh_CN": "豆浆",
+      "en": "Soy milk"
+    },
+    {
+      "id": "mg.sorting.title",
+      "zh_CN": "仓库分拣",
+      "en": "Warehouse sorting"
+    },
+    {
+      "id": "mg.sorting.help",
+      "zh_CN": "包裹顺着传送带下来，在黄色区域里按 ←（A 红）↓（B 蓝）→（C 绿）送进对应滑道，也可以用 A / S / D。\n越到后面越快，共 60 秒。",
+      "en": "Parcels ride down the belt. In the yellow zone, send each to its chute with ← (A, red), ↓ (B, blue) or → (C, green), or A / S / D.\nIt speeds up. 60 seconds."
+    },
+    {
+      "id": "mg.sorting.montage",
+      "zh_CN": "扫标签……|搬箱子……|“这批发华东！”|打包装车……",
+      "en": "Scanning labels…|Lifting boxes…|\"This lot goes east!\"|Loading the truck…"
+    },
+    {
+      "id": "mg.sorting.status",
+      "zh_CN": "分对 %d · 分错 %d · 漏掉 %d",
+      "en": "Right %d · wrong %d · missed %d"
+    },
+    {
+      "id": "mg.bricks.title",
+      "zh_CN": "工地砌墙",
+      "en": "Bricklaying"
+    },
+    {
+      "id": "mg.bricks.help",
+      "zh_CN": "砖块左右移动，按空格（或点击）把它砌上去。只有和下面那块对齐的部分能留下，完全对不上就塌了。\n砌够 15 层，留下的越宽分越高。",
+      "en": "The brick slides back and forth; press Space (or click) to lay it. Only the part over the brick below stays; miss completely and it falls.\nLay 15 courses; the wider the wall stays, the better."
+    },
+    {
+      "id": "mg.bricks.montage",
+      "zh_CN": "和砂浆……|搬砖……|砌墙……|“小心头顶！”",
+      "en": "Mixing mortar…|Carrying bricks…|Laying the wall…|\"Mind your head!\""
+    },
+    {
+      "id": "mg.bricks.status",
+      "zh_CN": "已砌 %d / %d 层",
+      "en": "%d / %d courses"
+    },
+    {
+      "id": "mg.bricks.fell",
+      "zh_CN": "砖没放稳，掉下去了。",
+      "en": "The brick slipped off."
+    },
+    {
+      "id": "mg.bricks.done",
+      "zh_CN": "砌完了！完美对齐 %d 次。",
+      "en": "Done! %d perfect courses."
+    },
+    {
+      "id": "mg.xiangqi.title",
+      "zh_CN": "和大爷杀一盘",
+      "en": "A game with the old man"
+    },
+    {
+      "id": "mg.xiangqi.help",
+      "zh_CN": "你执红先走：点自己的棋子，再点绿色的落点。规则照中国象棋：马走日（会蹩腿），象走田（不过河），炮隔子打，将帅不能照面。\n将死大爷算赢；40 回合还没分出胜负就按子力算。",
+      "en": "You play red and move first: click a piece, then a green point. Standard xiangqi: horses can be blocked, elephants stay home, cannons capture over a screen, generals may not face each other.\nCheckmate wins; after 40 moves it's judged on material."
+    },
+    {
+      "id": "mg.xiangqi.montage",
+      "zh_CN": "“观棋不语真君子！”|“这步臭棋……”|“将军！”|“再来一盘？”",
+      "en": "\"A gentleman watches in silence!\"|\"What a move…\"|\"Check!\"|\"Another game?\""
+    },
+    {
+      "id": "mg.xiangqi.your_move",
+      "zh_CN": "轮到你了",
+      "en": "Your move"
+    },
+    {
+      "id": "mg.xiangqi.thinking",
+      "zh_CN": "大爷在想……",
+      "en": "The old man is thinking…"
+    },
+    {
+      "id": "mg.xiangqi.check",
+      "zh_CN": "将军！小心你的帅",
+      "en": "Check! Watch your general"
+    },
+    {
+      "id": "mg.xiangqi.moves",
+      "zh_CN": "第 %d / %d 回合",
+      "en": "Move %d / %d"
+    },
+    {
+      "id": "mg.xiangqi.you_won",
+      "zh_CN": "将死了！大爷直摇头：“后生可畏。”",
+      "en": "Checkmate! \"The young ones these days…\""
+    },
+    {
+      "id": "mg.xiangqi.you_lost",
+      "zh_CN": "被将死了。大爷乐呵呵：“再练练。”",
+      "en": "Checkmated. \"Keep practising,\" he chuckles."
+    },
+    {
+      "id": "mg.xiangqi.draw_by_moves",
+      "zh_CN": "下到天黑也没分胜负，按子力算。",
+      "en": "No winner before dark; judged on material."
+    },
+    {
+      "id": "mg.billiards.title",
+      "zh_CN": "打台球",
+      "en": "Billiards"
+    },
+    {
+      "id": "mg.billiards.help",
+      "zh_CN": "鼠标瞄准（或 ←→），按住左键（或空格）蓄力，松开出杆。10 杆之内把 7 颗彩球打进袋，白球进袋会白费一杆。",
+      "en": "Aim with the mouse (or ←/→), hold the left button (or Space) to build power, release to strike. Pot the 7 coloured balls within 10 shots; potting the cue ball wastes the shot."
+    },
+    {
+      "id": "mg.billiards.montage",
+      "zh_CN": "擦巧粉……|瞄准……|“好球！”|“差一点……”",
+      "en": "Chalking the cue…|Lining up…|\"Nice shot!\"|\"So close…\""
+    },
+    {
+      "id": "mg.billiards.status",
+      "zh_CN": "剩余 %d 杆 · 进球 %d / %d",
+      "en": "%d shots left · potted %d / %d"
+    },
+    {
+      "id": "mg.billiards.scratch",
+      "zh_CN": "白球进袋了，这杆白打。",
+      "en": "Scratch! That shot is lost."
+    },
+    {
+      "id": "mg.billiards.result",
+      "zh_CN": "进了 %d / %d 颗。",
+      "en": "Potted %d of %d."
+    },
+    {
+      "id": "mg.billiards.cleared",
+      "zh_CN": "一杆不剩全清台！",
+      "en": "Table cleared!"
+    },
+    {
+      "id": "mg.breakout.title",
+      "zh_CN": "打街机：打砖块",
+      "en": "Arcade: brick breaker"
+    },
+    {
+      "id": "mg.breakout.help",
+      "zh_CN": "鼠标（或 ←→）移动挡板，点击（或空格）发球。把砖块全部打掉，3 条命，90 秒。",
+      "en": "Move the paddle with the mouse (or ←/→); click (or Space) to launch. Break every brick. 3 lives, 90 seconds."
+    },
+    {
+      "id": "mg.breakout.montage",
+      "zh_CN": "投币……|“再来一局！”|打破纪录了？|游戏币又用完了……",
+      "en": "Inserting tokens…|\"One more!\"|A new high score?|Out of tokens again…"
+    },
+    {
+      "id": "mg.breakout.status",
+      "zh_CN": "生命 %d · 得分 %d",
+      "en": "Lives %d · score %d"
+    },
+    {
+      "id": "mg.breakout.launch",
+      "zh_CN": "点击或按空格发球",
+      "en": "Click or press Space to launch"
+    },
+    {
+      "id": "mg.breakout.cleared",
+      "zh_CN": "全部打掉了！",
+      "en": "Every brick gone!"
+    },
+    {
+      "id": "mg.breakout.no_lives",
+      "zh_CN": "球没接住，游戏结束。",
+      "en": "Out of lives."
+    },
+    {
+      "id": "mg.dance.title",
+      "zh_CN": "跳舞机",
+      "en": "Dance machine"
+    },
+    {
+      "id": "mg.dance.help",
+      "zh_CN": "箭头往上飘，到框里时踩对应的方向键（或 W A S D）。踩得准是“完美”，稍差是“不错”。",
+      "en": "Arrows rise to the frames; press the matching arrow key (or W A S D) as each arrives. Spot on is Perfect, close is Good."
+    },
+    {
+      "id": "mg.dance.montage",
+      "zh_CN": "投币……|踩、踩、踩……|“完美！”|满头大汗……",
+      "en": "Inserting tokens…|Step, step, step…|\"Perfect!\"|Dripping with sweat…"
+    },
+    {
+      "id": "mg.square_dance.title",
+      "zh_CN": "跟着跳广场舞",
+      "en": "Square dancing"
+    },
+    {
+      "id": "mg.square_dance.help",
+      "zh_CN": "音箱一响，跟着阿姨们的节奏：箭头到框里时按对应方向键（或 W A S D）。节奏比跳舞机慢一些。",
+      "en": "Follow the aunties: press the matching arrow key (or W A S D) as each arrow reaches its frame. Slower than the dance machine."
+    },
+    {
+      "id": "mg.square_dance.montage",
+      "zh_CN": "音箱响起来了……|跟着转圈……|“左手，右手！”|出了一身汗……",
+      "en": "The speaker starts up…|Turning with the group…|\"Left hand, right hand!\"|Pleasantly sweaty…"
+    },
+    {
+      "id": "mg.rhythm.perfect",
+      "zh_CN": "完美！",
+      "en": "Perfect!"
+    },
+    {
+      "id": "mg.rhythm.good",
+      "zh_CN": "不错",
+      "en": "Good"
+    },
+    {
+      "id": "mg.rhythm.accuracy",
+      "zh_CN": "准确率 %d%%",
+      "en": "Accuracy %d%%"
     }
   ]
 }

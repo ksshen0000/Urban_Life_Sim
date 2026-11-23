@@ -56,6 +56,13 @@ static func evaluate(c: Dictionary, world: WorldState, content: ContentRegistry,
 		"npc_present":
 			var loc := NpcScheduleSystem.new(content).location_of(c["npc_id"], world.clock.get_minute())
 			return not loc.is_empty() and (world.get_component("locations") as LocationSystem).is_on_map_of(actor_id, loc)
+		"npc_nearby":
+			# present AND the player walked up to them within the last few minutes (approach_npc)
+			var here := NpcScheduleSystem.new(content).location_of(c["npc_id"], world.clock.get_minute())
+			if here.is_empty() or not (world.get_component("locations") as LocationSystem).is_on_map_of(actor_id, here):
+				return false
+			var at := (world.get_component("stats") as StatsSystem).get_stat(actor_id, ApproachNpcHandler.stat_key(c["npc_id"]))
+			return at > 0 and world.clock.get_minute() - at <= ApproachNpcHandler.NEARBY_MINUTES
 		"event_fired":
 			return (world.get_component("events") as EventSystem).has_fired(c["event_id"])
 	return false

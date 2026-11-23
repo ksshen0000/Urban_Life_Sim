@@ -148,3 +148,18 @@ func test_mirror_at_home_changes_the_sprite() -> void:
 	assert_eq(s.profile.get_look(P)["hair"], CharacterCreator.HAIR[4], "saved through set_profile")
 	assert_eq(world.player.look["hair"], CharacterCreator.HAIR[4], "sprite updated")
 	assert_false((Engine.get_main_loop() as SceneTree).paused)
+
+
+## A control created but never added to the tree is an orphan that leaks at exit (and pins the
+## theme font with its glyph textures): the barber's hair-only creator used to do this.
+func test_creator_modes_leave_no_orphan_nodes() -> void:
+	Localizer.install(Sessions.content())
+	for fields: Array in [[], ["hair_style", "hair"], ["hair"]]:
+		await wait_process_frames(2)  # let nodes queued for deletion by earlier tests go first
+		var before := int(Performance.get_monitor(Performance.OBJECT_ORPHAN_NODE_COUNT))
+		var c := CharacterCreator.make({}, "ui.creator.title", "ui.creator.start", fields)
+		(Engine.get_main_loop() as SceneTree).root.add_child(c)
+		await wait_process_frames(2)
+		var during := int(Performance.get_monitor(Performance.OBJECT_ORPHAN_NODE_COUNT))
+		c.free()
+		assert_eq(during, before, "no orphan controls with fields %s" % str(fields))

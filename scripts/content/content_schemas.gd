@@ -55,6 +55,7 @@ const TILE_KIND_NAMES := ["ground", "road", "grass", "wall", "building", "tree",
 const STRUCTURE_STYLES := ["apartment", "shop", "restaurant", "block", "warehouse", "arcade", "billiards",
 	"barber", "noodle", "construction", "tower", "luxury", "cafe", "mall"]
 const INTERACTABLE_KINDS := ["sign", "shop", "activity", "home", "job_board", "transit", "workplace", "door", "barber"]
+## Interactables created at runtime (never in map files): "npc", "pedestrian".
 ## Indoor furniture (D-034): kind -> blocking footprint in tiles [w, h] ([0, 0] = walk-through).
 ## Work stations (cash register, order counter) are where shift minigames will live later.
 const FURNITURE := {
@@ -104,9 +105,9 @@ const CONDITION_TYPES := [
 	"relationship_at_least", "any_relationship_at_least", "flag_equals",
 	"lease_active", "rent_overdue", "rent_periods_paid_at_least",
 	"shifts_booked_at_least", "shifts_completed_at_least", "shifts_completed_below",
-	"stat_at_least", "on_map", "npc_present", "event_fired",
+	"stat_at_least", "on_map", "npc_present", "npc_nearby", "event_fired",
 ]
-const EFFECT_TYPES := ["set_flag", "credit_money", "debit_money", "change_need", "change_relationship", "show_summary"]
+const EFFECT_TYPES := ["set_flag", "credit_money", "debit_money", "change_need", "change_relationship", "show_summary", "give_item"]
 const FLAG_KEY_PATTERN := "^[a-z][a-z0-9_]*(\\.[a-z0-9_]+)*$"
 const CONDITION := {"type": "object", "fields": {
 	"type": {"type": "string", "required": true, "values": CONDITION_TYPES},
@@ -125,6 +126,8 @@ const EFFECT := {"type": "object", "fields": {
 	"need_id": {"type": "ref", "table": "needs"},
 	"delta": {"type": "int", "min": -100, "max": 100},
 	"amount": {"type": "int", "min": 1},
+	"item_id": {"type": "ref", "table": "items"},
+	"count": {"type": "int", "min": 1},
 }}
 const CONDITIONS := {"type": "array", "required": true, "items": CONDITION}
 const EFFECTS := {"type": "array", "required": true, "items": EFFECT}
@@ -195,6 +198,18 @@ const TABLES := {
 			## Increases during a mode never push the value above this cap (e.g. sleep -> 90 energy).
 			"mode_caps": {"type": "map", "key_pattern": "^(awake|resting|sleeping|working)$",
 				"values_spec": {"type": "int", "min": 0, "max": 100}},
+			## What a need does to you beyond the number (D-037): past a threshold you walk slower,
+			## work less efficiently (pay x efficiency), or cannot start a shift at all.
+			"states": {"type": "array", "unique_by": "id", "items": {"type": "object", "fields": {
+				"id": {"type": "id", "required": true},
+				"name_key": TEXT,
+				"op": {"type": "string", "required": true, "values": ["at_least", "at_most"]},
+				"value": {"type": "int", "required": true, "min": 0, "max": 100},
+				"walk_speed_pct": {"type": "int", "min": 10, "max": 100},
+				"work_efficiency_pct": {"type": "int", "min": 10, "max": 100},
+				## Set = cannot start a shift in this state; the value is the refusal code.
+				"blocks_work": {"type": "string", "pattern": "^E_[A-Z_]+$"},
+			}}},
 			"pressure_rules": {"type": "array", "items": {"type": "object", "fields": {
 				"when_need": {"type": "ref", "required": true, "table": "needs"},
 				"op": {"type": "string", "required": true, "values": ["at_least", "at_most"]},
@@ -250,6 +265,8 @@ const TABLES := {
 			"price_per_hour_minor": {"type": "int", "min": 0, "max": 1000000},
 			## Grouping for menus: "sleep" (the bed) or "rest" (pastimes at home / on a bench).
 			"category": {"type": "string", "required": true, "values": ["sleep", "rest"]},
+			## Optional minigame played while doing it (registry id, D-038); presentation only.
+			"minigame": {"type": "id"},
 			## Only at the actor's leased home (bed).
 			"requires_home": {"type": "bool"},
 			## Otherwise: only on the map of one of these locations (bench in the park). Empty = anywhere.
@@ -357,6 +374,7 @@ const TABLES := {
 					"start_minute_of_day": {"type": "int", "required": true, "min": 0, "max": 1439},
 					"duration_minutes": {"type": "int", "required": true, "min": 30, "max": 720},
 				}}},
+			"minigame": {"type": "id"},  # the shift's minigame (registry id, D-038)
 			"work_rates_per_hour": {"type": "array", "required": true, "unique_by": "need_id",
 				"items": {"type": "object", "fields": {
 					"need_id": {"type": "ref", "required": true, "table": "needs"},
@@ -428,6 +446,9 @@ const TABLES := {
 				"start_minute_of_day": {"type": "int", "required": true, "min": 0, "max": 1439},
 				"end_minute_of_day": {"type": "int", "required": true, "min": 1, "max": 1440},
 				"location_id": {"type": "ref", "required": true, "table": "locations"},
+				## Only on these game days (strangers you meet once, D-039). Absent = every day.
+				"day_from": {"type": "int", "min": 1, "max": 9999},
+				"day_to": {"type": "int", "min": 1, "max": 9999},
 			}}},
 			"initial_relationship": {"type": "int", "required": true, "min": -100, "max": 100},
 			"dialogue_tree_id": {"type": "ref", "required": true, "table": "dialogues"},
@@ -590,6 +611,21 @@ const TABLES := {
 				"kind": {"type": "string", "required": true, "values": DECOR_KINDS},
 				"tile": TILE,
 			}}},
+			## Passers-by walking a route back and forth (D-039). Presentation only; press E next to
+			## one for a line of chat (one of `lines`, picked by the day). Segments of `path` must be
+			## straight (same row or column) and every tile on them walkable.
+			"pedestrians": {"type": "array", "unique_by": "id", "items": {"type": "object", "fields": {
+				"id": {"type": "id", "required": true},
+				"name_key": TEXT,
+				"lines": {"type": "array", "required": true, "min_items": 1, "items": TEXT},
+				"path": {"type": "array", "required": true, "min_items": 2, "items": TILE},
+				"speed": {"type": "int", "min": 20, "max": 140},
+				"hours": HOURS,
+				"shirt": COLOR,
+				"hair": COLOR,
+				"hair_style": LOOK_EXTRA["hair_style"], "outfit": LOOK_EXTRA["outfit"], "figure": LOOK_EXTRA["figure"],
+				"skin": OPTIONAL_COLOR, "bottom": OPTIONAL_COLOR, "shoes": OPTIONAL_COLOR, "vest": OPTIONAL_COLOR,
+			}}},
 			## Background people (chess players, singers, dancers...). Presentation only, never
 			## part of the world state: they show while their `activity_id` is open, or during
 			## their own `hours`, or always.
@@ -700,6 +736,25 @@ static func _check_map(record: Dictionary, path: String, errors: Array[Dictionar
 			if not is_walkable_kind(legend[(rows[tile[1]] as String)[tile[0]]]):
 				errors.append({"code": "E_MAP_BLOCKED", "path": p, "message": "furniture must stand on floor, %s is not" % str(tile)})
 				break
+	var peds: Array = record.get("pedestrians", [])
+	for i in peds.size():
+		var route: Array = peds[i]["path"]
+		for k in range(1, route.size()):
+			var a := Vector2i(route[k - 1][0], route[k - 1][1])
+			var b := Vector2i(route[k][0], route[k][1])
+			var p := "%s/pedestrians/%d/path/%d" % [path, i, k]
+			if a.x != b.x and a.y != b.y:
+				errors.append({"code": "E_MAP_PATH", "path": p, "message": "path segments must be straight"})
+				continue
+			var step := Vector2i(signi(b.x - a.x), signi(b.y - a.y))
+			var t := a
+			while true:
+				if not _tile_in_bounds([t.x, t.y], width, rows.size()) or not is_walkable_kind(legend[(rows[t.y] as String)[t.x]]):
+					errors.append({"code": "E_MAP_BLOCKED", "path": p, "message": "route crosses %s" % str(t)})
+					break
+				if t == b:
+					break
+				t += step
 	var wall_decor: Array = record.get("wall_decor", [])
 	for i in wall_decor.size():
 		if not _tile_in_bounds(wall_decor[i]["tile"], width, rows.size()):

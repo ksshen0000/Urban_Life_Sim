@@ -18,9 +18,11 @@ static func start_money() -> int:
 	return content().get_record("cities", CITY_ID)["starting_money_minor"]
 
 
-## Mechanics tests run without story events unless they ask for them (story_enabled: true).
+## Mechanics tests run without story events and without need effects (D-037: they fast-forward
+## days without sleeping) unless they ask for them (story_enabled / need_effects: true).
+## (old note) Mechanics tests run without story events unless they ask for them (story_enabled: true).
 static func create(overrides: Dictionary = {}) -> SimulationSession:
-	var o := {"story_enabled": false}
+	var o := {"story_enabled": false, "need_effects": false}
 	o.merge(overrides, true)
 	var r := SimulationSession.create_new(content(), RegionPolicyRegistry.with_builtin_implementations(),
 		CITY_ID, o)

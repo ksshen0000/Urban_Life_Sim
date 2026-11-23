@@ -19,7 +19,22 @@ var structures: Array[StructureVisual] = []
 var npcs: Dictionary = {}  # npc_id -> NpcActor on the current map
 var day_night: DayNight
 var _last_tile := Vector2i(-1, -1)
+## NPCs the player is currently standing near (approach_npc already sent for this visit).
+var _near: Dictionary = {}
+const APPROACH_TILES := 2.5
+const LEAVE_TILES := 4.0
+## Greeting cutscene (D-036): an NPC with a face-to-face story beat notices the player within
+## SIGHT_TILES, a "!" pops up, the player is held in place and the NPC walks over.
+const SIGHT_TILES := 16.0
+const ALERT_SECONDS := 0.7
+var greeting: NpcActor = null
+var _greet_phase := ""          # "alert" | "walk" | "talk" | "return"
+var _greet_timer := 0.0
+var _greet_home := Vector2.ZERO
+var _greeted: Dictionary = {}   # npc_id -> true (once per map visit)
+var _blocked: Dictionary = {}   # Vector2i -> true: furniture footprints
 var ambient: Dictionary = {}  # ambient id -> AmbientActor currently shown
+var pedestrians: Dictionary = {}  # pedestrian id -> Pedestrian currently walking
 var _npc_presence: Dictionary = {}
 ## Saved standing tile to use instead of the arrival spawn on the next map build (after a load).
 var _start_tile := Vector2i(-1, -1)
@@ -67,11 +82,17 @@ func _process(delta: float) -> void:
 	_refresh_npcs()
 	_refresh_ambient()
 	day_night.update(session.world.clock.get_minute_of_day())
+	player.speed_factor = NeedStates.walk_factor(session.need_states())
+	_update_greeting(delta)
 	if not ui.is_modal():
-		_check_walk_in_doors()
 		if session.dialogue.has_pending():
 			ui.open_story_entry(session.dialogue.peek())
-		else:
+		elif greeting == null or _greet_phase == "return":
+			# free roaming (a greeting NPC walking back home does not hold the player)
+			_check_walk_in_doors()
+			_check_npc_approach()
+			if greeting == null:
+				_check_greetings()
 			session.advance_exploration(delta)
 	for st in structures:
 		st.update_fade(player.position)
@@ -116,7 +137,12 @@ func _build_map() -> void:
 			c.queue_free()
 	structures.clear()
 	npcs.clear()
+	_near.clear()
+	_greeted.clear()
+	_blocked.clear()
+	_end_greeting()
 	ambient.clear()
+	pedestrians.clear()
 	_npc_presence = {}
 	var ts: int = map["tile_size"]
 	for record: Dictionary in map["structures"]:
@@ -138,10 +164,26 @@ func _build_map() -> void:
 			lamps.append(CityMapBuilder.tile_foot(map, Vector2i(d["tile"][0], d["tile"][1])))
 	day_night.set_sources(lamps, map.get("indoor", false))
 	day_night.update(session.world.clock.get_minute_of_day())
+	for fr: Dictionary in map.get("furniture", []):
+		var size: Array = ContentSchemas.FURNITURE[fr["kind"]]
+		for dx in int(size[0]):
+			_blocked[Vector2i(int(fr["tile"][0]) + dx, int(fr["tile"][1]))] = true
 	for i in (map.get("furniture", []) as Array).size():
 		var f := FurnitureVisual.new()
 		f.setup(map["furniture"][i], ts, i)
 		entities.add_child(f)
+	# One label per street end ("往新河里 →"), above the first of its walk-in tiles.
+	var labelled := {}
+	for record: Dictionary in map["interactables"]:
+		if record.get("walk_in", false) and not labelled.has(record["target_location_id"]):
+			labelled[record["target_location_id"]] = true
+			var text := tr(record["name_key"])
+			var w := WorldText.measure(text, 12) + 14.0
+			var foot := CityMapBuilder.tile_foot(map, Vector2i(record["tile"][0], record["tile"][1]))
+			var x := foot.x - w if int(record["tile"][0]) > 0 else foot.x - 16.0
+			var label := WorldText.make(text, Rect2(x, foot.y - ts - 26, w, 18), 12, Color("#fbf7ec"), Color(0.08, 0.07, 0.1, 0.6))
+			label.name = "ExitLabel_" + str(record["id"])
+			entities.add_child(label)
 	for i in (map.get("decor", []) as Array).size():
 		var d: Dictionary = map["decor"][i]
 		var prop := PropVisual.new()
@@ -190,6 +232,141 @@ func _refresh_npcs() -> void:
 			break
 
 
+func _check_greetings() -> void:
+	if not session.story_enabled or Engine.get_process_frames() % 6 != 0:
+		return
+	var ts: float = map["tile_size"]
+	var best: NpcActor = null
+	var best_d := INF
+	for npc_id in session.events.greeting_npcs(session.world):
+		if _greeted.has(npc_id) or not npcs.has(npc_id):
+			continue
+		var d: float = (npcs[npc_id] as Node2D).position.distance_to(player.position) / ts
+		if d <= SIGHT_TILES and d < best_d:
+			best = npcs[npc_id]
+			best_d = d
+	if best != null:
+		_start_greeting(best)
+
+
+func _start_greeting(npc: NpcActor) -> void:
+	greeting = npc
+	_greeted[npc.npc_id] = true
+	_greet_home = npc.position
+	_greet_phase = "alert"
+	_greet_timer = ALERT_SECONDS
+	npc.alert = true
+	npc.face_towards(player.position)
+	player.locked = true
+	session.world.clock.push_pause("greeting")
+
+
+func _update_greeting(delta: float) -> void:
+	if greeting == null:
+		return
+	if not is_instance_valid(greeting):
+		_end_greeting()
+		return
+	match _greet_phase:
+		"alert":
+			_greet_timer -= delta
+			if _greet_timer <= 0.0:
+				greeting.alert = false
+				greeting.queue_redraw()
+				_greet_phase = "walk"
+				greeting.walk_path(path_points(_tile_of(greeting.position), player_tile(), true))
+		"walk":
+			if not greeting.is_walking():
+				greeting.face_towards(player.position)
+				_face_player_towards(greeting.position)
+				_greet_phase = "talk"
+				session.world.clock.pop_pause("greeting")
+				session.submit(ApproachNpcHandler.ACTION, {"npc_id": greeting.npc_id})
+				_near[greeting.npc_id] = true
+				_greet_timer = 0.3
+		"talk":
+			# the story entry opens on its own (pending dialogue); wait until it is answered
+			_greet_timer -= delta
+			if _greet_timer <= 0.0 and not ui.is_modal() and not session.dialogue.has_pending():
+				player.locked = false
+				_greet_phase = "return"
+				greeting.walk_path(path_points(_tile_of(greeting.position), _tile_of(_greet_home), false))
+		"return":
+			if not greeting.is_walking():
+				greeting.position = _greet_home
+				greeting = null
+				_greet_phase = ""
+
+
+func _end_greeting() -> void:
+	if greeting != null and _greet_phase in ["alert", "walk"]:
+		session.world.clock.pop_pause("greeting")
+	greeting = null
+	_greet_phase = ""
+	player.locked = false
+
+
+func _face_player_towards(target: Vector2) -> void:
+	var d := target - player.position
+	player.facing = (Vector2.RIGHT if d.x > 0 else Vector2.LEFT) if absf(d.x) > absf(d.y) else (Vector2.DOWN if d.y > 0 else Vector2.UP)
+	player.queue_redraw()
+
+
+func _tile_of(p: Vector2) -> Vector2i:
+	var ts: float = map["tile_size"]
+	return Vector2i(floori(p.x / ts), floori((p.y - 1.0) / ts))
+
+
+func is_free_tile(tile: Vector2i) -> bool:
+	return ContentSchemas.is_walkable_kind(CityMapBuilder.tile_kind_at(map, tile)) and not _blocked.has(tile)
+
+
+## Tile-by-tile path (BFS over free tiles) as world foot positions. With `beside`, ends on the
+## free tile next to `goal` that is closest to walk to; otherwise ends on `goal`.
+func path_points(from: Vector2i, goal: Vector2i, beside: bool) -> Array[Vector2]:
+	var targets := {}
+	if beside:
+		for d: Vector2i in [Vector2i.LEFT, Vector2i.RIGHT, Vector2i.UP, Vector2i.DOWN]:
+			if is_free_tile(goal + d):
+				targets[goal + d] = true
+	else:
+		targets[goal] = true
+	var prev := {from: from}
+	var queue: Array[Vector2i] = [from]
+	var found := Vector2i(-9999, -9999)
+	while not queue.is_empty() and prev.size() < 4000:
+		var c: Vector2i = queue.pop_front()
+		if targets.has(c):
+			found = c
+			break
+		for d: Vector2i in [Vector2i.LEFT, Vector2i.RIGHT, Vector2i.UP, Vector2i.DOWN]:
+			var n := c + d
+			if not prev.has(n) and (is_free_tile(n) or targets.has(n)):
+				prev[n] = c
+				queue.append(n)
+	var out: Array[Vector2] = []
+	if found.x == -9999:
+		return out
+	var c := found
+	while c != from:
+		out.push_front(CityMapBuilder.tile_foot(map, c))
+		c = prev[c]
+	return out
+
+
+## Walking up to an NPC is a fact the story can use (face-to-face introductions, D-036): sent
+## once when the player comes within APPROACH_TILES, again only after walking away past LEAVE_TILES.
+func _check_npc_approach() -> void:
+	var ts: float = map["tile_size"]
+	for npc_id: String in npcs:
+		var d: float = (npcs[npc_id] as Node2D).position.distance_to(player.position) / ts
+		if d <= APPROACH_TILES and not _near.has(npc_id):
+			_near[npc_id] = true
+			session.submit(ApproachNpcHandler.ACTION, {"npc_id": npc_id})
+		elif d > LEAVE_TILES and _near.has(npc_id):
+			_near.erase(npc_id)
+
+
 ## Street ends (`walk_in` doors): stepping onto one walks on into the next district.
 func _check_walk_in_doors() -> void:
 	var tile := player_tile()
@@ -220,9 +397,21 @@ func map_anchor(location_id: String) -> Dictionary:
 	return {}
 
 
-## Park regulars come and go with their activity's hours (presentation only).
+## Park regulars come and go with their activity's hours (presentation only); so do passers-by.
 func _refresh_ambient() -> void:
 	var mod := session.world.clock.get_minute_of_day()
+	for record: Dictionary in map.get("pedestrians", []):
+		var pid: String = record["id"]
+		var show_ped := Pedestrian.is_visible_at(record, mod)
+		if show_ped and not pedestrians.has(pid):
+			var p := Pedestrian.new()
+			p.setup_pedestrian(record, map)
+			entities.add_child(p)
+			pedestrians[pid] = p
+		elif not show_ped and pedestrians.has(pid):
+			entities.remove_child(pedestrians[pid])
+			pedestrians[pid].queue_free()
+			pedestrians.erase(pid)
 	for record: Dictionary in map.get("ambient", []):
 		var id: String = record["id"]
 		var visible_now := AmbientActor.is_visible_at(record, session.content, mod)
@@ -314,6 +503,9 @@ func _on_interact_requested(target: Interactable) -> void:
 			ui.open_work(location_id)
 		"barber":
 			ui.open_barber(target.data)
+		"pedestrian":
+			var ped := target as Pedestrian
+			ui.open_message(ped.get_display_name(), tr(ped.line_for_day(session.world.clock.get_day_index())))
 		"door":
 			var r := session.submit(UseDoorHandler.ACTION, {"door_id": target.get_interactable_id()})
 			if not r.ok:

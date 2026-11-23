@@ -143,6 +143,10 @@ func test_arcade_door_lists_machines_and_charges() -> void:
 	assert_true(hour.text.contains("¥15.00"), hour.text)
 	var cash := s.economy.get_balance(P)
 	hour.pressed.emit()
+	assert_eq(world.ui.get_panel_kind(), "activity_play")
+	(world.ui.get_panel_content().find_child("Pass", true, false) as Button).pressed.emit()
+	world.ui.get_montage().hurry()
+	await wait_process_frames(3)
 	assert_eq(cash - s.economy.get_balance(P), 1500)
 	var body := world.ui.get_panel_content().find_child("Body", true, false) as Label
 	assert_true(body.text.contains("¥15.00"), "receipt shown: " + body.text)

@@ -914,5 +914,210 @@
       "figure": "m",
       "bottom": "#2f5aa0"
     }
+  ],
+  "pedestrians": [
+    {
+      "id": "auntie_shopping",
+      "name_key": "ped.auntie",
+      "lines": [
+        "street.rent",
+        "street.dinner_deal",
+        "street.greens"
+      ],
+      "path": [
+        [
+          2,
+          7
+        ],
+        [
+          30,
+          7
+        ]
+      ],
+      "speed": 40,
+      "shirt": "#d84a4a",
+      "hair": "#4a3a34",
+      "hair_style": "perm",
+      "figure": "f",
+      "outfit": "skirt",
+      "bottom": "#3a3550",
+      "hours": [
+        {
+          "start_minute_of_day": 420,
+          "end_minute_of_day": 1200
+        }
+      ]
+    },
+    {
+      "id": "commuter",
+      "name_key": "ped.commuter",
+      "lines": [
+        "street.bus_late",
+        "street.overtime",
+        "street.bus_route"
+      ],
+      "path": [
+        [
+          36,
+          10
+        ],
+        [
+          52,
+          10
+        ]
+      ],
+      "speed": 60,
+      "shirt": "#e9edf2",
+      "hair": "#1e1a1a",
+      "hair_style": "short",
+      "figure": "m",
+      "bottom": "#2e2a28",
+      "shoes": "#2e2a28",
+      "hours": [
+        {
+          "start_minute_of_day": 420,
+          "end_minute_of_day": 600
+        },
+        {
+          "start_minute_of_day": 1020,
+          "end_minute_of_day": 1260
+        }
+      ]
+    },
+    {
+      "id": "rider",
+      "name_key": "ped.rider",
+      "lines": [
+        "street.delivery",
+        "street.rain"
+      ],
+      "path": [
+        [
+          5,
+          10
+        ],
+        [
+          30,
+          10
+        ]
+      ],
+      "speed": 95,
+      "shirt": "#f2c94c",
+      "hair": "#1e1a1a",
+      "hair_style": "buzz",
+      "figure": "m",
+      "bottom": "#3d4656",
+      "vest": "#2f6fb0",
+      "hours": [
+        {
+          "start_minute_of_day": 600,
+          "end_minute_of_day": 1380
+        }
+      ]
+    },
+    {
+      "id": "students",
+      "name_key": "ped.student",
+      "lines": [
+        "street.exam",
+        "street.arcade_tip"
+      ],
+      "path": [
+        [
+          16,
+          19
+        ],
+        [
+          54,
+          19
+        ]
+      ],
+      "speed": 55,
+      "shirt": "#3a6fd8",
+      "hair": "#2e221c",
+      "hair_style": "ponytail",
+      "figure": "f",
+      "bottom": "#3a3550",
+      "hours": [
+        {
+          "start_minute_of_day": 720,
+          "end_minute_of_day": 780
+        },
+        {
+          "start_minute_of_day": 990,
+          "end_minute_of_day": 1110
+        }
+      ]
+    },
+    {
+      "id": "old_man_walk",
+      "name_key": "ped.grandpa",
+      "lines": [
+        "street.chess_tip",
+        "street.square_dance_tip",
+        "street.young_days"
+      ],
+      "path": [
+        [
+          3,
+          24
+        ],
+        [
+          26,
+          24
+        ]
+      ],
+      "speed": 28,
+      "shirt": "#7d8a96",
+      "hair": "#b8b8b8",
+      "hair_style": "bald",
+      "figure": "m",
+      "bottom": "#4a4a52",
+      "hours": [
+        {
+          "start_minute_of_day": 360,
+          "end_minute_of_day": 660
+        },
+        {
+          "start_minute_of_day": 900,
+          "end_minute_of_day": 1200
+        }
+      ]
+    },
+    {
+      "id": "jogger",
+      "name_key": "ped.jogger",
+      "lines": [
+        "street.jog",
+        "street.hungry_tip"
+      ],
+      "path": [
+        [
+          28,
+          24
+        ],
+        [
+          54,
+          24
+        ]
+      ],
+      "speed": 85,
+      "shirt": "#3fa06a",
+      "hair": "#2e221c",
+      "hair_style": "short",
+      "figure": "m",
+      "bottom": "#2e2a28",
+      "shoes": "#f4f1e8",
+      "hours": [
+        {
+          "start_minute_of_day": 360,
+          "end_minute_of_day": 510
+        },
+        {
+          "start_minute_of_day": 1110,
+          "end_minute_of_day": 1290
+        }
+      ]
+    }
   ]
 }

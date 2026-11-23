@@ -124,14 +124,16 @@ func _build_options() -> Control:
 	grid.columns = 2
 	grid.add_theme_constant_override("h_separation", 20)
 	grid.add_theme_constant_override("v_separation", 14)
-	_name_edit = LineEdit.new()
-	_name_edit.name = "NameEdit"
-	_name_edit.max_length = ProfileSystem.MAX_NAME_LENGTH
-	_name_edit.placeholder_text = tr("ui.creator.name_hint")
-	_name_edit.custom_minimum_size.x = 320
-	_name_edit.text = profile["name"]
-	_name_edit.text_changed.connect(func(t: String) -> void: profile["name"] = t)
+	# Controls are only created when shown: a control never added to the tree is an orphan that
+	# leaks at exit (and keeps the theme font with all its glyph textures alive).
 	if _shows("name"):
+		_name_edit = LineEdit.new()
+		_name_edit.name = "NameEdit"
+		_name_edit.max_length = ProfileSystem.MAX_NAME_LENGTH
+		_name_edit.placeholder_text = tr("ui.creator.name_hint")
+		_name_edit.custom_minimum_size.x = 320
+		_name_edit.text = profile["name"]
+		_name_edit.text_changed.connect(func(t: String) -> void: profile["name"] = t)
 		_label(grid, "ui.creator.name")
 		grid.add_child(_name_edit)
 	if _shows("figure"):
@@ -139,8 +141,8 @@ func _build_options() -> Control:
 		var g := _row(grid, "figure")
 		_button(g, "Gender_m", tr("ui.creator.male"), _set_gender.bind("m"))
 		_button(g, "Gender_f", tr("ui.creator.female"), _set_gender.bind("f"))
-	_hair_label = Label.new()
 	if _shows("hair_style"):
+		_hair_label = Label.new()
 		_label(grid, "ui.creator.hair_style")
 		var h := _row(grid, "hair_style")
 		_button(h, "HairPrev", "◀", _cycle_hair.bind(-1))
@@ -216,7 +218,8 @@ func randomize_look() -> void:
 
 
 func _confirm() -> void:
-	profile["name"] = _name_edit.text.strip_edges()
+	if _name_edit != null:
+		profile["name"] = _name_edit.text.strip_edges()
 	if ProfileSystem.validate_profile(profile).is_empty():
 		confirmed.emit(profile.duplicate(true))
 
@@ -224,7 +227,8 @@ func _confirm() -> void:
 ## Highlights the selected option in every row.
 func _refresh() -> void:
 	var look: Dictionary = profile["look"]
-	_hair_label.text = tr("ui.creator.hair." + str(look["hair_style"]))
+	if _hair_label != null:
+		_hair_label.text = tr("ui.creator.hair." + str(look["hair_style"]))
 	for field: String in _rows:
 		for b in (_rows[field] as HBoxContainer).get_children():
 			if b is Button and b.has_meta("value"):

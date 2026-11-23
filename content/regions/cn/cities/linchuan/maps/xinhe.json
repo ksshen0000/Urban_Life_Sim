@@ -495,5 +495,73 @@
         }
       ]
     }
+  ],
+  "pedestrians": [
+    {
+      "id": "site_worker",
+      "name_key": "ped.worker",
+      "lines": [
+        "street.site_pay",
+        "street.site_tired",
+        "street.hard_hat"
+      ],
+      "path": [
+        [
+          2,
+          10
+        ],
+        [
+          44,
+          10
+        ]
+      ],
+      "speed": 55,
+      "shirt": "#e07a2e",
+      "hair": "#2e221c",
+      "hair_style": "buzz",
+      "figure": "m",
+      "bottom": "#4a4a52",
+      "hours": [
+        {
+          "start_minute_of_day": 390,
+          "end_minute_of_day": 1140
+        }
+      ]
+    },
+    {
+      "id": "basket_auntie",
+      "name_key": "ped.auntie",
+      "lines": [
+        "street.market",
+        "street.greens",
+        "street.barber_tip"
+      ],
+      "path": [
+        [
+          3,
+          7
+        ],
+        [
+          45,
+          7
+        ]
+      ],
+      "speed": 38,
+      "shirt": "#3fa06a",
+      "hair": "#4a3a34",
+      "hair_style": "bun",
+      "figure": "f",
+      "outfit": "dress",
+      "hours": [
+        {
+          "start_minute_of_day": 420,
+          "end_minute_of_day": 720
+        },
+        {
+          "start_minute_of_day": 960,
+          "end_minute_of_day": 1140
+        }
+      ]
+    }
   ]
 }

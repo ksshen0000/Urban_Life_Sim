@@ -51,6 +51,27 @@ func eligible_events(world: WorldState) -> PackedStringArray:
 	return out
 
 
+## NPCs who have a face-to-face story beat waiting (D-036): an unfired event with an
+## `npc_nearby` condition for them whose other conditions already hold. The world then lets the
+## NPC notice the player and walk over (the walk ends with `approach_npc`, which fires it).
+func greeting_npcs(world: WorldState) -> PackedStringArray:
+	var out: PackedStringArray = []
+	for ev in _content.get_records("events"):
+		if has_fired(ev["id"]):
+			continue
+		var npc := ""
+		var others_hold := true
+		for c: Dictionary in ev["conditions"]:
+			if c["type"] == "npc_nearby":
+				npc = c["npc_id"]
+			elif not StoryConditions.evaluate(c, world, _content):
+				others_hold = false
+				break
+		if not npc.is_empty() and others_hold and not out.has(npc):
+			out.append(npc)
+	return out
+
+
 func mark_fired(ctx: CommandContext, event_id: String) -> String:
 	if ctx == null or not ctx.can_write():
 		return "E_NOT_IN_COMMAND"

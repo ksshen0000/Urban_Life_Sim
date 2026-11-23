@@ -26,6 +26,16 @@ func increment(ctx: CommandContext, actor_id: String, key: String, amount: int =
 	return ""
 
 
+## Records a value outright (e.g. the minute the player last walked up to an NPC).
+func set_stat(ctx: CommandContext, actor_id: String, key: String, value: int) -> String:
+	if ctx == null or not ctx.can_write():
+		return "E_NOT_IN_COMMAND"
+	if not _actors.has(actor_id):
+		_actors[actor_id] = {}
+	_actors[actor_id][key] = maxi(value, 0)
+	return ""
+
+
 func to_dict() -> Dictionary:
 	return {"schema_version": SCHEMA_VERSION, "actors": _actors.duplicate(true)}
 

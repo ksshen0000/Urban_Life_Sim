@@ -96,6 +96,87 @@
         "shoes": "#3a2e26",
         "skin": "#e2b48c"
       }
+    },
+    {
+      "id": "npc_xiao_wu",
+      "name_key": "npc.xiao_wu.name",
+      "role_key": "npc.xiao_wu.role",
+      "home_location_id": "old_town_bus_stop",
+      "schedule": [
+        {
+          "start_minute_of_day": 480,
+          "end_minute_of_day": 570,
+          "location_id": "old_town_bus_stop",
+          "day_from": 2,
+          "day_to": 2
+        }
+      ],
+      "initial_relationship": 0,
+      "dialogue_tree_id": "dialogue_xiao_wu_intro",
+      "chat_tree_id": "dialogue_xiao_wu_chat",
+      "appearance": {
+        "shirt": "#e9edf2",
+        "hair": "#1e1a1a",
+        "hair_style": "short",
+        "figure": "m",
+        "bottom": "#2e2a28",
+        "shoes": "#2e2a28"
+      },
+      "city_id": "CN_LINCHUAN"
+    },
+    {
+      "id": "npc_doudou",
+      "name_key": "npc.doudou.name",
+      "role_key": "npc.doudou.role",
+      "home_location_id": "park",
+      "schedule": [
+        {
+          "start_minute_of_day": 990,
+          "end_minute_of_day": 1110,
+          "location_id": "park",
+          "day_from": 3,
+          "day_to": 3
+        }
+      ],
+      "initial_relationship": 0,
+      "dialogue_tree_id": "dialogue_doudou_intro",
+      "chat_tree_id": "dialogue_doudou_chat",
+      "appearance": {
+        "shirt": "#f2c94c",
+        "hair": "#1e1a1a",
+        "hair_style": "spiky",
+        "figure": "m",
+        "bottom": "#3a6fd8",
+        "shoes": "#d84a4a"
+      },
+      "city_id": "CN_LINCHUAN"
+    },
+    {
+      "id": "npc_granny_liu",
+      "name_key": "npc.granny_liu.name",
+      "role_key": "npc.granny_liu.role",
+      "home_location_id": "old_town_east_end",
+      "schedule": [
+        {
+          "start_minute_of_day": 420,
+          "end_minute_of_day": 540,
+          "location_id": "old_town_east_end",
+          "day_from": 4,
+          "day_to": 4
+        }
+      ],
+      "initial_relationship": 0,
+      "dialogue_tree_id": "dialogue_granny_liu_intro",
+      "chat_tree_id": "dialogue_granny_liu_chat",
+      "appearance": {
+        "shirt": "#8a5ad0",
+        "hair": "#b8b8b8",
+        "hair_style": "bun",
+        "figure": "f",
+        "outfit": "dress",
+        "shoes": "#2e2a28"
+      },
+      "city_id": "CN_LINCHUAN"
     }
   ]
 }

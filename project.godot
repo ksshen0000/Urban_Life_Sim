@@ -7,7 +7,7 @@ config_version=5
 
 config/name="Everyday City"
 config/description="都市普通人生活模拟（工作名）"
-config/version="0.9.0"
+config/version="0.11.0"
 run/main_scene="res://scenes/boot/boot.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 

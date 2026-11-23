@@ -15,6 +15,10 @@ scan_errors() { # $1 = log file, $2 = step name
 	if grep -E "^(ERROR|SCRIPT ERROR|USER ERROR|Parse Error)" "$1" >/dev/null; then
 		echo "[$2] engine errors detected:"; grep -E -A2 "^(ERROR|SCRIPT ERROR|USER ERROR|Parse Error)" "$1"; return 1
 	fi
+	# Engine warnings that always mean a layout bug in our code.
+	if grep -E "non-equal opposite anchors" "$1" >/dev/null; then
+		echo "[$2] layout warnings detected:"; grep -E -A3 "non-equal opposite anchors" "$1"; return 1
+	fi
 	# Leaked objects usually mean RefCounted cycles (e.g. a lambda capturing its owner).
 	if grep -E "instances were leaked|still in use at exit" "$1" >/dev/null; then
 		echo "[$2] leaks detected:"; grep -E "instances were leaked|still in use at exit" "$1"; return 1

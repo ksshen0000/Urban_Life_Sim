@@ -167,3 +167,89 @@ func test_night_light_layering() -> void:
 	assert_true(ground_glow.get_index() < world.entities.get_index(), "lamp pools are drawn under people")
 	assert_eq(world.player.self_modulate, world.day_night.get_tint(), "people are darkened like the street")
 	assert_true(DayNight.glow_strength > 0.5)
+
+
+## D-036: Lao Zhou notices you, a "!" pops up, you are held in place while he walks over, then
+## the gloves scene opens; afterwards you can move again and he walks back to the warehouse.
+func test_lao_zhou_walks_over_to_greet_you() -> void:
+	var s := Sessions.create({"story_enabled": true})
+	s.run_story_rules()
+	_answer_story(s)  # the arrival narration
+	s.submit("take_route", {"route_id": "route_12_to_industrial"})
+	_answer_story(s)
+	await _open(s)
+	await wait_process_frames(8)
+	assert_eq(world.map["id"], "map_industrial")
+	assert_true(world.greeting == null, "too far away at the bus stop")
+	assert_false(s.events.has_fired("event_meet_lao_zhou"))
+	var zhou: NpcActor = world.npcs["npc_lao_zhou"]
+	var home := zhou.position
+	world.player.position = zhou.position + Vector2(32 * 8, 32 * 2)
+	await wait_process_frames(8)
+	assert_true(world.greeting == zhou, "he noticed you")
+	assert_true(zhou.alert, "! above his head")
+	assert_true(world.player.locked, "you are held in place")
+	var minute := s.world.clock.get_minute()
+	for i in 1500:
+		await wait_process_frames(1)
+		if world.ui.is_modal():
+			break
+	assert_eq(s.world.clock.get_minute(), minute, "the clock waits during the walk")
+	assert_true(zhou.position.distance_to(world.player.position) <= 40.0, "he walked right up to you")
+	assert_true(s.events.has_fired("event_meet_lao_zhou"))
+	assert_eq(world.ui.get_panel_kind(), "dialogue")
+	_answer_story(s)
+	world.ui.close()
+	for i in 1500:
+		await wait_process_frames(1)
+		if world.greeting == null:
+			break
+	assert_false(world.player.locked, "free to move again")
+	assert_eq(zhou.position, home, "back at the warehouse")
+
+
+func test_chen_comes_out_from_behind_the_counter() -> void:
+	var s := Sessions.create({"story_enabled": true})
+	s.run_story_rules()
+	_answer_story(s)
+	s.submit("advance_time", {"minutes": GameClock.minute_from_day_time(2, 9) - s.world.clock.get_minute()}, "system")
+	_answer_story(s)
+	Sessions.go(s, "convenience_store")
+	await _open(s)
+	await wait_process_frames(8)
+	assert_true(world.greeting != null and world.greeting.npc_id == "npc_chen_yu")
+	var path := world.path_points(Vector2i(12, 6), world.player_tile(), true)
+	assert_false(path.is_empty(), "a way around the counter exists")
+	for p in path:
+		var t := Vector2i(floori(p.x / 32), floori((p.y - 1) / 32))
+		assert_true(world.is_free_tile(t), "path never crosses furniture: %s" % t)
+	for i in 1500:
+		await wait_process_frames(1)
+		if world.ui.is_modal():
+			break
+	assert_true(s.events.has_fired("event_day2_chen_intro"))
+
+
+func _answer_story(s: SimulationSession) -> void:
+	for guard in 20:
+		if not s.dialogue.has_pending():
+			return
+		var e := s.dialogue.peek()
+		if e["kind"] == "summary":
+			s.submit("dismiss_story_entry", {"entry_id": e["entry_id"]})
+			continue
+		var node: Dictionary = (s.content.get_record("dialogues", e["tree_id"])["nodes"] as Array).filter(
+			func(n: Dictionary) -> bool: return n["id"] == e["node_id"])[0]
+		s.submit("choose_dialogue", {"tree_id": e["tree_id"], "node_id": e["node_id"],
+			"choice_id": node["choices"][0]["id"], "entry_id": e["entry_id"]})
+
+
+func test_street_end_needs_no_key_and_shows_no_prompt() -> void:
+	var s := Sessions.create()
+	await _open(s)
+	world.player.position = world.tile_center(Vector2i(54, 9))  # right next to the east exit
+	await wait_physics_frames(3)
+	var focus := world.player.get_focus()
+	assert_true(focus == null or not focus.is_walk_through(), "the street end is never the interact target")
+	assert_eq(world.ui.hud.get_prompt_text(), "", "no [E] prompt there")
+	assert_not_null(world.entities.find_child("ExitLabel_street_east_8", true, false), "a sign says where the road leads")

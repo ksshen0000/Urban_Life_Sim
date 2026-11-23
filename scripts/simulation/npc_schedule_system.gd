@@ -17,7 +17,10 @@ func location_of(npc_id: String, game_minute: int) -> String:
 	if not _content.has_record("npcs", npc_id):
 		return ""
 	var mod := GameClock.minute_of_day_of(game_minute)
+	var day := GameClock.day_index_of(game_minute)
 	for slot: Dictionary in _content.get_record("npcs", npc_id)["schedule"]:
+		if day < int(slot.get("day_from", 1)) or day > int(slot.get("day_to", 999999)):
+			continue
 		if mod >= int(slot["start_minute_of_day"]) and mod < int(slot["end_minute_of_day"]):
 			return slot["location_id"]
 	return ""

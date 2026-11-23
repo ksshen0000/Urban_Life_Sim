@@ -6,7 +6,17 @@ extends CommandHandler
 ## computed by the RegionPolicy, then credited once. The shift's status guards against double pay.
 
 const ACTION := "work_shift"
-const ARGUMENTS_SCHEMA := {"type": "object", "fields": {"shift_id": {"type": "string", "required": true, "min_length": 1}}}
+const ARGUMENTS_SCHEMA := {"type": "object", "fields": {
+	"shift_id": {"type": "string", "required": true, "min_length": 1},
+	## How well the shift's minigame went, 0..100 (D-038). Absent / skipped = 50 = normal pay.
+	"performance": {"type": "int", "min": 0, "max": 100},
+}}
+const DEFAULT_PERFORMANCE := 50
+
+
+## Pay multiplier for a performance score, in basis points: 50 -> 100 %, 100 -> 110 %, 0 -> 90 %.
+static func performance_bp(performance: int) -> int:
+	return 9000 + clampi(performance, 0, 100) * 20
 
 
 func get_action() -> String:
@@ -29,7 +39,18 @@ func validate(ctx: CommandContext) -> String:
 	var job := (ctx.get_service("content") as ContentRegistry).get_record("jobs", jobs.get_shift(args["shift_id"])["job_id"])
 	if not (ctx.world.get_component("locations") as LocationSystem).is_on_map_of(actor, job["workplace_location_id"]):
 		return "E_NOT_HERE"
+	# exhausted or at breaking point: cannot start (D-037); hunger never blocks (no dead ends)
+	var block := NeedStates.work_block(_states(ctx, actor))
+	if not block.is_empty():
+		return block
 	return ""
+
+
+func _states(ctx: CommandContext, actor: String) -> Array[Dictionary]:
+	if not (ctx.get_service("rules") as Dictionary).get("need_effects", true):
+		return []
+	return NeedStates.active(ctx.get_service("content") as ContentRegistry,
+		(ctx.world.get_component("needs") as NeedsSystem).get_values(actor))
 
 
 @warning_ignore("integer_division")
@@ -41,6 +62,9 @@ func apply(ctx: CommandContext) -> String:
 	var job := (ctx.get_service("content") as ContentRegistry).get_record("jobs", shift["job_id"])
 	var start: int = shift["start_minute"]
 	var end: int = shift["end_minute"]
+	# how well you work is judged by your state when you clock in (D-037)
+	var efficiency_bp := NeedStates.work_efficiency_bp(_states(ctx, actor))
+	var perf := int(ctx.proposal.arguments.get("performance", DEFAULT_PERFORMANCE))
 	var err := jobs.begin(ctx, shift_id)
 	if not err.is_empty():
 		return err
@@ -58,7 +82,11 @@ func apply(ctx: CommandContext) -> String:
 	err = TimeFlow.advance(ctx, worked, TimeFlow.MODE_WORKING, {"rates": rates, "job_id": job["id"]})
 	if not err.is_empty():
 		return err
-	var gross: int = int(job["hourly_wage_minor"]) * worked / 60
+	var gross: int = int(job["hourly_wage_minor"]) * worked / 60 * efficiency_bp / 10000 * performance_bp(perf) / 10000
+	if perf != DEFAULT_PERFORMANCE:
+		ctx.emit("work_performance", {"shift_id": shift_id, "performance": perf})
+	if efficiency_bp < 10000:
+		ctx.emit("work_efficiency", {"shift_id": shift_id, "efficiency_bp": efficiency_bp})
 	var policy := ctx.get_service("region_policy") as RegionPolicy
 	var net := policy.calculate_take_home_pay(gross, {"job_id": job["id"], "shift_id": shift_id, "actor_id": actor})
 	if net > 0:

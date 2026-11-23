@@ -36,6 +36,7 @@ const CONDITION_FIELDS := {
 	"stat_at_least": {"key": "stat", "value": "nat"},
 	"on_map": {"map_id": "map"},
 	"npc_present": {"npc_id": "npc"},
+	"npc_nearby": {"npc_id": "npc"},
 	"event_fired": {"event_id": "event"},
 }
 const EFFECT_FIELDS := {
@@ -45,7 +46,9 @@ const EFFECT_FIELDS := {
 	"change_need": {"need_id": "need", "delta": "need_delta"},
 	"change_relationship": {"npc_id": "npc", "delta": "relationship_delta"},
 	"show_summary": {},
+	"give_item": {"item_id": "item", "count": "item_count"},
 }
+const MAX_ITEM_GIFT := 3
 
 
 static func validate_conditions(conditions: Array, path: String, content: ContentRegistry) -> Array[Dictionary]:
@@ -179,8 +182,11 @@ static func _check_value(v: Variant, kind: String, path: String, content: Conten
 		"stat":
 			if typeof(v) != TYPE_STRING or str(v).is_empty():
 				errors.append(_err("E_STORY_TYPE", path, "expected a stat name"))
-		"npc", "need", "map", "event":
-			var table: String = {"npc": "npcs", "need": "needs", "map": "maps", "event": "events"}[kind]
+		"item_count":
+			if not is_int or int(v) < 1 or int(v) > MAX_ITEM_GIFT:
+				errors.append(_err("E_STORY_AUTHORITY", path, "item gifts are limited to 1..%d" % MAX_ITEM_GIFT))
+		"npc", "need", "map", "event", "item":
+			var table: String = {"npc": "npcs", "need": "needs", "map": "maps", "event": "events", "item": "items"}[kind]
 			if typeof(v) != TYPE_STRING or not content.has_record(table, v):
 				errors.append(_err("E_STORY_UNKNOWN_REF", path, "%s '%s' does not exist" % [kind, str(v)]))
 

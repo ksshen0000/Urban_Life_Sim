@@ -403,6 +403,309 @@
         }
       ],
       "speaker_id": "npc_landlord_wang"
+    },
+    {
+      "id": "dialogue_xiao_wu_intro",
+      "speaker_id": "npc_xiao_wu",
+      "repeatable": false,
+      "nodes": [
+        {
+          "id": "start",
+          "text_key": "dlg.xiao_wu_intro.start",
+          "choices": [
+            {
+              "id": "help",
+              "text_key": "dlg.xiao_wu_intro.help",
+              "next": "found",
+              "effects": []
+            },
+            {
+              "id": "shrug",
+              "text_key": "dlg.xiao_wu_intro.shrug",
+              "effects": [
+                {
+                  "type": "change_relationship",
+                  "npc_id": "npc_xiao_wu",
+                  "delta": 1
+                },
+                {
+                  "type": "set_flag",
+                  "key": "story.met_xiao_wu",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "found",
+          "text_key": "dlg.xiao_wu_intro.found",
+          "choices": [
+            {
+              "id": "accept",
+              "text_key": "dlg.xiao_wu_intro.accept",
+              "effects": [
+                {
+                  "type": "credit_money",
+                  "amount": 2000
+                },
+                {
+                  "type": "change_relationship",
+                  "npc_id": "npc_xiao_wu",
+                  "delta": 4
+                },
+                {
+                  "type": "set_flag",
+                  "key": "story.met_xiao_wu",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "id": "refuse",
+              "text_key": "dlg.xiao_wu_intro.refuse",
+              "effects": [
+                {
+                  "type": "change_relationship",
+                  "npc_id": "npc_xiao_wu",
+                  "delta": 10
+                },
+                {
+                  "type": "change_need",
+                  "need_id": "stress",
+                  "delta": -4
+                },
+                {
+                  "type": "set_flag",
+                  "key": "story.met_xiao_wu",
+                  "value": true
+                },
+                {
+                  "type": "set_flag",
+                  "key": "story.refused_reward",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "city_id": "CN_LINCHUAN",
+      "channel": "in_person"
+    },
+    {
+      "id": "dialogue_xiao_wu_chat",
+      "speaker_id": "npc_xiao_wu",
+      "repeatable": true,
+      "nodes": [
+        {
+          "id": "start",
+          "text_key": "dlg.xiao_wu_chat.start",
+          "choices": [
+            {
+              "id": "talk",
+              "text_key": "dlg.xiao_wu_chat.talk",
+              "effects": [
+                {
+                  "type": "change_relationship",
+                  "npc_id": "npc_xiao_wu",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "city_id": "CN_LINCHUAN",
+      "channel": "in_person"
+    },
+    {
+      "id": "dialogue_doudou_intro",
+      "speaker_id": "npc_doudou",
+      "repeatable": false,
+      "nodes": [
+        {
+          "id": "start",
+          "text_key": "dlg.doudou_intro.start",
+          "choices": [
+            {
+              "id": "help",
+              "text_key": "dlg.doudou_intro.help",
+              "next": "found",
+              "effects": []
+            },
+            {
+              "id": "wait",
+              "text_key": "dlg.doudou_intro.wait",
+              "effects": [
+                {
+                  "type": "change_relationship",
+                  "npc_id": "npc_doudou",
+                  "delta": 2
+                },
+                {
+                  "type": "set_flag",
+                  "key": "story.met_doudou",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "found",
+          "text_key": "dlg.doudou_intro.found",
+          "choices": [
+            {
+              "id": "ok",
+              "text_key": "dlg.doudou_intro.ok",
+              "effects": [
+                {
+                  "type": "give_item",
+                  "item_id": "item_simple_meal",
+                  "count": 1
+                },
+                {
+                  "type": "change_relationship",
+                  "npc_id": "npc_doudou",
+                  "delta": 8
+                },
+                {
+                  "type": "change_need",
+                  "need_id": "stress",
+                  "delta": -5
+                },
+                {
+                  "type": "set_flag",
+                  "key": "story.met_doudou",
+                  "value": true
+                },
+                {
+                  "type": "set_flag",
+                  "key": "story.helped_kid",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "city_id": "CN_LINCHUAN",
+      "channel": "in_person"
+    },
+    {
+      "id": "dialogue_doudou_chat",
+      "speaker_id": "npc_doudou",
+      "repeatable": true,
+      "nodes": [
+        {
+          "id": "start",
+          "text_key": "dlg.doudou_chat.start",
+          "choices": [
+            {
+              "id": "talk",
+              "text_key": "dlg.doudou_chat.talk",
+              "effects": [
+                {
+                  "type": "change_relationship",
+                  "npc_id": "npc_doudou",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "city_id": "CN_LINCHUAN",
+      "channel": "in_person"
+    },
+    {
+      "id": "dialogue_granny_liu_intro",
+      "speaker_id": "npc_granny_liu",
+      "repeatable": false,
+      "nodes": [
+        {
+          "id": "start",
+          "text_key": "dlg.granny_liu_intro.start",
+          "choices": [
+            {
+              "id": "walk",
+              "text_key": "dlg.granny_liu_intro.walk",
+              "effects": [
+                {
+                  "type": "change_need",
+                  "need_id": "energy",
+                  "delta": -4
+                },
+                {
+                  "type": "change_need",
+                  "need_id": "stress",
+                  "delta": -4
+                },
+                {
+                  "type": "change_relationship",
+                  "npc_id": "npc_granny_liu",
+                  "delta": 8
+                },
+                {
+                  "type": "set_flag",
+                  "key": "story.met_granny_liu",
+                  "value": true
+                },
+                {
+                  "type": "set_flag",
+                  "key": "story.walked_granny",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "id": "point",
+              "text_key": "dlg.granny_liu_intro.point",
+              "effects": [
+                {
+                  "type": "change_relationship",
+                  "npc_id": "npc_granny_liu",
+                  "delta": 2
+                },
+                {
+                  "type": "set_flag",
+                  "key": "story.met_granny_liu",
+                  "value": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "city_id": "CN_LINCHUAN",
+      "channel": "in_person"
+    },
+    {
+      "id": "dialogue_granny_liu_chat",
+      "speaker_id": "npc_granny_liu",
+      "repeatable": true,
+      "nodes": [
+        {
+          "id": "start",
+          "text_key": "dlg.granny_liu_chat.start",
+          "choices": [
+            {
+              "id": "talk",
+              "text_key": "dlg.granny_liu_chat.talk",
+              "effects": [
+                {
+                  "type": "change_relationship",
+                  "npc_id": "npc_granny_liu",
+                  "delta": 2
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "city_id": "CN_LINCHUAN",
+      "channel": "in_person"
     }
   ]
 }
